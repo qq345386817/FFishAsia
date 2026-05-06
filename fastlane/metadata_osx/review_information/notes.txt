@@ -1,0 +1,1 @@
+No account is required. The app can be reviewed without logging in. AR features are unavailable on macOS; the macOS app is for browsing model information and managing local model content.

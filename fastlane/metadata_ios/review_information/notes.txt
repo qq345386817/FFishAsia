@@ -1,0 +1,1 @@
+No account is required. The app can be reviewed without logging in. AR viewing uses the camera only when the reviewer opens an AR model.
