@@ -4,6 +4,13 @@
 
 ## User settings
 xcuserdata/
+.DS_Store
+ar-asia/
+*.sh
+scripts/
+maestro_screenshots/
+macos_screenshots/
+usdz_resources/
 
 ## Obj-C/Swift specific
 *.hmap
@@ -58,5 +65,8 @@ Carthage/Build/
 
 fastlane/report.xml
 fastlane/Preview.html
-fastlane/screenshots/**/*.png
+fastlane/**/*.png
 fastlane/test_output
+fastlane/*.p8
+fastlane/.env*
+fastlane/*.plist
