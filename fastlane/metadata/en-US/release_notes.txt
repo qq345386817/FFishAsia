@@ -1,5 +1,0 @@
-Initial App Store submission:
-- Added clearer category filters (All / Animals / Plants / Special)
-- Search now works together with category filtering
-- Supports on-demand model downloads and offline viewing of saved assets
-- Improved model browsing and download management

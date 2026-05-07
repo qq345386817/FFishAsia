@@ -1,0 +1,4 @@
+app_identifier(ENV.fetch("FFISHASIA_APP_IDENTIFIER", ""))
+apple_id(ENV.fetch("FASTLANE_APPLE_ID", ""))
+itc_team_id(ENV.fetch("APP_STORE_CONNECT_TEAM_ID", ""))
+team_id(ENV.fetch("DEVELOPER_PORTAL_TEAM_ID", ""))

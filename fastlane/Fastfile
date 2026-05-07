@@ -1,0 +1,158 @@
+fastlane_version("2.228.0")
+
+require "fileutils"
+require "pathname"
+require "tmpdir"
+
+PROJECT_ROOT = File.expand_path("..", __dir__)
+FASTLANE_ROOT = __dir__
+FFISHASIA_APP_IDENTIFIER = ENV.fetch("FFISHASIA_APP_IDENTIFIER", "")
+FFISHASIA_APP_STORE_ID = ENV.fetch("FFISHASIA_APP_STORE_ID", "")
+
+def resolve_project_path(path)
+  return path if Pathname.new(path).absolute?
+
+  cwd_path = File.expand_path(path, Dir.pwd)
+  return cwd_path if File.exist?(cwd_path)
+
+  fastlane_path = File.expand_path(path, FASTLANE_ROOT)
+  return fastlane_path if File.exist?(fastlane_path)
+
+  File.expand_path(path, PROJECT_ROOT)
+end
+
+def api_key
+  app_store_connect_api_key(
+    key_id: ENV.fetch("APP_STORE_CONNECT_KEY_ID", ""),
+    issuer_id: ENV.fetch("APP_STORE_CONNECT_ISSUER_ID", ""),
+    key_filepath: ENV.fetch("APP_STORE_CONNECT_KEY_FILEPATH", "")
+  )
+end
+
+def deliver_base_options(platform:)
+  {
+    api_key: api_key,
+    app_identifier: FFISHASIA_APP_IDENTIFIER,
+    platform: platform,
+    force: true,
+    run_precheck_before_submit: true,
+    precheck_include_in_app_purchases: false
+  }
+end
+
+def upload_metadata_only(platform:, metadata_path:)
+  deliver(
+    deliver_base_options(platform: platform).merge(
+      metadata_path: resolve_project_path(metadata_path),
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: false,
+      submit_for_review: false,
+      automatic_release: true
+    )
+  )
+end
+
+def upload_screenshots_only(platform:, screenshots_path:, languages: nil)
+  deliver(
+    deliver_base_options(platform: platform).merge(
+      screenshots_path: resolve_project_path(screenshots_path),
+      languages: languages,
+      skip_binary_upload: true,
+      skip_metadata: true,
+      overwrite_screenshots: true
+    )
+  )
+end
+
+def screenshot_locales(screenshots_path:)
+  screenshots_path = resolve_project_path(screenshots_path)
+  requested = ENV["FASTLANE_SCREENSHOT_LOCALES"].to_s.split(/[,\s]+/).reject(&:empty?)
+  return requested unless requested.empty?
+
+  UI.user_error!("Missing screenshot directory: #{screenshots_path}") unless File.directory?(screenshots_path)
+
+  Dir.children(screenshots_path)
+     .select { |name| File.directory?(File.join(screenshots_path, name)) }
+     .sort
+end
+
+def upload_screenshots_in_batches(platform:, screenshots_path:)
+  screenshots_path = resolve_project_path(screenshots_path)
+  locales = screenshot_locales(screenshots_path: screenshots_path)
+  batch_size = ENV.fetch("FASTLANE_SCREENSHOT_BATCH_SIZE", "3").to_i
+  UI.user_error!("FASTLANE_SCREENSHOT_BATCH_SIZE must be greater than 0") if batch_size <= 0
+  UI.user_error!("No screenshot locale directories found in #{screenshots_path}") if locales.empty?
+
+  batches = locales.each_slice(batch_size).to_a
+  UI.message("Uploading #{FFISHASIA_APP_IDENTIFIER} screenshots for App Store ID #{FFISHASIA_APP_STORE_ID}.")
+  UI.message("Uploading screenshots in #{batches.length} batch(es), #{batch_size} locale(s) per batch.")
+
+  batches.each_with_index do |batch_locales, index|
+    UI.header("Screenshot upload batch #{index + 1}/#{batches.length}: #{batch_locales.join(', ')}")
+
+    Dir.mktmpdir("ffishasia-screenshots-") do |tmp_root|
+      batch_locales.each do |locale|
+        source = File.join(screenshots_path, locale)
+        UI.user_error!("Missing screenshot locale directory: #{source}") unless File.directory?(source)
+        FileUtils.cp_r(source, tmp_root)
+      end
+
+      upload_screenshots_only(
+        platform: platform,
+        screenshots_path: tmp_root,
+        languages: batch_locales
+      )
+    end
+  end
+end
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Upload iOS App Store metadata only"
+  lane :upload_metadata do
+    upload_metadata_only(platform: "ios", metadata_path: "fastlane/metadata_ios")
+  end
+
+  desc "Upload iOS App Store preview screenshots only"
+  lane :upload_screenshots do
+    upload_screenshots_in_batches(platform: "ios", screenshots_path: "fastlane/screenshots")
+  end
+
+  desc "Upload iOS metadata + screenshots, and optionally binary when ipa is provided"
+  lane :upload do |options|
+    deliver(
+      deliver_base_options(platform: "ios").merge(
+        ipa: options[:ipa],
+        metadata_path: "fastlane/metadata_ios",
+        screenshots_path: resolve_project_path("fastlane/screenshots"),
+        skip_binary_upload: options[:ipa].nil?,
+        skip_metadata: false,
+        skip_screenshots: false,
+        submit_for_review: false,
+        automatic_release: false
+      )
+    )
+  end
+
+  lane :metadata do
+    upload_metadata
+  end
+
+  lane :screenshots do
+    upload_screenshots
+  end
+end
+
+platform :mac do
+  desc "Upload macOS App Store metadata only"
+  lane :upload_metadata do
+    upload_metadata_only(platform: "osx", metadata_path: "fastlane/metadata_osx")
+  end
+
+  desc "Upload macOS App Store preview screenshots only"
+  lane :upload_screenshots do
+    upload_screenshots_in_batches(platform: "osx", screenshots_path: "fastlane/screenshots_macos")
+  end
+end

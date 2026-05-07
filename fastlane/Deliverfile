@@ -1,0 +1,2 @@
+app_identifier(ENV.fetch("FFISHASIA_APP_IDENTIFIER", ""))
+overwrite_screenshots(true)
