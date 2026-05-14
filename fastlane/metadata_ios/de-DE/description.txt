@@ -1,0 +1,14 @@
+Little Nature ist ein AR-Feldführer für biologische 3D-Modelle. Platziere 3D-Modelle asiatischer Tiere und Pflanzen in deinem realen Raum und betrachte Formen und Details von Blumen, Insekten, Amphibien und Meereslebewesen aus der Nähe.
+
+Ob Naturerkundung, Wissenschaft mit Kindern oder ein neuer Blick auf Lebewesen: Little Nature bringt Modelle aus dem Bildschirm auf deinen Tisch, Boden oder in deine Umgebung.
+
+Hauptfunktionen:
+- AR-Feldführer: 3D-Tier- und Pflanzenmodelle in deiner realen Umgebung ansehen
+- Kategorien: nach Alle / Tiere / Pflanzen / Spezial filtern
+- Schnelle Suche: Modelle nach japanischem, englischem, chinesischem oder wissenschaftlichem Namen finden
+- Downloads bei Bedarf: Modelle nur laden, wenn sie gebraucht werden, um die App klein zu halten
+- Offline ansehen: geladene Modelle auch ohne Netzwerk öffnen
+- Downloadverwaltung: gespeicherte Modellinhalte prüfen und löschen
+- Modelldetails: Basisdaten wie Flächen, Eckpunkte und Dateigröße ansehen
+
+Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen zum Durchsuchen, Herunterladen und Anzeigen in AR verwendet. Little Nature fragt nur bei Nutzung von AR-Funktionen nach Kamerazugriff. Es gibt keine Benutzerkonten und keine Uploads persönlicher Daten.

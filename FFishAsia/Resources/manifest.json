@@ -23,7 +23,13 @@
       "face_count": 1067803,
       "vertex_count": 799069,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "染井吉野櫻",
+      "name_ko": "Sakura Cherry Blossom",
+      "name_de": "Sakura Cherry Blossom",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 櫻屬 / Prunus",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nClade: Pru",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nClade: Pru"
     },
     {
       "id": "3595e743a5b64d8699fac6dcf4af3f4f",
@@ -44,7 +50,13 @@
       "face_count": 233243,
       "vertex_count": 116546,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "彼岸花",
+      "name_ko": "Red Spider Lily",
+      "name_de": "Red Spider Lily",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 单子叶植物 / monocots\n目: 天門冬目 / Asparagales\n科: 石蒜科 / Amaryllidaceae\n屬: 石蒜屬 / Lycoris\n種: 石蒜 / Lycoris radiata",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Asparagales\nFamily: Amaryllidaceae\nGenus: Lycoris\nSpecies: Lycoris radiata (Red Spider Lily)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Asparagales\nFamily: Amaryllidaceae\nGenus: Lycoris\nSpecies: Lycoris radiata (Red Spider Lily)"
     },
     {
       "id": "d69e1be5895f40e484f0db472a721c2f",
@@ -65,7 +77,13 @@
       "face_count": 1495742,
       "vertex_count": 855031,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "印度蓮",
+      "name_ko": "Indian Lotus",
+      "name_de": "Indian Lotus",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Magnoliophyta\n綱: 雙子叶植物綱 / Magnoliopsida\n目: 山龍眼目 / Proteales\n科: 蓮科 / Nelumbonaceae\n屬: 蓮屬 / Nelumbo\n種: 蓮 / Nelumbo nucifera",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Magnoliophyta\nClass: Magnoliopsida\nOrder: Proteales\nFamily: Nelumbonaceae\nGenus: Nelumbo\nSpecies: Nelumbo nucifera (Indian Lotus)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Magnoliophyta\nClass: Magnoliopsida\nOrder: Proteales\nFamily: Nelumbonaceae\nGenus: Nelumbo\nSpecies: Nelumbo nucifera (Indian Lotus)"
     },
     {
       "id": "a9c23391171c4e1abd859b05887e00af",
@@ -86,7 +104,13 @@
       "face_count": 1096795,
       "vertex_count": 658302,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "森林綠樹蛙",
+      "name_ko": "Forest Green Tree Frog",
+      "name_de": "Forest Green Tree Frog",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 两栖綱 / Amphibia\n目: 無尾目 / Anura\n科: 樹蛙科 / Rhacophoridae\n屬: 樹蛙屬 / Rhacophorus\n種: 森林綠樹蛙 / Rhacophorus arboreus",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Amphibia\nOrder: Anura\nFamily: Rhacophoridae\nGenus: Rhacophorus\nSpecies: Rhacophorus arboreus (Forest Green Tree Frog)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Amphibia\nOrder: Anura\nFamily: Rhacophoridae\nGenus: Rhacophorus\nSpecies: Rhacophorus arboreus (Forest Green Tree Frog)"
     },
     {
       "id": "769234ce5f6c49ab89e51aedcc0eed4c",
@@ -107,7 +131,13 @@
       "face_count": 852879,
       "vertex_count": 597219,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "皋月杜鵑",
+      "name_ko": "Satsuki Azalea",
+      "name_de": "Satsuki Azalea",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 菊類植物 / asterids\n目: 杜鵑花目 / Ericales\n科: 杜鵑花科 / Ericaceae\n屬: 杜鵑屬 / Rhododendron\n種: 皋月杜鵑 / Rhododendron indicum",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Ericaceae\nGenus: Rhododendron\nSpecies: Rhododendron indicum (Satsuki Azalea)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Ericaceae\nGenus: Rhododendron\nSpecies: Rhododendron indicum (Satsuki Azalea)"
     },
     {
       "id": "45874734e4a64fc6938b3d58b50fd1e9",
@@ -128,7 +158,13 @@
       "face_count": 1433890,
       "vertex_count": 717117,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本杏 / 梅",
+      "name_ko": "Japanese Apricot",
+      "name_de": "Japanese Apricot",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 櫻屬 / Prunus\n種: 梅 / Prunus mume",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus mume (Japanese Apricot)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus mume (Japanese Apricot)"
     },
     {
       "id": "3f54b0670e9c49d79a0d19371b03baca",
@@ -149,7 +185,13 @@
       "face_count": 2435932,
       "vertex_count": 1521257,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "筑紫薔薇",
+      "name_ko": "Tsukushi Rose",
+      "name_de": "Tsukushi Rose",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 薔薇屬 / Rosa\n種: 筑紫薔薇 / Rosa multiflora var. adenochaeta",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Rosa\nSpecies: Rosa multiflora var. adenochaeta (Tsukushi Rose)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Rosa\nSpecies: Rosa multiflora var. adenochaeta (Tsukushi Rose)"
     },
     {
       "id": "abc1bba2bdac40d0acff87d52a3aa0a7",
@@ -170,7 +212,13 @@
       "face_count": 782953,
       "vertex_count": 392309,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "百合紀念花",
+      "name_ko": "RIP My Friend",
+      "name_de": "RIP My Friend",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 单子叶植物 / monocots\n目: 百合目 / Liliales\n科: 百合科 / Liliaceae\n屬: 百合屬 / Lilium\n種: 百合 / Lilium cv",
+      "taxonomic_info_ko": "Clade: ___\nKingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium cv (RIP My Friend)",
+      "taxonomic_info_de": "Clade: ___\nKingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium cv (RIP My Friend)"
     },
     {
       "id": "8992b6b94b094a069930104a32d5e9f5",
@@ -191,7 +239,13 @@
       "face_count": 487457,
       "vertex_count": 315752,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "紅色扶桑花",
+      "name_ko": "Red Hibiscus",
+      "name_de": "Red Hibiscus",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 錦葵類真薔薇分支 II / malvids\n目: 錦葵目 / Malvales\n科: 錦葵科 / Malvaceae\n屬: 木槿屬 / Hibiscus\n種: 朱槿 / Hibiscus cv",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: malvids\nOrder: Malvales\nFamily: Malvaceae\nGenus: Hibiscus\nSpecies: Hibiscus cv (Red Hibiscus)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: malvids\nOrder: Malvales\nFamily: Malvaceae\nGenus: Hibiscus\nSpecies: Hibiscus cv (Red Hibiscus)"
     },
     {
       "id": "b1d89a4c913c4ca192533bbca8a4d448",
@@ -212,7 +266,13 @@
       "face_count": 1087313,
       "vertex_count": 627911,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本紫藤",
+      "name_ko": "Japanese Wisteria",
+      "name_de": "Japanese Wisteria",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 豆目 / Fabales\n科: 豆科 / Fabaceae / Leguminosae\n屬: 紫藤屬 / Wisteria\n種: 多花紫藤 / Wisteria floribunda",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Fabales\nFamily: Fabaceae / Leguminosae\nGenus: Wisteria\nSpecies: Wisteria floribunda (Japanese Wisteria)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Fabales\nFamily: Fabaceae / Leguminosae\nGenus: Wisteria\nSpecies: Wisteria floribunda (Japanese Wisteria)"
     },
     {
       "id": "f9c1f7e3f373491fbf01adf94ec8169e",
@@ -233,7 +293,13 @@
       "face_count": 375650,
       "vertex_count": 188443,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本大黃蜂",
+      "name_ko": "Japanese Giant Hornet",
+      "name_de": "Japanese Giant Hornet",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 昆虫綱 / Insecta\n目: 膜翅目 / Hymenoptera\n科: 胡蜂科 / Vespidae\n屬: 胡蜂屬 / Vespa\n種: 日本大黃蜂 / Vespa mandarinia japonica",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Hymenoptera\nFamily: Vespidae\nGenus: Vespa\nSpecies: Vespa mandarinia japonica (Japanese Giant Hornet)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Hymenoptera\nFamily: Vespidae\nGenus: Vespa\nSpecies: Vespa mandarinia japonica (Japanese Giant Hornet)"
     },
     {
       "id": "acf183a0a0214b58b86b6ad2eeb2eefb",
@@ -254,7 +320,13 @@
       "face_count": 705542,
       "vertex_count": 450668,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "长腕章魚",
+      "name_ko": "Long Arm Octopus",
+      "name_de": "Long Arm Octopus",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 軟體動物門 / Mollusca\n綱: 頭足綱 / Cephalopoda\n目: 八腕目 / Octobrachiata\n科: 章魚科 / Octopodidae\n屬: 章魚屬 / Octopus\n種: 长蛸 / Octopus minor",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Mollusca\nClass: Cephalopoda\nOrder: Octobrachiata\nFamily: Octopodidae\nGenus: Octopus\nSpecies: Octopus minor (Long Arm Octopus)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Mollusca\nClass: Cephalopoda\nOrder: Octobrachiata\nFamily: Octopodidae\nGenus: Octopus\nSpecies: Octopus minor (Long Arm Octopus)"
     },
     {
       "id": "2f5a16ad05db49bb83a9777031f9a530",
@@ -275,7 +347,13 @@
       "face_count": 986716,
       "vertex_count": 634781,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "山杜鵑",
+      "name_ko": "Azalea",
+      "name_de": "Azalea",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 菊類植物 / asterids\n目: 杜鵑花目 / Ericales\n科: 杜鵑花科 / Ericaceae\n屬: 杜鵑屬 / Rhododendron\n種: 山杜鵑類 / Rhododendron sp./spp",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Ericaceae\nGenus: Rhododendron\nSpecies: Rhododendron sp./spp (Azalea)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Ericaceae\nGenus: Rhododendron\nSpecies: Rhododendron sp./spp (Azalea)"
     },
     {
       "id": "2b2381a6a4bc4a68ac7449fbfb96df51",
@@ -296,7 +374,13 @@
       "face_count": 384478,
       "vertex_count": 189382,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本小龍蝦",
+      "name_ko": "Japanese Crayfish",
+      "name_de": "Japanese Crayfish",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 甲壳綱 / Crustacea\n目: 十足目 / Decapoda\n科: 螯蝦科 / Astacidae\n屬: 亚洲螯蝦屬 / Cambaroides\n種: 日本螯蝦 / Cambaroides japonicus",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Astacidae\nGenus: Cambaroides\nSpecies: Cambaroides japonicus (Japanese Crayfish)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Astacidae\nGenus: Cambaroides\nSpecies: Cambaroides japonicus (Japanese Crayfish)"
     },
     {
       "id": "e7830f486a0248b6b894f3e7a63b8c16",
@@ -317,7 +401,13 @@
       "face_count": 1892877,
       "vertex_count": 1151811,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "睡蓮",
+      "name_ko": "Water Lily",
+      "name_de": "Water Lily",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Magnoliophyta\n綱: 雙子叶植物綱 / Magnoliopsida\n目: 睡蓮目 / Nymphaeales\n科: 睡蓮科 / Nymphaeaceae\n屬: 睡蓮屬 / Nymphaea\n種: 睡蓮 / Nymphaea cv",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Magnoliophyta\nClass: Magnoliopsida\nOrder: Nymphaeales\nFamily: Nymphaeaceae\nGenus: Nymphaea\nSpecies: Nymphaea cv (Water Lily)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Magnoliophyta\nClass: Magnoliopsida\nOrder: Nymphaeales\nFamily: Nymphaeaceae\nGenus: Nymphaea\nSpecies: Nymphaea cv (Water Lily)"
     },
     {
       "id": "0d4dac6d670c46a38154bcc205cb9094",
@@ -338,7 +428,13 @@
       "face_count": 1264357,
       "vertex_count": 652565,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "深秋紀念模型",
+      "name_ko": "Deep Autumn",
+      "name_de": "Deep Autumn",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 超薔薇類植物 / superrosids\n目: 虎耳草目 / Saxifragales\n科: 楓香科 / Altingiaceae\n屬: 楓香屬 / Liquidambar\n類群: 楓香屬 / Liquidam",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: superrosids\nOrder: Saxifragales\nFamily: Altingiaceae\nGenus: Liquidambar\nClade: Liquidam",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: superrosids\nOrder: Saxifragales\nFamily: Altingiaceae\nGenus: Liquidambar\nClade: Liquidam"
     },
     {
       "id": "9fb298fac2da414fab7b8cf2f7e5fa82",
@@ -359,7 +455,13 @@
       "face_count": 721980,
       "vertex_count": 483413,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "山櫻",
+      "name_ko": "Japanese Mountain Cherry",
+      "name_de": "Japanese Mountain Cherry",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 櫻屬 / Prunus\n種: 山櫻 / Prunus jamasakura",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus jamasakura (Japanese Mountain Cherry)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus jamasakura (Japanese Mountain Cherry)"
     },
     {
       "id": "8ec4811184f34fc5b6699eca34008f68",
@@ -380,7 +482,13 @@
       "face_count": 383783,
       "vertex_count": 191096,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本草蜥",
+      "name_ko": "Japanese Grass Lizard",
+      "name_de": "Japanese Grass Lizard",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 爬行綱 / Reptilia\n目: 有鱗目 / Squamata\n科: 蜥蜴科 / Lacertidae\n屬: 草蜥屬 / Takydromus\n種: 日本草蜥 / Takydromus tachydromoides",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Squamata\nFamily: Lacertidae\nGenus: Takydromus\nSpecies: Takydromus tachydromoides (Japanese Grass Lizard)\nClade: lizard",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Squamata\nFamily: Lacertidae\nGenus: Takydromus\nSpecies: Takydromus tachydromoides (Japanese Grass Lizard)\nClade: lizard"
     },
     {
       "id": "8605a27d76634bbdafe8a934e2d3e84d",
@@ -401,7 +509,13 @@
       "face_count": 2829395,
       "vertex_count": 1418825,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "黃色菊花",
+      "name_ko": "Chrysanthemum",
+      "name_de": "Chrysanthemum",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 桔梗類植物 / campanulids\n目: 菊目 / Asterales\n科: 菊科 / Asteraceae / Compositae\n屬: 菊屬 / Chrysanthemum\n種: 菊花 / Chrysanthemum cv",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: campanulids\nOrder: Asterales\nFamily: Asteraceae / Compositae\nGenus: Chrysanthemum\nSpecies: Chrysanthemum cv (Chrysanthemum)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: campanulids\nOrder: Asterales\nFamily: Asteraceae / Compositae\nGenus: Chrysanthemum\nSpecies: Chrysanthemum cv (Chrysanthemum)"
     },
     {
       "id": "14111c88dc994402a6318f6c1ba1b6f6",
@@ -422,7 +536,13 @@
       "face_count": 510666,
       "vertex_count": 330531,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "蓬蘽 / 草莓状悬钩子",
+      "name_ko": "Hirsute Raspberry",
+      "name_de": "Hirsute Raspberry",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 悬钩子屬 / Rubus\n種: 蓬蘽 / Rubus hirsutus",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Rubus\nSpecies: Rubus hirsutus (Hirsute Raspberry)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Rubus\nSpecies: Rubus hirsutus (Hirsute Raspberry)"
     },
     {
       "id": "4915ee5a2d9f46af9a24d3b8da505d00",
@@ -443,7 +563,13 @@
       "face_count": 567578,
       "vertex_count": 387737,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本石蟹",
+      "name_ko": "Asian Paddle Crab",
+      "name_de": "Asian Paddle Crab",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 甲壳綱 / Crustacea\n目: 十足目 / Decapoda\n科: 梭子蟹科 / Portunidae\n屬: 蟳屬 / Charybdis\n種: 日本蟳 / Charybdis japonica",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Portunidae\nGenus: Charybdis\nSpecies: Charybdis japonica (Asian Paddle Crab)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Portunidae\nGenus: Charybdis\nSpecies: Charybdis japonica (Asian Paddle Crab)"
     },
     {
       "id": "701f33ba0db84058900232bf7ee91fec",
@@ -464,7 +590,13 @@
       "face_count": 546376,
       "vertex_count": 369367,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "月斑蓑鲉",
+      "name_ko": "Luna Lionfish",
+      "name_de": "Luna Lionfish",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 硬骨魚綱 / Osteichthyes\n目: 鲈形目 / Perciformes\n科: 鲉科 / Scorpaenidae\n屬: 蓑鲉屬 / Pterois\n種: 環紋蓑鲉 / Pterois lunulata",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Osteichthyes\nOrder: Perciformes\nFamily: Scorpaenidae\nGenus: Pterois\nSpecies: Pterois lunulata (Luna Lionfish)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Osteichthyes\nOrder: Perciformes\nFamily: Scorpaenidae\nGenus: Pterois\nSpecies: Pterois lunulata (Luna Lionfish)"
     },
     {
       "id": "71f93eee4194460aafa5a9555b6099ef",
@@ -485,7 +617,13 @@
       "face_count": 1751362,
       "vertex_count": 1059220,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "灰星鯊",
+      "name_ko": "Spotless Smooth-hound",
+      "name_de": "Spotless Smooth-hound",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 軟骨魚綱 / Chondrichthyes\n目: 真鯊目 / Carcharhiniformes\n科: 皱唇鯊科 / Triakidae\n屬: 星鯊屬 / Mustelus\n種: 星鯊 / Mustelus griseus",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Chondrichthyes\nOrder: Carcharhiniformes\nFamily: Triakidae\nGenus: Mustelus\nSpecies: Mustelus griseus (Spotless Smooth-hound)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Chondrichthyes\nOrder: Carcharhiniformes\nFamily: Triakidae\nGenus: Mustelus\nSpecies: Mustelus griseus (Spotless Smooth-hound)"
     },
     {
       "id": "b11d9f411194426bb16883aed176e4e6",
@@ -506,7 +644,13 @@
       "face_count": 454846,
       "vertex_count": 297923,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "卷丹百合",
+      "name_ko": "Tiger Lily",
+      "name_de": "Tiger Lily",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 单子叶植物 / monocots\n目: 百合目 / Liliales\n科: 百合科 / Liliaceae\n屬: 百合屬 / Lilium\n種: 小鬼百合 / Lilium leichtlinii f. pseudotigrinum",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium leichtlinii f. pseudotigrinum (Tiger Lily)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium leichtlinii f. pseudotigrinum (Tiger Lily)"
     },
     {
       "id": "0e421206982f460ab58908a5b3880448",
@@ -527,7 +671,13 @@
       "face_count": 343672,
       "vertex_count": 240593,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "白花曼珠沙华",
+      "name_ko": "White Spider Lily",
+      "name_de": "White Spider Lily",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 单子叶植物 / monocots\n目: 天門冬目 / Asparagales\n科: 石蒜科 / Amaryllidaceae\n屬: 石蒜屬 / Lycoris\n種: 白花石蒜 / Lycoris x albiflora",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Asparagales\nFamily: Amaryllidaceae\nGenus: Lycoris\nSpecies: Lycoris x albiflora (White Spider Lily)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Asparagales\nFamily: Amaryllidaceae\nGenus: Lycoris\nSpecies: Lycoris x albiflora (White Spider Lily)"
     },
     {
       "id": "6e08a55e2284409682fea1f89e5afb54",
@@ -548,7 +698,13 @@
       "face_count": 620640,
       "vertex_count": 402056,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "忍冬 / 金银花",
+      "name_ko": "Japanese Honeysuckle",
+      "name_de": "Japanese Honeysuckle",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 桔梗類植物 / campanulids\n目: 川續断目 / Dipsacales\n科: 忍冬科 / Caprifoliaceae\n屬: 忍冬屬 / Lonicera\n種: 忍冬 / Lonicera japonica",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: campanulids\nOrder: Dipsacales\nFamily: Caprifoliaceae\nGenus: Lonicera\nSpecies: Lonicera japonica (Japanese Honeysuckle)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: campanulids\nOrder: Dipsacales\nFamily: Caprifoliaceae\nGenus: Lonicera\nSpecies: Lonicera japonica (Japanese Honeysuckle)"
     },
     {
       "id": "146ae65a1e134a45811acaefa3f1e27a",
@@ -569,7 +725,13 @@
       "face_count": 1025693,
       "vertex_count": 746458,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "大岛櫻",
+      "name_ko": "Oshima Cherry",
+      "name_de": "Oshima Cherry",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 櫻屬 / Prunus\n種: 大岛櫻 / Prunus speciosa",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus speciosa (Oshima Cherry)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus speciosa (Oshima Cherry)"
     },
     {
       "id": "4a8be7619bc0468894a19b8f2464947f",
@@ -590,7 +752,13 @@
       "face_count": 1240195,
       "vertex_count": 621727,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "西洋繡球",
+      "name_ko": "Hydrangea",
+      "name_de": "Hydrangea",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 菊類植物 / asterids\n目: 山茱萸目 / Cornales\n科: 繡球科 / Hydrangeaceae\n屬: 繡球屬 / Hydrangea\n種: 繡球 / Hydrangea macrophylla f. hortensia",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Cornales\nFamily: Hydrangeaceae\nGenus: Hydrangea\nSpecies: Hydrangea macrophylla f. hortensia (Hydrangea)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Cornales\nFamily: Hydrangeaceae\nGenus: Hydrangea\nSpecies: Hydrangea macrophylla f. hortensia (Hydrangea)"
     },
     {
       "id": "15f772d7febd45a48d3cecf1cef6fe10",
@@ -611,7 +779,13 @@
       "face_count": 168488,
       "vertex_count": 84248,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "先岛樹蜥",
+      "name_ko": "Sakishima Tree Lizard",
+      "name_de": "Sakishima Tree Lizard",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 爬行綱 / Reptilia\n目: 有鱗目 / Squamata\n科: 飞蜥科 / Agamidae\n屬: 龍蜥屬 / Diploderma\n種: 先岛樹蜥 / Diploderma polygonatum ishigakiense",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Squamata\nFamily: Agamidae\nGenus: Diploderma\nSpecies: Diploderma polygonatum ishigakiense (Sakishima Tree Lizard)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Squamata\nFamily: Agamidae\nGenus: Diploderma\nSpecies: Diploderma polygonatum ishigakiense (Sakishima Tree Lizard)"
     },
     {
       "id": "cb851e66c8674117b8c9ee13da686584",
@@ -632,7 +806,13 @@
       "face_count": 1064901,
       "vertex_count": 679706,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "西伯利亚百合",
+      "name_ko": "Siberian Lily",
+      "name_de": "Siberian Lily",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 单子叶植物 / monocots\n目: 百合目 / Liliales\n科: 百合科 / Liliaceae\n屬: 百合屬 / Lilium\n種: 毛百合 / Lilium pensylvanicum",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium pensylvanicum (Siberian Lily)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium pensylvanicum (Siberian Lily)"
     },
     {
       "id": "4b71e4fd4250439f85c1aebe01eb945f",
@@ -653,7 +833,13 @@
       "face_count": 1012686,
       "vertex_count": 683891,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "平戶杜鵑",
+      "name_ko": "Hirado Azalea",
+      "name_de": "Hirado Azalea",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 菊類植物 / asterids\n目: 杜鵑花目 / Ericales\n科: 杜鵑花科 / Ericaceae\n屬: 杜鵑屬 / Rhododendron\n種: 平戶杜鵑 / Rhododendron x pulchrum",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Ericaceae\nGenus: Rhododendron\nSpecies: Rhododendron x pulchrum (Hirado Azalea)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Ericaceae\nGenus: Rhododendron\nSpecies: Rhododendron x pulchrum (Hirado Azalea)"
     },
     {
       "id": "d9e174d623124d2aa23122683018f6e6",
@@ -674,7 +860,13 @@
       "face_count": 497186,
       "vertex_count": 248674,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "絨毛新木姜子",
+      "name_ko": "Japanese Silver Tree",
+      "name_de": "Japanese Silver Tree",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 木蘭類植物 / magnoliids\n目: 樟目 / Laurales\n科: 樟科 / Lauraceae\n屬: 新木姜子屬 / Neolitsea\n種: 絨毛新木姜子 / Neolitsea sericea",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: magnoliids\nOrder: Laurales\nFamily: Lauraceae\nGenus: Neolitsea\nSpecies: Neolitsea sericea (Japanese Silver Tree)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: magnoliids\nOrder: Laurales\nFamily: Lauraceae\nGenus: Neolitsea\nSpecies: Neolitsea sericea (Japanese Silver Tree)"
     },
     {
       "id": "7bd37dfa1f0246e5a60749a007082a82",
@@ -695,7 +887,13 @@
       "face_count": 680076,
       "vertex_count": 383422,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "台湾百合",
+      "name_ko": "Taiwan Lily",
+      "name_de": "Taiwan Lily",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 单子叶植物 / monocots\n目: 百合目 / Liliales\n科: 百合科 / Liliaceae\n屬: 百合屬 / Lilium\n種: 台湾百合 / Lilium formosanum",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium formosanum (Taiwan Lily)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: monocots\nOrder: Liliales\nFamily: Liliaceae\nGenus: Lilium\nSpecies: Lilium formosanum (Taiwan Lily)"
     },
     {
       "id": "ea300256d9dc460b871dee878080fe7c",
@@ -716,7 +914,13 @@
       "face_count": 337053,
       "vertex_count": 168566,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "黑脉桦斑蝶",
+      "name_ko": "Common Tiger Butterfly",
+      "name_de": "Common Tiger Butterfly",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 昆虫綱 / Insecta\n目: 鱗翅目 / Lepidoptera\n科: 蛺蝶科 / Nymphalidae\n屬: 斑蝶屬 / Salatura\n種: 黑脉桦斑蝶 / Salatura genutia",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Lepidoptera\nFamily: Nymphalidae\nGenus: Salatura\nSpecies: Salatura genutia (Common Tiger Butterfly)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Lepidoptera\nFamily: Nymphalidae\nGenus: Salatura\nSpecies: Salatura genutia (Common Tiger Butterfly)"
     },
     {
       "id": "263e196645fd420d830a06462e906d08",
@@ -737,7 +941,13 @@
       "face_count": 310919,
       "vertex_count": 155544,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "油蟬",
+      "name_ko": "Aburazemi Cicada",
+      "name_de": "Aburazemi Cicada",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 昆虫綱 / Insecta\n目: 半翅目 / Hemiptera\n科: 蟬科 / Cicadidae\n屬: 油蟬屬 / Graptopsaltria\n種: 油蟬 / Graptopsaltria nigrofuscata",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Hemiptera\nFamily: Cicadidae\nGenus: Graptopsaltria\nSpecies: Graptopsaltria nigrofuscata (Aburazemi Cicada)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Hemiptera\nFamily: Cicadidae\nGenus: Graptopsaltria\nSpecies: Graptopsaltria nigrofuscata (Aburazemi Cicada)"
     },
     {
       "id": "8f8d1c0305d04637b7abaf4cb54d25a8",
@@ -758,7 +968,13 @@
       "face_count": 178633,
       "vertex_count": 89467,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "少棘蜈蚣",
+      "name_ko": "Chinese Red-headed Centipede",
+      "name_de": "Chinese Red-headed Centipede",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 唇足綱 / Chilopoda\n目: 蜈蚣目 / Scolopendromorpha\n科: 蜈蚣科 / Scolopendridae\n屬: 蜈蚣屬 / Scolopendra\n種: 少棘蜈蚣 / Scolopendra mutilans",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Chilopoda\nOrder: Scolopendromorpha\nFamily: Scolopendridae\nGenus: Scolopendra\nSpecies: Scolopendra mutilans (Chinese Red-headed Centipede)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Chilopoda\nOrder: Scolopendromorpha\nFamily: Scolopendridae\nGenus: Scolopendra\nSpecies: Scolopendra mutilans (Chinese Red-headed Centipede)"
     },
     {
       "id": "48dc404d5d444769955148c893dbb9ad",
@@ -779,7 +995,13 @@
       "face_count": 394487,
       "vertex_count": 197460,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本泽蟹",
+      "name_ko": "Japanese Freshwater Crab",
+      "name_de": "Japanese Freshwater Crab",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 甲壳綱 / Crustacea\n目: 十足目 / Decapoda\n科: 溪蟹科 / Potamidae\n屬: 溪蟹屬 / Geothelphusa\n種: 日本溪蟹 / Geothelphusa dehaani",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Potamidae\nGenus: Geothelphusa\nSpecies: Geothelphusa dehaani (Japanese Freshwater Crab)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Potamidae\nGenus: Geothelphusa\nSpecies: Geothelphusa dehaani (Japanese Freshwater Crab)"
     },
     {
       "id": "ef418bf372554dc29a8b5c3f50ae3506",
@@ -800,7 +1022,13 @@
       "face_count": 1390738,
       "vertex_count": 693915,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "蘋果蘚",
+      "name_ko": "Apple Moss",
+      "name_de": "Apple Moss",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 苔蘚植物門 / Bryophyta\n綱: 蘚綱 / Bryopsida\n目: 珠蘚目 / Bartramiales\n科: 珠蘚科 / Bartramiaceae\n屬: 珠蘚屬 / Bartramia\n種: 蘋果蘚 / Bartramia pomiformis",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Bryophyta\nClass: Bryopsida\nOrder: Bartramiales\nFamily: Bartramiaceae\nGenus: Bartramia\nSpecies: Bartramia pomiformis (Apple Moss)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Bryophyta\nClass: Bryopsida\nOrder: Bartramiales\nFamily: Bartramiaceae\nGenus: Bartramia\nSpecies: Bartramia pomiformis (Apple Moss)"
     },
     {
       "id": "2d54c54618da4b1c8c0240119299f1c6",
@@ -821,7 +1049,13 @@
       "face_count": 1178328,
       "vertex_count": 651519,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本毛茛",
+      "name_ko": "Japanese Buttercup",
+      "name_de": "Japanese Buttercup",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 真雙子叶植物 / eudicots\n目: 毛茛目 / Ranunculales\n科: 毛茛科 / Ranunculaceae\n屬: 毛茛屬 / Ranunculus\n種: 毛茛 / Ranunculus japonicus",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: eudicots\nOrder: Ranunculales\nFamily: Ranunculaceae\nGenus: Ranunculus\nSpecies: Ranunculus japonicus (Japanese Buttercup)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: eudicots\nOrder: Ranunculales\nFamily: Ranunculaceae\nGenus: Ranunculus\nSpecies: Ranunculus japonicus (Japanese Buttercup)"
     },
     {
       "id": "78f35818cac442ca9a274d639c62930c",
@@ -842,7 +1076,13 @@
       "face_count": 1182680,
       "vertex_count": 829794,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "寒椿",
+      "name_ko": "Camellia Sasanqua",
+      "name_de": "Camellia Sasanqua",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 菊類植物 / asterids\n目: 杜鵑花目 / Ericales\n科: 山茶科 / Theaceae\n屬: 山茶屬 / Camellia\n種: 狮子頭山茶 / Camellia sasanqua 'Shishigashira'",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Theaceae\nGenus: Camellia\nSpecies: Camellia sasanqua 'Shishigashira' (Camellia Sasanqua)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: asterids\nOrder: Ericales\nFamily: Theaceae\nGenus: Camellia\nSpecies: Camellia sasanqua 'Shishigashira' (Camellia Sasanqua)"
     },
     {
       "id": "dfc2d31732174dbc82a84d3237783590",
@@ -863,7 +1103,13 @@
       "face_count": 967623,
       "vertex_count": 648929,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "蛙形蟹",
+      "name_ko": "Red Frog Crab",
+      "name_de": "Red Frog Crab",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 甲壳綱 / Crustacea\n目: 十足目 / Decapoda\n科: 旭蟹科 / Raninidae\n屬: 旭蟹屬 / Ranina\n種: 旭蟹 / Ranina ranina",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Raninidae\nGenus: Ranina\nSpecies: Ranina ranina (Red Frog Crab)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Raninidae\nGenus: Ranina\nSpecies: Ranina ranina (Red Frog Crab)"
     },
     {
       "id": "35559c2236d04c1a80ccbe08cae863c6",
@@ -884,7 +1130,13 @@
       "face_count": 12774,
       "vertex_count": 6387,
       "has_animation": true,
-      "animations": 1
+      "animations": 1,
+      "name_zh_hant": "日本泽蟹（低面數版）",
+      "name_ko": "Japanese Freshwater Crab Low Poly",
+      "name_de": "Japanese Freshwater Crab Low Poly",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 甲壳綱 / Crustacea\n目: 十足目 / Decapoda\n科: 溪蟹科 / Potamidae\n屬: 溪蟹屬 / Geothelphusa\n種: 日本溪蟹 / Geothelphusa dehaani",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Potamidae\nGenus: Geothelphusa\nSpecies: Geothelphusa dehaani (Japanese Freshwater Crab Low Poly)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Potamidae\nGenus: Geothelphusa\nSpecies: Geothelphusa dehaani (Japanese Freshwater Crab Low Poly)"
     },
     {
       "id": "c5e1e73fce7d4caf803ecd8abd0797e1",
@@ -905,7 +1157,13 @@
       "face_count": 1321732,
       "vertex_count": 661716,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "美枝蘚",
+      "name_ko": "Beautiful Branch Moss",
+      "name_de": "Beautiful Branch Moss",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 苔蘚植物門 / Bryophyta\n綱: 蘚綱 / Bryopsida\n目: 灰蘚目 / Hypnales\n科: 灰蘚科 / Hypnaceae\n類群: 草蘚屬 / Callicladium\n種: 美枝蘚 / Callicladium haldanianum",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Bryophyta\nClass: Bryopsida\nOrder: Hypnales\nFamily: Hypnaceae\nClade: Callicladium\nSpecies: Callicladium haldanianum (Beautiful Branch Moss)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Bryophyta\nClass: Bryopsida\nOrder: Hypnales\nFamily: Hypnaceae\nClade: Callicladium\nSpecies: Callicladium haldanianum (Beautiful Branch Moss)"
     },
     {
       "id": "428f55efa9734c0b8524430bb7e4c114",
@@ -926,7 +1184,13 @@
       "face_count": 309247,
       "vertex_count": 155496,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "陽光櫻",
+      "name_ko": "Youko Sakura",
+      "name_de": "Youko Sakura",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 豆類真薔薇分支 I / fabids\n目: 薔薇目 / Rosales\n科: 薔薇科 / Rosaceae\n屬: 櫻屬 / Prunus\n種: 陽光櫻 / Prunus ”Yoko”",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus ”Yoko” (Youko Sakura)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: fabids\nOrder: Rosales\nFamily: Rosaceae\nGenus: Prunus\nSpecies: Prunus ”Yoko” (Youko Sakura)"
     },
     {
       "id": "9818500118df4542b8ffb49128006b29",
@@ -947,7 +1211,13 @@
       "face_count": 1575602,
       "vertex_count": 789223,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "紫罗蘭花",
+      "name_ko": "Stock Flower",
+      "name_de": "Stock Flower",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 錦葵類真薔薇分支 II / malvids\n目: 十字花目 / Brassicales\n科: 十字花科 / Brassicaceae / Cruciferae\n屬: 紫罗蘭屬 / Matthiola\n種: 紫罗蘭 / Matthiola cv",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: malvids\nOrder: Brassicales\nFamily: Brassicaceae / Cruciferae\nGenus: Matthiola\nSpecies: Matthiola cv (Stock Flower)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: malvids\nOrder: Brassicales\nFamily: Brassicaceae / Cruciferae\nGenus: Matthiola\nSpecies: Matthiola cv (Stock Flower)"
     },
     {
       "id": "9958ba9e986240179142d85751b3adaf",
@@ -968,7 +1238,13 @@
       "face_count": 984562,
       "vertex_count": 714427,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "二色錦帶花",
+      "name_ko": "Nishiki Utsugi",
+      "name_de": "Nishiki Utsugi",
+      "taxonomic_info_zh_hant": "界: 植物界 / Plantae\n門: 被子植物門 / Angiospermae / Magnoliophyta\n類群: 桔梗類植物 / campanulids\n目: 川續断目 / Dipsacales\n科: 忍冬科 / Caprifoliaceae\n屬: 錦帶花屬 / Weigela\n種: 錦帶花 / Weigela decora",
+      "taxonomic_info_ko": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: campanulids\nOrder: Dipsacales\nFamily: Caprifoliaceae\nGenus: Weigela\nSpecies: Weigela decora (Nishiki Utsugi)",
+      "taxonomic_info_de": "Kingdom: Plantae\nPhylum: Angiospermae / Magnoliophyta\nClade: campanulids\nOrder: Dipsacales\nFamily: Caprifoliaceae\nGenus: Weigela\nSpecies: Weigela decora (Nishiki Utsugi)"
     },
     {
       "id": "04e13f6fc8304c34b7928a7c7879a39a",
@@ -989,7 +1265,13 @@
       "face_count": 751820,
       "vertex_count": 483664,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "短蛸",
+      "name_ko": "Webfoot Octopus",
+      "name_de": "Webfoot Octopus",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 軟體動物門 / Mollusca\n綱: 頭足綱 / Cephalopoda\n目: 八腕目 / Octobrachiata\n科: 章魚科 / Octopodidae\n屬: 章魚屬 / Octopus\n種: 短蛸 / Octopus ocellatus",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Mollusca\nClass: Cephalopoda\nOrder: Octobrachiata\nFamily: Octopodidae\nGenus: Octopus\nSpecies: Octopus ocellatus (Webfoot Octopus)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Mollusca\nClass: Cephalopoda\nOrder: Octobrachiata\nFamily: Octopodidae\nGenus: Octopus\nSpecies: Octopus ocellatus (Webfoot Octopus)"
     },
     {
       "id": "93bc064c84ba40a39a709804760610c7",
@@ -1010,7 +1292,13 @@
       "face_count": 173819,
       "vertex_count": 87167,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "負子蝽",
+      "name_ko": "Japanese Giant Water Bug",
+      "name_de": "Japanese Giant Water Bug",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 昆虫綱 / Insecta\n目: 半翅目 / Hemiptera\n科: 負子蝽科 / Belostomatidae\n屬: 負子蝽屬 / Appasus\n種: 負子蝽 / Appasus japonicus",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Hemiptera\nFamily: Belostomatidae\nGenus: Appasus\nSpecies: Appasus japonicus (Japanese Giant Water Bug)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Hemiptera\nFamily: Belostomatidae\nGenus: Appasus\nSpecies: Appasus japonicus (Japanese Giant Water Bug)"
     },
     {
       "id": "23a849e380da4f89addf0a8375b0c32f",
@@ -1031,7 +1319,13 @@
       "face_count": 949565,
       "vertex_count": 675959,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "特鰭魚",
+      "name_ko": "Sail-fin Poacher",
+      "name_de": "Sail-fin Poacher",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 硬骨魚綱 / Osteichthyes\n目: 鲈形目 / Perciformes\n科: 八角魚科 / Agonidae\n屬: 八角魚屬 / Podothecus\n種: 特鰭魚 / Podothecus sachi",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Osteichthyes\nOrder: Perciformes\nFamily: Agonidae\nGenus: Podothecus\nSpecies: Podothecus sachi (Sail-fin Poacher)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Osteichthyes\nOrder: Perciformes\nFamily: Agonidae\nGenus: Podothecus\nSpecies: Podothecus sachi (Sail-fin Poacher)"
     },
     {
       "id": "b67fb6cbe3fa455c81373aaa9f91fa1a",
@@ -1052,7 +1346,13 @@
       "face_count": 539297,
       "vertex_count": 270028,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "日本獨角仙",
+      "name_ko": "Japanese Rhinoceros Beetle",
+      "name_de": "Japanese Rhinoceros Beetle",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 昆虫綱 / Insecta\n目: 鞘翅目 / Coleoptera\n科: 金龜科 / Scarabaeidae\n屬: 叉犀金龜屬 / Trypoxylus\n種: 日本獨角仙 / Trypoxylus dichotomus",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Coleoptera\nFamily: Scarabaeidae\nGenus: Trypoxylus\nSpecies: Trypoxylus dichotomus (Japanese Rhinoceros Beetle)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Insecta\nOrder: Coleoptera\nFamily: Scarabaeidae\nGenus: Trypoxylus\nSpecies: Trypoxylus dichotomus (Japanese Rhinoceros Beetle)"
     },
     {
       "id": "320e77ebe2e049dcbb759dd79ee03a8c",
@@ -1073,7 +1373,13 @@
       "face_count": 437904,
       "vertex_count": 218962,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "大长脚蛛",
+      "name_ko": "Fishing Spider",
+      "name_de": "Fishing Spider",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 蛛形綱 / Arachnida\n目: 蜘蛛目 / Araneae\n科: 盗蛛科 / Pisauridae\n屬: 水蛛屬 / Dolomedes\n種: 大长脚蛛 / Dolomedes orion",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Arachnida\nOrder: Araneae\nFamily: Pisauridae\nGenus: Dolomedes\nSpecies: Dolomedes orion (Fishing Spider)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Arachnida\nOrder: Araneae\nFamily: Pisauridae\nGenus: Dolomedes\nSpecies: Dolomedes orion (Fishing Spider)"
     },
     {
       "id": "638f29eae79d40ddb0adaf6ebb8375cc",
@@ -1094,7 +1400,13 @@
       "face_count": 1183473,
       "vertex_count": 852142,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "草龜",
+      "name_ko": "Reeve's Pond Turtle",
+      "name_de": "Reeve's Pond Turtle",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 爬行綱 / Reptilia\n目: 龜鳖目 / Testudines\n科: 地龜科 / Geoemydidae\n屬: 拟水龜屬 / Mauremys\n種: 草龜 / Mauremys reevesii",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Testudines\nFamily: Geoemydidae\nGenus: Mauremys\nSpecies: Mauremys reevesii (Reeve's Pond Turtle)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Testudines\nFamily: Geoemydidae\nGenus: Mauremys\nSpecies: Mauremys reevesii (Reeve's Pond Turtle)"
     },
     {
       "id": "80ccbb2feea24f85994cfb89bce55dbf",
@@ -1115,7 +1427,13 @@
       "face_count": 558254,
       "vertex_count": 279570,
       "has_animation": false,
-      "animations": 0
+      "animations": 0,
+      "name_zh_hant": "紅螯蟳",
+      "name_ko": "Mangrove Crab",
+      "name_de": "Mangrove Crab",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 節肢動物門 / Arthropoda\n綱: 甲壳綱 / Crustacea\n目: 十足目 / Decapoda\n科: 梭子蟹科 / Portunidae\n屬: 青蟹屬 / Scylla\n種: 紅螯蟳 / Scylla olivacea",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Portunidae\nGenus: Scylla\nSpecies: Scylla olivacea (Mangrove Crab)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Arthropoda\nClass: Crustacea\nOrder: Decapoda\nFamily: Portunidae\nGenus: Scylla\nSpecies: Scylla olivacea (Mangrove Crab)"
     },
     {
       "id": "0f4f583d5e3842eca1152c0bb021ec32",
@@ -1136,7 +1454,13 @@
       "face_count": 70084,
       "vertex_count": 35044,
       "has_animation": true,
-      "animations": 1
+      "animations": 1,
+      "name_zh_hant": "日本錦蛇",
+      "name_ko": "Striped Snake",
+      "name_de": "Striped Snake",
+      "taxonomic_info_zh_hant": "界: 動物界 / Animalia\n門: 脊索動物門 / Chordata\n綱: 爬行綱 / Reptilia\n目: 有鱗目 / Squamata\n科: 游蛇科 / Colubridae\n屬: 錦蛇屬 / Elaphe\n種: 日本錦蛇 / Elaphe quadrivirgata",
+      "taxonomic_info_ko": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Squamata\nFamily: Colubridae\nGenus: Elaphe\nSpecies: Elaphe quadrivirgata (Striped Snake)",
+      "taxonomic_info_de": "Kingdom: Animalia\nPhylum: Chordata\nClass: Reptilia\nOrder: Squamata\nFamily: Colubridae\nGenus: Elaphe\nSpecies: Elaphe quadrivirgata (Striped Snake)"
     }
   ]
 }

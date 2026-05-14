@@ -1,0 +1,14 @@
+Little Nature für Mac ist ein Desktop-Feldführer zum Durchsuchen CC0-basierter biologischer 3D-Modellrecords von asiatischen Tieren und Pflanzen. Der größere Arbeitsbereich hilft beim Erkunden des Katalogs, Prüfen von Modelldetails und Verwalten gespeicherter Modellinhalte.
+
+Nutze die App für Naturreferenzen, Bildung, Modellauswahl oder einfach zum Durchstöbern von Formen und Taxonomie von Blumen, Insekten, Amphibien, Meereslebewesen und anderen Organismen.
+
+Hauptfunktionen:
+- Desktop-Katalog: kuratierte 3D-Tier- und Pflanzenmodelle auf dem Mac durchsuchen
+- Kategorien: nach Alle / Tiere / Pflanzen / Spezial filtern
+- Schnelle Suche: Modelle nach japanischem, englischem, chinesischem oder wissenschaftlichem Namen finden
+- Downloads bei Bedarf: Modelle nur laden, wenn sie gebraucht werden, um Speicher zu sparen
+- Offline-Zugriff: gespeicherte Modellinhalte nach dem Download ansehen
+- Downloadverwaltung: gespeicherte Modelle prüfen und lokale Inhalte löschen
+- Modelldetails: Flächen, Eckpunkte, Dateigröße, Kategorie und Quellenlinks ansehen
+
+Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen zum Durchsuchen und als lokale Referenz verwendet. Little Nature bietet keine Benutzerkonten und lädt keine persönlichen Daten hoch.

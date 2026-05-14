@@ -35,13 +35,19 @@ struct ModelItem: Identifiable, Codable, Hashable {
     let displayName: String
     let englishName: String
     let localizedNameZhHans: String
+    let localizedNameZhHant: String
     let localizedNameJa: String
+    let localizedNameKo: String
+    let localizedNameDe: String
     let localizedNameEn: String
     let scientificName: String
     let filename: String
     let taxonomicInfo: String
     let localizedTaxonomicInfoZhHans: String
+    let localizedTaxonomicInfoZhHant: String
     let localizedTaxonomicInfoJa: String
+    let localizedTaxonomicInfoKo: String
+    let localizedTaxonomicInfoDe: String
     let localizedTaxonomicInfoEn: String
     let fileSizeMB: Double
     let faceCount: Int
@@ -84,8 +90,14 @@ struct ModelItem: Identifiable, Codable, Hashable {
         switch language {
         case .zhHans:
             return localizedNameZhHans.ifNotEmpty
+        case .zhHant:
+            return localizedNameZhHant.ifNotEmpty ?? localizedNameZhHans.ifNotEmpty
         case .ja:
             return localizedNameJa.ifNotEmpty
+        case .ko:
+            return localizedNameKo.ifNotEmpty ?? localizedNameEn.ifNotEmpty
+        case .de:
+            return localizedNameDe.ifNotEmpty ?? localizedNameEn.ifNotEmpty
         case .en:
             return localizedNameEn.ifNotEmpty
         }
@@ -95,8 +107,14 @@ struct ModelItem: Identifiable, Codable, Hashable {
         switch language {
         case .zhHans:
             return localizedTaxonomicInfoZhHans.ifNotEmpty ?? taxonomicInfo
+        case .zhHant:
+            return localizedTaxonomicInfoZhHant.ifNotEmpty ?? localizedTaxonomicInfoZhHans.ifNotEmpty ?? taxonomicInfo
         case .ja:
             return localizedTaxonomicInfoJa.ifNotEmpty ?? taxonomicInfo
+        case .ko:
+            return localizedTaxonomicInfoKo.ifNotEmpty ?? localizedTaxonomicInfoEn.ifNotEmpty ?? taxonomicInfo
+        case .de:
+            return localizedTaxonomicInfoDe.ifNotEmpty ?? localizedTaxonomicInfoEn.ifNotEmpty ?? taxonomicInfo
         case .en:
             return localizedTaxonomicInfoEn.ifNotEmpty ?? taxonomicInfo
         }
@@ -117,13 +135,19 @@ struct ModelItem: Identifiable, Codable, Hashable {
         displayName: String,
         englishName: String,
         localizedNameZhHans: String = "",
+        localizedNameZhHant: String = "",
         localizedNameJa: String = "",
+        localizedNameKo: String = "",
+        localizedNameDe: String = "",
         localizedNameEn: String = "",
         scientificName: String,
         filename: String,
         taxonomicInfo: String,
         localizedTaxonomicInfoZhHans: String = "",
+        localizedTaxonomicInfoZhHant: String = "",
         localizedTaxonomicInfoJa: String = "",
+        localizedTaxonomicInfoKo: String = "",
+        localizedTaxonomicInfoDe: String = "",
         localizedTaxonomicInfoEn: String = "",
         fileSizeMB: Double,
         faceCount: Int,
@@ -137,13 +161,19 @@ struct ModelItem: Identifiable, Codable, Hashable {
         self.displayName = displayName
         self.englishName = englishName
         self.localizedNameZhHans = localizedNameZhHans
+        self.localizedNameZhHant = localizedNameZhHant
         self.localizedNameJa = localizedNameJa
+        self.localizedNameKo = localizedNameKo
+        self.localizedNameDe = localizedNameDe
         self.localizedNameEn = localizedNameEn
         self.scientificName = scientificName
         self.filename = filename
         self.taxonomicInfo = taxonomicInfo
         self.localizedTaxonomicInfoZhHans = localizedTaxonomicInfoZhHans
+        self.localizedTaxonomicInfoZhHant = localizedTaxonomicInfoZhHant
         self.localizedTaxonomicInfoJa = localizedTaxonomicInfoJa
+        self.localizedTaxonomicInfoKo = localizedTaxonomicInfoKo
+        self.localizedTaxonomicInfoDe = localizedTaxonomicInfoDe
         self.localizedTaxonomicInfoEn = localizedTaxonomicInfoEn
         self.fileSizeMB = fileSizeMB
         self.faceCount = faceCount
@@ -172,10 +202,16 @@ private struct RemoteManifestModel: Decodable {
     let name_ja: String?
     let name_en: String?
     let name_zh_hans: String?
+    let name_zh_hant: String?
+    let name_ko: String?
+    let name_de: String?
     let scientific_name: String?
     let taxonomic_info: String?
     let taxonomic_info_zh_hans: String?
+    let taxonomic_info_zh_hant: String?
     let taxonomic_info_ja: String?
+    let taxonomic_info_ko: String?
+    let taxonomic_info_de: String?
     let taxonomic_info_en: String?
     let sketchfab_url: URL?
     let face_count: Int?
@@ -203,13 +239,19 @@ struct ModelCatalog {
                 displayName: displayName,
                 englishName: englishName,
                 localizedNameZhHans: raw.name_zh_hans ?? "",
+                localizedNameZhHant: raw.name_zh_hant ?? raw.name_zh_hans ?? "",
                 localizedNameJa: raw.name_ja ?? displayName,
+                localizedNameKo: raw.name_ko ?? raw.name_en ?? englishName,
+                localizedNameDe: raw.name_de ?? raw.name_en ?? englishName,
                 localizedNameEn: raw.name_en ?? englishName,
                 scientificName: raw.scientific_name ?? "",
                 filename: raw.filename,
                 taxonomicInfo: taxonomy,
                 localizedTaxonomicInfoZhHans: cleanTaxonomicInfo(raw.taxonomic_info_zh_hans ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
+                localizedTaxonomicInfoZhHant: cleanTaxonomicInfo(raw.taxonomic_info_zh_hant ?? raw.taxonomic_info_zh_hans ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
                 localizedTaxonomicInfoJa: cleanTaxonomicInfo(raw.taxonomic_info_ja ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
+                localizedTaxonomicInfoKo: cleanTaxonomicInfo(raw.taxonomic_info_ko ?? raw.taxonomic_info_en ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
+                localizedTaxonomicInfoDe: cleanTaxonomicInfo(raw.taxonomic_info_de ?? raw.taxonomic_info_en ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
                 localizedTaxonomicInfoEn: cleanTaxonomicInfo(raw.taxonomic_info_en ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
                 fileSizeMB: raw.file_size_mb ?? 0,
                 faceCount: raw.face_count ?? 0,

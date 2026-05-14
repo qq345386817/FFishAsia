@@ -14,7 +14,7 @@ App Store: [小小自然 / Little Nature](https://apps.apple.com/app/id676655183
 - **跨平台浏览**: 支持 iOS 与 macOS (Apple Silicon)，适配不同设备的使用习惯。
 - **按需下载**: 模型资源通过远程加载，减小应用初始包体积，并支持本地缓存管理。
 - **交互支持**: 具备基础的平面检测、手势平移、旋转及缩放功能。
-- **多语言支持**: 提供 简体中文、日本語、English 三种界面语言。
+- **多语言支持**: 提供 简体中文、繁體中文、日本語、한국어、Deutsch、English 六种界面语言。
 
 ## ⚙️ 技术规格 (Technical Specs)
 

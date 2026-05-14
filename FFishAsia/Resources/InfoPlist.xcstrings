@@ -1,75 +1,129 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "CFBundleDisplayName" : {
-      "comment" : "Bundle display name",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Little Nature"
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "comment": "Bundle display name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小さな自然"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小さな自然"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小小自然"
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
           }
         }
       }
     },
-    "CFBundleName" : {
-      "comment" : "Bundle name",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Little Nature"
+    "CFBundleName": {
+      "comment": "Bundle name",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小さな自然"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小さな自然"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小小自然"
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
           }
         }
       }
     },
-    "NSCameraUsageDescription" : {
-      "comment" : "Privacy - Camera Usage Description",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Little Nature needs camera access to place and preview AR biological models in your surroundings."
+    "NSCameraUsageDescription": {
+      "comment": "Privacy - Camera Usage Description",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature needs camera access to place and preview AR biological models in your surroundings."
           }
         },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小さな自然は、現実空間にAR生物モデルを配置・プレビューするためにカメラへのアクセスが必要です。"
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小さな自然は、現実空間にAR生物モデルを配置・プレビューするためにカメラへのアクセスが必要です。"
           }
         },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "小小自然需要访问相机，以便在真实环境中放置和预览 AR 生物模型。"
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然需要访问相机，以便在真实环境中放置和预览 AR 生物模型。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然需要取用相機，以便在真實環境中放置和預覽 AR 生物模型。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature는 실제 공간에 AR 생물 모델을 배치하고 미리 보기 위해 카메라 접근 권한이 필요합니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature benötigt Kamerazugriff, um biologische AR-Modelle in deiner Umgebung zu platzieren und anzuzeigen."
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

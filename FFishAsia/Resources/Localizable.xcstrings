@@ -1,7 +1,9 @@
 {
   "sourceLanguage": "en",
   "strings": {
-    "%lld%%": {},
+    "%lld%%": {
+      "localizations": {}
+    },
     "about.authorSite": {
       "extractionState": "stale",
       "localizations": {
@@ -21,6 +23,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "作者网站"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作者網站"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "제작자 웹사이트"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Websites der Ersteller"
           }
         }
       }
@@ -44,6 +64,24 @@
             "state": "translated",
             "value": "查看 CC0 协议详情"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看 CC0 協議詳情"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CC0 라이선스 자세히 보기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CC0-Lizenzdetails ansehen"
+          }
         }
       }
     },
@@ -65,6 +103,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "模型文件由远程 CDN 按需下载，不会随 App 一起安装。你可以在下载管理中查看缓存占用，并随时删除已下载内容。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型文件由遠程 CDN 按需下載，不會隨 App 一起安装。你可以在下載管理中查看缓存佔用，并隨時刪除已下載內容。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 파일은 원격 CDN에서 필요할 때 다운로드되며 앱에 기본 포함되지 않습니다. 다운로드 관리자에서 캐시 사용량을 확인하고 저장된 콘텐츠를 언제든 삭제할 수 있습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelldateien werden bei Bedarf von einem entfernten CDN geladen und nicht mit der App installiert. Im Download-Manager kannst du die Cache-Nutzung prüfen und gespeicherte Inhalte jederzeit löschen."
           }
         }
       }
@@ -88,6 +144,24 @@
             "state": "translated",
             "value": "下载说明"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載說明"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloads"
+          }
         }
       }
     },
@@ -109,6 +183,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "相关模型以 CC0 1.0 Universal 许可发布，可用于浏览、下载与 AR 展示。小小自然 App 本身仅提供模型浏览、下载管理和 AR 展示功能，不主张对模型资源拥有额外权利。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "相關模型以 CC0 1.0 Universal 許可發佈，可用於瀏覽、下載與 AR 展示。小小自然 App 本身仅提供模型瀏覽、下載管理和 AR 展示功能，不主张對模型資源拥有额外權利。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델은 CC0 1.0 Universal 라이선스로 공개되어 탐색, 다운로드, AR 보기에서 사용할 수 있습니다. Little Nature는 모델 탐색, 다운로드 관리, AR 보기 기능만 제공하며 모델 자산에 대한 추가 권리를 주장하지 않습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Modelle werden unter der CC0 1.0 Universal-Lizenz veröffentlicht und können durchsucht, heruntergeladen und in AR angesehen werden. Little Nature stellt nur Modellkatalog, Downloadverwaltung und AR-Ansicht bereit und erhebt keine zusätzlichen Rechte an den Modellinhalten."
           }
         }
       }
@@ -132,6 +224,24 @@
             "state": "translated",
             "value": "数据来源与许可"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "數據來源與許可"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "데이터 출처 및 라이선스"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Datenquelle und Lizenz"
+          }
         }
       }
     },
@@ -153,6 +263,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "本研究隶属于日本九州大学，致力于通过 3D 数字化技术保存和传播生物多样性数据。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本研究隶屬於日本九州大学，致力於通過 3D 數字化技术保存和傳播生物多样性數據。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 연구는 일본 규슈대학교와 관련되어 있으며 3D 디지털화를 통해 생물다양성 데이터를 보존하고 공유하는 것을 목표로 합니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Diese Forschung ist mit der Kyushu University in Japan verbunden und soll Biodiversitätsdaten durch 3D-Digitalisierung bewahren und teilen."
           }
         }
       }
@@ -176,6 +304,24 @@
             "state": "translated",
             "value": "模型托管于 Sketchfab 平台。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型托管於 Sketchfab 平台。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델은 Sketchfab 플랫폼에 호스팅되어 있습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Modelle werden auf Sketchfab gehostet."
+          }
         }
       }
     },
@@ -198,6 +344,24 @@
             "state": "translated",
             "value": "访问 ffishAsia-and-floraZia 的 Sketchfab 主页"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "访问 ffishAsia-and-floraZia 的 Sketchfab 主頁"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketchfab에서 ffishAsia-and-floraZia 보기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ffishAsia-and-floraZia auf Sketchfab besuchen"
+          }
         }
       }
     },
@@ -216,6 +380,24 @@
           }
         },
         "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketchfab"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketchfab"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketchfab"
+          }
+        },
+        "de": {
           "stringUnit": {
             "state": "translated",
             "value": "Sketchfab"
@@ -242,6 +424,24 @@
             "state": "translated",
             "value": "本 App 内的 3D 模型资源来自 Sketchfab 作者 ffishAsia-and-floraZia。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本 App 內的 3D 模型資源來自 Sketchfab 作者 ffishAsia-and-floraZia。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 앱의 3D 모델 리소스는 Sketchfab 제작자 ffishAsia-and-floraZia에서 제공합니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die 3D-Modellressourcen in dieser App stammen vom Sketchfab-Ersteller ffishAsia-and-floraZia."
+          }
         }
       }
     },
@@ -263,6 +463,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "AR 3D 生物模型图鉴"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 3D 生物模型圖鑑"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 3D 생물 모델 도감"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR-Feldführer für biologische 3D-Modelle"
           }
         }
       }
@@ -286,6 +504,24 @@
             "state": "translated",
             "value": "所有 3D 模型均来自 Sketchfab 作者 ffishAsia-and-floraZia（九州大学生物科学研究机构）。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "所有 3D 模型均來自 Sketchfab 作者 ffishAsia-and-floraZia（九州大学生物科学研究機构）。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 3D 모델은 규슈대학교 생물과학 연구와 관련된 Sketchfab 제작자 ffishAsia-and-floraZia에서 제공됩니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle 3D-Modelle stammen vom Sketchfab-Ersteller ffishAsia-and-floraZia, verbunden mit biologischer Forschung an der Kyushu University."
+          }
         }
       }
     },
@@ -307,6 +543,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "致谢"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "致谢"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "감사의 말"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Danksagung"
           }
         }
       }
@@ -330,6 +584,24 @@
             "state": "translated",
             "value": "关于小小自然"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關於小小自然"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature 정보"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Über Little Nature"
+          }
         }
       }
     },
@@ -351,6 +623,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "版本信息"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本信息"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version"
           }
         }
       }
@@ -374,6 +664,24 @@
             "state": "translated",
             "value": "继续"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "繼續"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "계속"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fortfahren"
+          }
         }
       }
     },
@@ -395,6 +703,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "删除已下载内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除已下載內容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드한 콘텐츠 삭제"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geladene Inhalte löschen"
           }
         }
       }
@@ -418,6 +744,24 @@
             "state": "translated",
             "value": "下载模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 다운로드"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell laden"
+          }
         }
       }
     },
@@ -439,6 +783,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "稍后再说"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍後再說"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vielleicht später"
           }
         }
       }
@@ -462,6 +824,24 @@
             "state": "translated",
             "value": "在 AR 中查看"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 AR 中查看"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR로 보기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In AR ansehen"
+          }
         }
       }
     },
@@ -483,6 +863,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "重试"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重試"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 시도"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut versuchen"
           }
         }
       }
@@ -506,6 +904,24 @@
             "state": "translated",
             "value": "重新下载"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "重新下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 다운로드"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erneut laden"
+          }
         }
       }
     },
@@ -527,6 +943,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "开始使用"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始使用"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작하기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Loslegen"
           }
         }
       }
@@ -550,6 +984,24 @@
             "state": "translated",
             "value": "全部"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전체"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle"
+          }
         }
       }
     },
@@ -571,6 +1023,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "动物"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動物"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동물"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiere"
           }
         }
       }
@@ -594,6 +1064,24 @@
             "state": "translated",
             "value": "小小自然"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小小自然"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature"
+          }
         }
       }
     },
@@ -615,6 +1103,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "相机不可用"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "相機不可用"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카메라를 사용할 수 없음"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kamera nicht verfügbar"
           }
         }
       }
@@ -638,6 +1144,24 @@
             "state": "translated",
             "value": "请先下载模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請先下載模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "먼저 모델을 다운로드하세요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitte lade zuerst das Modell herunter"
+          }
         }
       }
     },
@@ -659,6 +1183,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "请保持设备稳定"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請保持设備穩定"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기기를 안정적으로 유지하세요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitte halte das Gerät ruhig"
           }
         }
       }
@@ -682,6 +1224,24 @@
             "state": "translated",
             "value": "单指拖动平移 · 双指缩放/旋转"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "单指拖動平移 · 雙指縮放/旋轉"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "드래그하여 이동 · 두 손가락으로 확대/축소 및 회전"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ziehen zum Bewegen · Mit zwei Fingern zoomen/drehen"
+          }
         }
       }
     },
@@ -703,6 +1263,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在初始化 AR..."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在初始化 AR..."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 초기화 중..."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR wird initialisiert..."
           }
         }
       }
@@ -726,6 +1304,24 @@
             "state": "translated",
             "value": "请对准有纹理的平面"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "請對準有紋理的平面"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "질감이 있는 표면을 비춰 주세요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf eine strukturierte Fläche richten"
+          }
         }
       }
     },
@@ -747,6 +1343,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "模型加载成功"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型加載成功"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델이 로드됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell geladen"
           }
         }
       }
@@ -771,6 +1385,24 @@
             "state": "translated",
             "value": "模型加载成功 · 点击平面放置 · 双指缩放旋转"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型加載成功 · 點擊平面放置 · 雙指縮放旋轉"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델이 로드됨 · 평면을 탭하여 배치 · 핀치로 크기 조절 및 회전"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell geladen · Zum Platzieren eine Fläche antippen · Mit Pinch skalieren und drehen"
+          }
         }
       }
     },
@@ -792,6 +1424,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "模型加载失败: %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型加載失敗: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 로드 실패: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell konnte nicht geladen werden: %@"
           }
         }
       }
@@ -815,6 +1465,24 @@
             "state": "translated",
             "value": "正在加载模型..."
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在加載模型..."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 로드 중..."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modell wird geladen..."
+          }
         }
       }
     },
@@ -836,6 +1504,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "AR 已就绪，正在加载模型..."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 已就緒，正在加載模型..."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 준비됨 · 모델 로드 중..."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR ist bereit · Modell wird geladen..."
           }
         }
       }
@@ -859,6 +1545,24 @@
             "state": "translated",
             "value": "正在重新定位..."
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在重新定位..."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다시 위치 확인 중..."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu lokalisieren..."
+          }
         }
       }
     },
@@ -880,6 +1584,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "恢复初始状态"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "恢復初始状態"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 초기화"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Position zurücksetzen"
           }
         }
       }
@@ -903,6 +1625,24 @@
             "state": "translated",
             "value": "已恢复初始状态"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已恢復初始状態"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "초기 위치로 재설정됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf Anfangsposition zurückgesetzt"
+          }
         }
       }
     },
@@ -924,6 +1664,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在恢复初始状态..."
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在恢復初始状態..."
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "위치 재설정 중..."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Position wird zurückgesetzt..."
           }
         }
       }
@@ -947,6 +1705,24 @@
             "state": "translated",
             "value": "AR 会话失败: %@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 會話失敗: %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 세션 실패: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR-Sitzung fehlgeschlagen: %@"
+          }
         }
       }
     },
@@ -968,6 +1744,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "AR 追踪受限"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 追踪受限"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 추적이 제한됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR-Tracking ist eingeschränkt"
           }
         }
       }
@@ -991,6 +1785,24 @@
             "state": "translated",
             "value": "此设备不支持 ARKit"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此设備不支持 ARKit"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 기기는 ARKit을 지원하지 않습니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Gerät unterstützt ARKit nicht"
+          }
         }
       }
     },
@@ -1012,6 +1824,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "已下载"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geladen"
           }
         }
       }
@@ -1035,6 +1865,24 @@
             "state": "translated",
             "value": "失败"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "失敗"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "실패"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fehlgeschlagen"
+          }
         }
       }
     },
@@ -1056,6 +1904,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "待下载"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "待下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laden"
           }
         }
       }
@@ -1080,10 +1946,49 @@
             "state": "translated",
             "value": "分类筛选"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分類篩選"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리 필터"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategoriefilter"
+          }
         }
       }
     },
-    "Clear search": {},
+    "Clear search": {
+      "localizations": {
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清除搜尋"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "검색 지우기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche löschen"
+          }
+        }
+      }
+    },
     "detail.animation": {
       "localizations": {
         "en": {
@@ -1102,6 +2007,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "动画"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動画"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "애니메이션"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animation"
           }
         }
       }
@@ -1125,6 +2048,24 @@
             "state": "translated",
             "value": "分类"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分類"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorie"
+          }
         }
       }
     },
@@ -1146,6 +2087,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "动物模型"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動物模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "동물 모델"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiermodell"
           }
         }
       }
@@ -1169,6 +2128,24 @@
             "state": "translated",
             "value": "植物模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "植物模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "식물 모델"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pflanzenmodell"
+          }
         }
       }
     },
@@ -1190,6 +2167,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "特别模型"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "特別模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "특별 모델"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spezialmodell"
           }
         }
       }
@@ -1213,6 +2208,24 @@
             "state": "translated",
             "value": "下载状态"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載状態"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 상태"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloadstatus"
+          }
         }
       }
     },
@@ -1234,6 +2247,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载与使用"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載與使用"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 및 사용"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laden und verwenden"
           }
         }
       }
@@ -1257,6 +2288,24 @@
             "state": "translated",
             "value": "面数"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "面數"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "면 수"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Flächen"
+          }
         }
       }
     },
@@ -1278,6 +2327,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "文件大小"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "文件大小"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "파일 크기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dateigröße"
           }
         }
       }
@@ -1301,6 +2368,24 @@
             "state": "translated",
             "value": "有"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "有"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "예"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ja"
+          }
         }
       }
     },
@@ -1322,6 +2407,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "无"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아니요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nein"
           }
         }
       }
@@ -1345,6 +2448,24 @@
             "state": "translated",
             "value": "在 Sketchfab 上查看原始模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Sketchfab 上查看原始模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sketchfab에서 원본 모델 보기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Originalmodell auf Sketchfab ansehen"
+          }
         }
       }
     },
@@ -1366,6 +2487,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "分类信息"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分類信息"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "분류 정보"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taxonomie"
           }
         }
       }
@@ -1389,6 +2528,24 @@
             "state": "translated",
             "value": "模型详情"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型詳情"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 상세 정보"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelldetails"
+          }
         }
       }
     },
@@ -1410,6 +2567,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "顶点数"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "頂點數"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "정점 수"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eckpunkte"
           }
         }
       }
@@ -1433,6 +2608,24 @@
             "state": "translated",
             "value": "正在下载"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 중"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird geladen"
+          }
         }
       }
     },
@@ -1454,6 +2647,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "清空已下载内容"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清空已下載內容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드한 콘텐츠 지우기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geladene Inhalte löschen"
           }
         }
       }
@@ -1477,6 +2688,24 @@
             "state": "translated",
             "value": "取消"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "取消"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "취소"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abbrechen"
+          }
         }
       }
     },
@@ -1498,6 +2727,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "删除"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "刪除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Löschen"
           }
         }
       }
@@ -1521,6 +2768,24 @@
             "state": "translated",
             "value": "该操作会移除当前所有本地缓存文件，无法撤销。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该操作會移除当前所有本地缓存文件，無法撤销。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 로컬 캐시 모델 파일이 삭제되며 되돌릴 수 없습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dadurch werden alle lokal zwischengespeicherten Modelldateien entfernt. Dies kann nicht rückgängig gemacht werden."
+          }
         }
       }
     },
@@ -1542,6 +2807,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "清空已下载内容？"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "清空已下載內容？"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드한 콘텐츠를 지울까요?"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geladene Inhalte löschen?"
           }
         }
       }
@@ -1565,6 +2848,24 @@
             "state": "translated",
             "value": "已下载"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geladen"
+          }
         }
       }
     },
@@ -1586,6 +2887,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "正在下载"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 중"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird geladen"
           }
         }
       }
@@ -1609,6 +2928,24 @@
             "state": "translated",
             "value": "你可以在模型目录中按需下载，已下载的内容会显示在这里，方便快速进入 AR 查看。"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "你可以在模型目錄中按需下載，已下載的內容會顯示在這里，方便快速进入 AR 查看。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카탈로그에서 필요한 모델을 다운로드하세요. 저장된 콘텐츠는 빠른 AR 보기를 위해 여기에 표시됩니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lade Modelle bei Bedarf aus dem Katalog. Gespeicherte Inhalte erscheinen hier für schnellen AR-Zugriff."
+          }
         }
       }
     },
@@ -1630,6 +2967,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "还没有下载任何模型"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "還没有下載任何模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 다운로드한 모델이 없습니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Modelle geladen"
           }
         }
       }
@@ -1653,6 +3008,24 @@
             "state": "translated",
             "value": "已下载 %d 个模型 · 占用 %.1f MB"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下載 %d 個模型 · 佔用 %.1f MB"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d개 모델 다운로드됨 · %.1f MB 사용"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%d Modelle geladen · %.1f MB verwendet"
+          }
         }
       }
     },
@@ -1674,6 +3047,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "尚无本地模型缓存，按需下载后会自动出现在这里。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚無本地模型缓存，按需下載後會自動出現在這里。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아직 로컬 모델 캐시가 없습니다. 다운로드한 모델이 여기에 표시됩니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch kein lokaler Modellcache. Geladene Modelle erscheinen hier."
           }
         }
       }
@@ -1697,6 +3088,24 @@
             "state": "translated",
             "value": "下载管理"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載管理"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 관리자"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download-Manager"
+          }
         }
       }
     },
@@ -1718,6 +3127,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "下拉或稍后再试，已下载的模型仍可在下载管理中查看。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下拉或稍後再試，已下載的模型仍可在下載管理中查看。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에 다시 시도하세요. 다운로드한 모델은 다운로드 관리자에서 계속 사용할 수 있습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bitte später erneut versuchen. Geladene Modelle bleiben im Download-Manager verfügbar."
           }
         }
       }
@@ -1741,6 +3168,24 @@
             "state": "translated",
             "value": "模型目录准备中"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型目錄準備中"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 카탈로그 준비 중"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modellkatalog wird vorbereitet"
+          }
         }
       }
     },
@@ -1762,6 +3207,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "换个分类看看，或者直接搜索你想找的生物。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "換個分類看看，或者直接搜索你想找的生物。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 카테고리를 선택하거나 원하는 생물을 검색해 보세요."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versuche eine andere Kategorie oder suche nach dem gewünschten Organismus."
           }
         }
       }
@@ -1785,6 +3248,24 @@
             "state": "translated",
             "value": "这个分类暂时没有模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這個分類暫時没有模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 카테고리에는 아직 모델이 없습니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Noch keine Modelle in dieser Kategorie"
+          }
         }
       }
     },
@@ -1806,6 +3287,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "试试搜索日文名、英文名、中文名或学名，也可以切换上方分类看看。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "試試搜索日文名、英文名、中文名或学名，也可以切換上方分類看看。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일본어, 영어, 중국어 또는 학명으로 검색하거나 위의 카테고리를 변경해 보세요."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche nach japanischem, englischem, chinesischem oder wissenschaftlichem Namen oder wechsle oben die Kategorie."
           }
         }
       }
@@ -1829,6 +3328,24 @@
             "state": "translated",
             "value": "没有找到匹配的模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有找到匹配的模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일치하는 모델 없음"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine passenden Modelle"
+          }
         }
       }
     },
@@ -1850,6 +3367,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载已取消"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載已取消"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드가 취소됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download abgebrochen"
           }
         }
       }
@@ -1873,6 +3408,24 @@
             "state": "translated",
             "value": "下载失败：%@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載失敗：%@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 실패: %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download fehlgeschlagen: %@"
+          }
         }
       }
     },
@@ -1894,6 +3447,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "网络不可用，请检查连接后重试"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "網絡不可用，請檢查連接後重試"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "인터넷 연결이 없습니다. 네트워크를 확인하고 다시 시도하세요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine Internetverbindung. Bitte Netzwerk prüfen und erneut versuchen"
           }
         }
       }
@@ -1917,6 +3488,24 @@
             "state": "translated",
             "value": "连接服务器失败，请稍后重试"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "連接服務器失敗，請稍後重試"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "서버에 연결할 수 없습니다. 나중에 다시 시도하세요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verbindung zum Server nicht möglich. Bitte später erneut versuchen"
+          }
         }
       }
     },
@@ -1938,6 +3527,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载超时，请稍后重试"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載超時，請稍後重試"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 시간이 초과되었습니다. 나중에 다시 시도하세요"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download-Zeitüberschreitung. Bitte später erneut versuchen"
           }
         }
       }
@@ -1961,6 +3568,24 @@
             "state": "translated",
             "value": "当前分类：%@ · 共 %d 个模型"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前分類：%@ · 共 %d 個模型"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리: %@ · 모델 %d개"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorie: %@ · %d Modelle"
+          }
         }
       }
     },
@@ -1982,6 +3607,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "当前分类：%@ · 关键词“%@” · 匹配 %d 个"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前分類：%@ · 關鍵詞“%@” · 匹配 %d 個"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카테고리: %@ · 키워드 “%@” · %d개 일치"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kategorie: %@ · Suchwort „%@“ · %d Treffer"
           }
         }
       }
@@ -2005,6 +3648,24 @@
             "state": "translated",
             "value": "语言"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "語言"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "언어"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprache"
+          }
         }
       }
     },
@@ -2026,6 +3687,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "这是一个 AR 生物模型图鉴，你可以浏览亚洲生物与植物的 3D 模型，并在现实空间中查看。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "這是一個 AR 生物模型圖鑑，你可以瀏覽亚洲生物與植物的 3D 模型，并在現實空間中查看。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "아시아의 동물과 식물을 3D로 탐색하고 실제 공간에서 볼 수 있는 AR 생물 모델 도감입니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein AR-Feldführer für biologische Modelle, mit dem du asiatische Tiere und Pflanzen in 3D erkundest und in deinem realen Raum ansiehst."
           }
         }
       }
@@ -2049,6 +3728,24 @@
             "state": "translated",
             "value": "欢迎来到小小自然"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "歡迎來到小小自然"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Little Nature에 오신 것을 환영합니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Willkommen bei Little Nature"
+          }
         }
       }
     },
@@ -2070,6 +3767,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "模型在你需要时才会下载，不会占用初始安装包空间，已下载内容也可以随时删除。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型在你需要時才會下載，不會佔用初始安装包空間，已下載內容也可以隨時刪除。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델은 필요할 때만 다운로드되어 앱을 가볍게 유지합니다. 저장된 콘텐츠는 언제든 삭제할 수 있습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelle werden nur bei Bedarf geladen, damit die App zunächst schlank bleibt. Gespeicherte Inhalte kannst du jederzeit löschen."
           }
         }
       }
@@ -2093,6 +3808,24 @@
             "state": "translated",
             "value": "按需下载，更省空间"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "按需下載，更省空間"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "필요할 때 다운로드하여 공간 절약"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Downloads bei Bedarf sparen Speicher"
+          }
         }
       }
     },
@@ -2114,6 +3847,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "为了放置和预览 AR 模型，App 需要访问相机。你可以在需要时授权。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "为了放置和预覽 AR 模型，App 需要访问相機。你可以在需要時授權。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "AR 모델을 배치하고 미리 보려면 카메라 접근 권한이 필요합니다. 필요할 때 허용할 수 있습니다."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die App benötigt Kamerazugriff, um AR-Modelle zu platzieren und anzusehen. Du kannst ihn bei Bedarf erlauben."
           }
         }
       }
@@ -2137,6 +3888,24 @@
             "state": "translated",
             "value": "需要相机权限"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "需要相機權限"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "카메라 권한이 필요합니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kameraberechtigung erforderlich"
+          }
         }
       }
     },
@@ -2158,6 +3927,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "植物"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "植物"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "식물"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pflanzen"
           }
         }
       }
@@ -2181,6 +3968,24 @@
             "state": "translated",
             "value": "搜索日文名、英文名、中文名或学名"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索日文名、英文名、中文名或学名"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "일본어, 영어, 중국어 또는 학명 검색"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Japanischen, englischen, chinesischen oder wissenschaftlichen Namen suchen"
+          }
         }
       }
     },
@@ -2202,6 +4007,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "特别"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "特別"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "특별"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spezial"
           }
         }
       }
@@ -2225,6 +4048,24 @@
             "state": "translated",
             "value": "已下载到本机"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已下載到本機"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 기기에 저장됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Auf diesem Gerät gespeichert"
+          }
         }
       }
     },
@@ -2246,6 +4087,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载中 %d%%"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載中 %d%%"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 중 %d%%"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird geladen %d%%"
           }
         }
       }
@@ -2269,6 +4128,24 @@
             "state": "translated",
             "value": "下载失败 · %@"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載失敗 · %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드 실패 · %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download fehlgeschlagen · %@"
+          }
         }
       }
     },
@@ -2290,6 +4167,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "尚未下载"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "尚未下載"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드되지 않음"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nicht geladen"
           }
         }
       }
@@ -2313,6 +4208,24 @@
             "state": "translated",
             "value": "%@ 已在本机"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 已在本機"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@은 이미 이 기기에 있습니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ ist bereits auf diesem Gerät"
+          }
         }
       }
     },
@@ -2334,6 +4247,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "已删除 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已刪除 %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 삭제됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gelöscht"
           }
         }
       }
@@ -2357,6 +4288,24 @@
             "state": "translated",
             "value": "已清空全部下载内容"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已清空全部下載內容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드한 콘텐츠를 모두 지웠습니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle geladenen Inhalte gelöscht"
+          }
         }
       }
     },
@@ -2378,6 +4327,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ 下载完成"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 下載完成"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 다운로드 완료"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download von %@ abgeschlossen"
           }
         }
       }
@@ -2401,6 +4368,24 @@
             "state": "translated",
             "value": "%@ 下载失败"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 下載失敗"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 다운로드 실패"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download von %@ fehlgeschlagen"
+          }
         }
       }
     },
@@ -2422,6 +4407,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "下载地址无效"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載地址無效"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잘못된 다운로드 URL"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ungültige Download-URL"
           }
         }
       }
@@ -2445,6 +4448,24 @@
             "state": "translated",
             "value": "当前没有可删除的下载内容"
           }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前没有可刪除的下載內容"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "삭제할 다운로드 콘텐츠가 없습니다"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine geladenen Inhalte zum Löschen"
+          }
         }
       }
     },
@@ -2466,6 +4487,24 @@
           "stringUnit": {
             "state": "translated",
             "value": "开始下载 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始下載 %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ 다운로드 시작됨"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download von %@ gestartet"
           }
         }
       }
