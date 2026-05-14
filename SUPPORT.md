@@ -12,5 +12,5 @@ FFishAsia is an AR field guide for Asian animals and plants. It lets you browse 
 
 ## Support channel
 - Support email: cameoshell09@gmail.com
-- Privacy policy URL: https://ar-asia.luopeike.com/privacy-policy.html
-- Support URL: https://ar-asia.luopeike.com/index.html
+- Privacy policy URL: https://ar-asia.luopeike.com/en-US/privacy-policy
+- Support URL: https://ar-asia.luopeike.com/en-US/

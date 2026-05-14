@@ -1,2 +1,1 @@
-- Mehr 3D-Modelle asiatischer Tiere und Pflanzen hinzugefügt.
-- Modelldetails und Downloadverwaltung verbessert.
+- Diese Version unterstützt weitere Sprachen.
