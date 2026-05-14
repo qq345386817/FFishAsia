@@ -30,8 +30,7 @@ struct ARViewContainer: UIViewRepresentable {
             return arView
         }
 
-        statusText = L10n.t("ar.initializing", language)
-        isModelLoaded = false
+        context.coordinator.updateParent(statusText: L10n.t("ar.initializing", language), isModelLoaded: false)
         context.coordinator.startSession()
         arView.backgroundColor = .white
 
@@ -88,6 +87,17 @@ struct ARViewContainer: UIViewRepresentable {
             self.lastHandledResetRequestID = parent.resetRequestID
         }
 
+        func updateParent(statusText: String? = nil, isModelLoaded: Bool? = nil) {
+            DispatchQueue.main.async {
+                if let statusText {
+                    self.parent.statusText = statusText
+                }
+                if let isModelLoaded {
+                    self.parent.isModelLoaded = isModelLoaded
+                }
+            }
+        }
+
         func startSession() {
             guard let arView, ARWorldTrackingConfiguration.isSupported else { return }
             let config = ARWorldTrackingConfiguration()
@@ -120,7 +130,7 @@ struct ARViewContainer: UIViewRepresentable {
             lastLoadedURL = nil
             isModelLoaded = false
             isLoading = false
-            parent.isModelLoaded = false
+            updateParent(isModelLoaded: false)
         }
 
         func loadModel(url: URL, hasBuiltInAnimation: Bool) {
@@ -128,8 +138,7 @@ struct ARViewContainer: UIViewRepresentable {
             isLoading = true
             isModelLoaded = false
             lastLoadedURL = url
-            parent.statusText = L10n.t("ar.loadingModel", parent.language)
-            parent.isModelLoaded = false
+            updateParent(statusText: L10n.t("ar.loadingModel", parent.language), isModelLoaded: false)
 
             if let oldAnchor = currentAnchor {
                 arView.scene.removeAnchor(oldAnchor)
@@ -169,22 +178,22 @@ struct ARViewContainer: UIViewRepresentable {
 
                 isLoading = false
                 isModelLoaded = true
-                parent.isModelLoaded = true
+                updateParent(isModelLoaded: true)
                 let animations = modelEntity.availableAnimations
                 if hasBuiltInAnimation || !animations.isEmpty {
                     for animation in animations {
                         modelEntity.playAnimation(animation.repeat(), transitionDuration: 0.3)
                     }
-                    parent.statusText = L10n.t("ar.loaded.gesture", parent.language)
+                    updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language))
                 } else {
-                    parent.statusText = L10n.t("ar.loaded.gesture", parent.language)
+                    updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language))
                 }
             } catch {
                 isLoading = false
                 isModelLoaded = false
-                parent.isModelLoaded = false
+                updateParent(isModelLoaded: false)
                 lastLoadedURL = nil
-                parent.statusText = L10n.t("ar.loadFailed", parent.language, error.localizedDescription)
+                updateParent(statusText: L10n.t("ar.loadFailed", parent.language, error.localizedDescription))
             }
         }
 
@@ -260,8 +269,7 @@ struct ARViewContainer: UIViewRepresentable {
                 model.scale = initialModelScale
                 model.position = initialModelPosition
                 model.orientation = simd_quatf()
-                parent.statusText = L10n.t("ar.resetDone", parent.language)
-                parent.isModelLoaded = true
+                updateParent(statusText: L10n.t("ar.resetDone", parent.language), isModelLoaded: true)
                 isModelLoaded = true
                 return
             }
@@ -277,8 +285,7 @@ struct ARViewContainer: UIViewRepresentable {
             animationTimer = nil
             rotatingEntity = nil
 
-            parent.statusText = L10n.t("ar.resetDone", parent.language)
-            parent.isModelLoaded = false
+            updateParent(statusText: L10n.t("ar.resetDone", parent.language), isModelLoaded: false)
             isModelLoaded = false
             isLoading = false
             loadModel(url: url, hasBuiltInAnimation: hasBuiltInAnimation)
@@ -408,7 +415,7 @@ struct ARViewContainer: UIViewRepresentable {
             switch camera.trackingState {
             case .notAvailable:
                 guard !isModelLoaded && !isLoading && lastLoadedURL == nil else { return }
-                DispatchQueue.main.async { self.parent.statusText = L10n.t("ar.cameraUnavailable", self.parent.language) }
+                updateParent(statusText: L10n.t("ar.cameraUnavailable", parent.language))
             case .limited(let reason):
                 // Do not let ARKit tracking-state callbacks overwrite model-loading or
                 // loaded UI text. Tracking may remain “initializing/limited” briefly even
@@ -422,10 +429,10 @@ struct ARViewContainer: UIViewRepresentable {
                 case .insufficientFeatures: msg = L10n.t("ar.insufficientFeatures", parent.language)
                 @unknown default: msg = L10n.t("ar.trackingLimited", parent.language)
                 }
-                DispatchQueue.main.async { self.parent.statusText = msg }
+                updateParent(statusText: msg)
             case .normal:
                 if !isModelLoaded && !isLoading {
-                    DispatchQueue.main.async { self.parent.statusText = L10n.t("ar.ready", self.parent.language) }
+                    updateParent(statusText: L10n.t("ar.ready", parent.language))
                 }
             @unknown default:
                 break
@@ -433,9 +440,7 @@ struct ARViewContainer: UIViewRepresentable {
         }
 
         func session(_ session: ARSession, didFailWithError error: Error) {
-            DispatchQueue.main.async {
-                self.parent.statusText = L10n.t("ar.sessionFailed", self.parent.language, error.localizedDescription)
-            }
+            updateParent(statusText: L10n.t("ar.sessionFailed", parent.language, error.localizedDescription))
         }
 
         private func addStaticAnimations(to entity: Entity) {
@@ -485,7 +490,7 @@ struct ARViewContainer: NSViewRepresentable {
         sceneView.backgroundColor = .windowBackgroundColor
         sceneView.rendersContinuously = true
         context.coordinator.sceneView = sceneView
-        statusText = L10n.t("ar.initializing", language)
+        context.coordinator.updateParent(statusText: L10n.t("ar.initializing", language))
         return sceneView
     }
 
@@ -523,6 +528,17 @@ struct ARViewContainer: NSViewRepresentable {
             self.lastHandledResetRequestID = parent.resetRequestID
         }
 
+        func updateParent(statusText: String? = nil, isModelLoaded: Bool? = nil) {
+            DispatchQueue.main.async {
+                if let statusText {
+                    self.parent.statusText = statusText
+                }
+                if let isModelLoaded {
+                    self.parent.isModelLoaded = isModelLoaded
+                }
+            }
+        }
+
         func emptyScene() -> SCNScene {
             let scene = SCNScene()
             installCameraAndLights(in: scene)
@@ -531,7 +547,7 @@ struct ARViewContainer: NSViewRepresentable {
 
         func cleanup() {
             lastLoadedURL = nil
-            parent.isModelLoaded = false
+            updateParent(isModelLoaded: false)
         }
 
         func consumeResetRequestIfNeeded(_ resetRequestID: Int, url: URL) -> Bool {
@@ -539,15 +555,14 @@ struct ARViewContainer: NSViewRepresentable {
             lastHandledResetRequestID = resetRequestID
             lastLoadedURL = nil
             loadModel(url: url)
-            parent.statusText = L10n.t("ar.resetDone", parent.language)
+            updateParent(statusText: L10n.t("ar.resetDone", parent.language))
             return true
         }
 
         func loadModel(url: URL) {
             guard let sceneView, lastLoadedURL != url else { return }
             lastLoadedURL = url
-            parent.statusText = L10n.t("ar.loadingModel", parent.language)
-            parent.isModelLoaded = false
+            updateParent(statusText: L10n.t("ar.loadingModel", parent.language), isModelLoaded: false)
 
             do {
                 let sourceScene = try SCNScene(url: url, options: [.checkConsistency: true])
@@ -563,12 +578,10 @@ struct ARViewContainer: NSViewRepresentable {
                 scene.rootNode.addChildNode(modelRoot)
                 sceneView.scene = scene
 
-                parent.isModelLoaded = true
-                parent.statusText = L10n.t("ar.loaded.gesture", parent.language)
+                updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
             } catch {
                 lastLoadedURL = nil
-                parent.isModelLoaded = false
-                parent.statusText = L10n.t("ar.loadFailed", parent.language, error.localizedDescription)
+                updateParent(statusText: L10n.t("ar.loadFailed", parent.language, error.localizedDescription), isModelLoaded: false)
             }
         }
 
