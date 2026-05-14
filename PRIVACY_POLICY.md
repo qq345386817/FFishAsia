@@ -19,4 +19,4 @@ When you choose to download a model, the file is downloaded to your device so yo
 Downloaded model files remain on your device until you delete them inside the app or remove the app.
 
 ## Contact
-For support or privacy questions, contact cameoshell09@gmail.com or visit http://luopeike.com/ar-asia/index.html.
+For support or privacy questions, contact cameoshell09@gmail.com or visit https://ar-asia.luopeike.com/index.html.
