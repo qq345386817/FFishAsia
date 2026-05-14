@@ -48,7 +48,7 @@ private final class FFishAsiaAppDelegate: NSObject, NSApplicationDelegate {
                 backing: .buffered,
                 defer: false
             )
-            window.title = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "FFishAsia"
+            window.title = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String ?? "Little Nature"
             window.contentViewController = NSHostingController(
                 rootView: ContentView().frame(minWidth: 760, minHeight: 640)
             )
