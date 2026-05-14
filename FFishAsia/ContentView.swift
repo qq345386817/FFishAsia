@@ -26,6 +26,9 @@ struct ContentView: View {
 
     init() {
         let snapshot = SnapshotLaunchConfiguration.current
+        if let language = snapshot.language {
+            UserDefaults.standard.set(language.rawValue, forKey: "appLanguage")
+        }
         _selectedCategory = State(initialValue: snapshot.category)
         _selectedModel = State(initialValue: snapshot.screen == .detail ? snapshot.model : nil)
         _showDownloads = State(initialValue: snapshot.screen == .downloads)
@@ -389,6 +392,7 @@ private struct SnapshotLaunchConfiguration {
     let category: ModelCategory?
     let model: ModelItem?
     let searchText: String
+    let language: AppLanguage?
 
     static var current: SnapshotLaunchConfiguration {
         let arguments = ProcessInfo.processInfo.arguments
@@ -404,6 +408,7 @@ private struct SnapshotLaunchConfiguration {
         let modelID = value(for: "FFISH_SNAPSHOT_MODEL_ID")
         let model = ModelCatalog.fallbackModels.first { $0.id == modelID } ?? ModelCatalog.fallbackModels.first
         let searchText = value(for: "FFISH_SNAPSHOT_SEARCH") ?? ""
+        let language = value(for: "FFISH_SNAPSHOT_APP_LANGUAGE").flatMap(AppLanguage.init(rawValue:))
         let category: ModelCategory?
         switch value(for: "FFISH_SNAPSHOT_CATEGORY") {
         case "plant": category = .plant
@@ -416,7 +421,8 @@ private struct SnapshotLaunchConfiguration {
             screen: screen,
             category: category,
             model: model,
-            searchText: searchText
+            searchText: searchText,
+            language: language
         )
     }
 }
@@ -594,7 +600,7 @@ private struct ModelDetailSheet: View {
 
                     VStack(alignment: .leading, spacing: 10) {
                         InfoRow(title: L10n.t("detail.downloadStatus", language), value: statusText)
-                        InfoRow(title: L10n.t("detail.category", language), value: model.category.label(in: language))
+                        InfoRow(title: L10n.t("detail.category", language), value: model.category.detailLabel(in: language))
                         InfoRow(title: L10n.t("detail.faces", language), value: model.formattedFaces)
                         InfoRow(title: L10n.t("detail.vertices", language), value: model.formattedVertices)
                         InfoRow(title: L10n.t("detail.fileSize", language), value: model.formattedSize)
@@ -617,7 +623,7 @@ private struct ModelDetailSheet: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.t("detail.taxonomy", language))
                             .font(.subheadline.bold())
-                        Text(model.taxonomicInfo)
+                        Text(model.localizedTaxonomicInfo(for: language))
                             .font(.caption)
                             .foregroundStyle(.secondary)
                             .lineLimit(8)

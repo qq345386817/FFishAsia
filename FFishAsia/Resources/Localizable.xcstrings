@@ -1,7 +1,9 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%lld%%": {},
     "about.authorSite": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -727,28 +729,6 @@
         }
       }
     },
-    "ar.loadFailed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Failed to load model: %@"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "モデルの読み込みに失敗しました: %@"
-          }
-        },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "模型加载失败: %@"
-          }
-        }
-      }
-    },
     "ar.loaded.gesture": {
       "localizations": {
         "en": {
@@ -772,6 +752,7 @@
       }
     },
     "ar.loaded.place": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -789,6 +770,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "模型加载成功 · 点击平面放置 · 双指缩放旋转"
+          }
+        }
+      }
+    },
+    "ar.loadFailed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Failed to load model: %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルの読み込みに失敗しました: %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "模型加载失败: %@"
           }
         }
       }
@@ -1058,6 +1061,7 @@
       }
     },
     "category.filter": {
+      "extractionState": "stale",
       "localizations": {
         "en": {
           "stringUnit": {
@@ -1079,6 +1083,7 @@
         }
       }
     },
+    "Clear search": {},
     "detail.animation": {
       "localizations": {
         "en": {
@@ -1119,6 +1124,72 @@
           "stringUnit": {
             "state": "translated",
             "value": "分类"
+          }
+        }
+      }
+    },
+    "detail.category.animal": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animal model"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動物モデル"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "动物模型"
+          }
+        }
+      }
+    },
+    "detail.category.plant": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plant model"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "植物モデル"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "植物模型"
+          }
+        }
+      }
+    },
+    "detail.category.special": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Special model"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "特別モデル"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "特别模型"
           }
         }
       }

@@ -77,7 +77,15 @@ enum ModelNameLocalization {
     }
 
     static func searchableNames(for model: ModelItem) -> [String] {
-        var names = [model.displayName, model.englishName, model.scientificName, model.taxonomicInfo]
+        var names = [
+            model.displayName,
+            model.englishName,
+            model.scientificName,
+            model.taxonomicInfo,
+            model.localizedTaxonomicInfoZhHans,
+            model.localizedTaxonomicInfoJa,
+            model.localizedTaxonomicInfoEn
+        ]
         for language in AppLanguage.allCases {
             if let name = model.localizedName(for: language) {
                 names.append(name)

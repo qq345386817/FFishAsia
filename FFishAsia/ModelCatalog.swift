@@ -13,6 +13,14 @@ enum ModelCategory: String, CaseIterable, Codable {
         }
     }
 
+    func detailLabel(in language: AppLanguage) -> String {
+        switch self {
+        case .plant: return L10n.t("detail.category.plant", language)
+        case .animal: return L10n.t("detail.category.animal", language)
+        case .special: return L10n.t("detail.category.special", language)
+        }
+    }
+
     var symbolName: String {
         switch self {
         case .plant: return "leaf.fill"
@@ -32,6 +40,9 @@ struct ModelItem: Identifiable, Codable, Hashable {
     let scientificName: String
     let filename: String
     let taxonomicInfo: String
+    let localizedTaxonomicInfoZhHans: String
+    let localizedTaxonomicInfoJa: String
+    let localizedTaxonomicInfoEn: String
     let fileSizeMB: Double
     let faceCount: Int
     let vertexCount: Int
@@ -80,6 +91,17 @@ struct ModelItem: Identifiable, Codable, Hashable {
         }
     }
 
+    func localizedTaxonomicInfo(for language: AppLanguage) -> String {
+        switch language {
+        case .zhHans:
+            return localizedTaxonomicInfoZhHans.ifNotEmpty ?? taxonomicInfo
+        case .ja:
+            return localizedTaxonomicInfoJa.ifNotEmpty ?? taxonomicInfo
+        case .en:
+            return localizedTaxonomicInfoEn.ifNotEmpty ?? taxonomicInfo
+        }
+    }
+
     func matches(keyword: String) -> Bool {
         let query = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return true }
@@ -100,6 +122,9 @@ struct ModelItem: Identifiable, Codable, Hashable {
         scientificName: String,
         filename: String,
         taxonomicInfo: String,
+        localizedTaxonomicInfoZhHans: String = "",
+        localizedTaxonomicInfoJa: String = "",
+        localizedTaxonomicInfoEn: String = "",
         fileSizeMB: Double,
         faceCount: Int,
         vertexCount: Int,
@@ -117,6 +142,9 @@ struct ModelItem: Identifiable, Codable, Hashable {
         self.scientificName = scientificName
         self.filename = filename
         self.taxonomicInfo = taxonomicInfo
+        self.localizedTaxonomicInfoZhHans = localizedTaxonomicInfoZhHans
+        self.localizedTaxonomicInfoJa = localizedTaxonomicInfoJa
+        self.localizedTaxonomicInfoEn = localizedTaxonomicInfoEn
         self.fileSizeMB = fileSizeMB
         self.faceCount = faceCount
         self.vertexCount = vertexCount
@@ -146,6 +174,9 @@ private struct RemoteManifestModel: Decodable {
     let name_zh_hans: String?
     let scientific_name: String?
     let taxonomic_info: String?
+    let taxonomic_info_zh_hans: String?
+    let taxonomic_info_ja: String?
+    let taxonomic_info_en: String?
     let sketchfab_url: URL?
     let face_count: Int?
     let vertex_count: Int?
@@ -166,7 +197,7 @@ struct ModelCatalog {
             let englishName = nonEmpty(raw.name_en) ?? parseEnglishName(from: rawName)
             let downloadURL = raw.download_url ?? modelsBaseURL.appendingPathComponent(raw.filename)
             let hasAnimation = raw.has_animation ?? ((raw.animations ?? 0) > 0)
-            let taxonomy = cleanTaxonomicInfo(raw.taxonomic_info ?? raw.scientific_name ?? "")
+            let taxonomy = cleanTaxonomicInfo(raw.taxonomic_info_ja ?? raw.taxonomic_info ?? raw.scientific_name ?? "")
             return ModelItem(
                 id: raw.id,
                 displayName: displayName,
@@ -177,6 +208,9 @@ struct ModelCatalog {
                 scientificName: raw.scientific_name ?? "",
                 filename: raw.filename,
                 taxonomicInfo: taxonomy,
+                localizedTaxonomicInfoZhHans: cleanTaxonomicInfo(raw.taxonomic_info_zh_hans ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
+                localizedTaxonomicInfoJa: cleanTaxonomicInfo(raw.taxonomic_info_ja ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
+                localizedTaxonomicInfoEn: cleanTaxonomicInfo(raw.taxonomic_info_en ?? raw.taxonomic_info ?? raw.scientific_name ?? ""),
                 fileSizeMB: raw.file_size_mb ?? 0,
                 faceCount: raw.face_count ?? 0,
                 vertexCount: raw.vertex_count ?? 0,
