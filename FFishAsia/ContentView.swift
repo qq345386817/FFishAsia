@@ -347,7 +347,12 @@ struct ContentView: View {
 
     private var bottomFilterBar: some View {
         VStack(spacing: 10) {
-            SearchField(text: $searchText, prompt: L10n.t("search.prompt", appLanguage), isFocused: $isSearchFocused)
+            SearchField(
+                text: $searchText,
+                prompt: L10n.t("search.prompt", appLanguage),
+                clearAccessibilityLabel: L10n.t("clear.search", appLanguage),
+                isFocused: $isSearchFocused
+            )
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 8) {
                     CategoryPill(title: L10n.t("all", appLanguage), systemImage: "globe.asia.australia.fill", isSelected: selectedCategory == nil) {
@@ -462,6 +467,7 @@ private struct CategoryPill: View {
 private struct SearchField: View {
     @Binding var text: String
     let prompt: String
+    let clearAccessibilityLabel: String
     let isFocused: FocusState<Bool>.Binding
 
     var body: some View {
@@ -488,7 +494,7 @@ private struct SearchField: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Clear search")
+                .accessibilityLabel(clearAccessibilityLabel)
             }
         }
         .padding(.horizontal, 12)
