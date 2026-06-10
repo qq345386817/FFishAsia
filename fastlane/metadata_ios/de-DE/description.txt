@@ -1,4 +1,4 @@
-Little Nature ist ein AR-Feldführer für biologische 3D-Modelle. Platziere 3D-Modelle asiatischer Tiere und Pflanzen in deinem realen Raum und betrachte Formen und Details von Blumen, Insekten, Amphibien und Meereslebewesen aus der Nähe.
+Little Nature ist ein AR-Feldführer mit einer wachsenden Sammlung biologischer 3D-Modelle asiatischer Tiere und Pflanzen. Platziere Modelle in deinem realen Raum und betrachte Formen und Details von Blumen, Insekten, Amphibien und Meereslebewesen aus der Nähe.
 
 Ob Naturerkundung, Wissenschaft mit Kindern oder ein neuer Blick auf Lebewesen: Little Nature bringt Modelle aus dem Bildschirm auf deinen Tisch, Boden oder in deine Umgebung.
 

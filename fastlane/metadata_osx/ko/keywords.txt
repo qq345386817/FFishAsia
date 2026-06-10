@@ -1,1 +1,1 @@
-AR,생물,3D모델,동물,식물,자연,도감,CC0,오프라인,다운로드
+생물도감,동물,식물,자연관찰,자연교육,곤충,꽃,해양생물,3D모델,offline,Asian nature,wildlife,animals,plants,biology

@@ -1,4 +1,4 @@
-Little Nature is an AR biological model field guide. Place 3D models of Asian animals and plants into your real space, and take a closer look at the shapes and details of flowers, insects, amphibians, and marine life.
+Little Nature is an AR biological model field guide with a growing collection of 3D models of Asian animals and plants. Place models into your real space, and take a closer look at the shapes and details of flowers, insects, amphibians, and marine life.
 
 Whether you are exploring nature, sharing science with children, or simply seeing living things from a new angle, Little Nature brings models out of the screen and onto your desk, floor, or surrounding space.
 

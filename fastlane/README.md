@@ -29,7 +29,7 @@ Upload iOS App Store metadata only
 [bundle exec] fastlane ios upload_screenshots
 ```
 
-Upload iOS App Store preview screenshots only
+Upload iOS App Store screenshots and preview videos only
 
 ### ios upload
 
@@ -55,6 +55,14 @@ Upload iOS metadata + screenshots, and optionally binary when ipa is provided
 
 
 
+### ios preview_assets
+
+```sh
+[bundle exec] fastlane ios preview_assets
+```
+
+
+
 ----
 
 
@@ -74,7 +82,23 @@ Upload macOS App Store metadata only
 [bundle exec] fastlane mac upload_screenshots
 ```
 
-Upload macOS App Store preview screenshots only
+Upload macOS App Store screenshots and preview videos only
+
+### mac screenshots
+
+```sh
+[bundle exec] fastlane mac screenshots
+```
+
+
+
+### mac preview_assets
+
+```sh
+[bundle exec] fastlane mac preview_assets
+```
+
+
 
 ----
 

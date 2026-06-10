@@ -1,1 +1,1 @@
-AR,biology,3D models,animals,plants,nature,field guide,CC0,offline,on-demand
+3D models,animals,plants,Asian nature,biology,wildlife,specimens,insects,flowers,field guide

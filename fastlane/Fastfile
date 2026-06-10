@@ -115,7 +115,7 @@ platform :ios do
     upload_metadata_only(platform: "ios", metadata_path: "fastlane/metadata_ios")
   end
 
-  desc "Upload iOS App Store preview screenshots only"
+  desc "Upload iOS App Store screenshots and preview videos only"
   lane :upload_screenshots do
     upload_screenshots_in_batches(platform: "ios", screenshots_path: "fastlane/screenshots")
   end
@@ -143,6 +143,10 @@ platform :ios do
   lane :screenshots do
     upload_screenshots
   end
+
+  lane :preview_assets do
+    upload_screenshots
+  end
 end
 
 platform :mac do
@@ -151,8 +155,16 @@ platform :mac do
     upload_metadata_only(platform: "osx", metadata_path: "fastlane/metadata_osx")
   end
 
-  desc "Upload macOS App Store preview screenshots only"
+  desc "Upload macOS App Store screenshots and preview videos only"
   lane :upload_screenshots do
     upload_screenshots_in_batches(platform: "osx", screenshots_path: "fastlane/screenshots_macos")
+  end
+
+  lane :screenshots do
+    upload_screenshots
+  end
+
+  lane :preview_assets do
+    upload_screenshots
   end
 end

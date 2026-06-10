@@ -1,1 +1,1 @@
-Durchsuche CC0-basierte biologische Modellrecords auf dem Mac, filtere nach Kategorie und verwalte gespeicherte Inhalte.
+Durchsuche 3D-Tiere und Pflanzen auf dem Mac, prüfe Taxonomie und Details und behalte ausgewählte Modelle offline.

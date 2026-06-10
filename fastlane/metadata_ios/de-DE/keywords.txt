@@ -1,1 +1,1 @@
-AR,Biologie,3D-Modelle,Tiere,Pflanzen,Natur,Feldführer,CC0,offline,Download
+AR Tiere,3D Modelle,Natur,Biologie,Wildtiere,Pflanzen,Insekten,Blumen,Naturführer,learn

@@ -1,1 +1,1 @@
-Browse CC0-based biological model records on Mac, filter by category, download on demand, and manage saved content.
+Browse 3D animal and plant models on Mac, review taxonomy and model details, and keep selected specimens offline.

@@ -1,1 +1,1 @@
-AR,生物図鑑,3Dモデル,動物,植物,自然観察,自然教育,CC0,オフライン,図鑑
+生物図鑑,動物,植物,自然観察,自然教育,昆虫,花,海洋生物,3Dモデル,offline,Asian nature,wildlife,animals,plants,biology
