@@ -23,6 +23,30 @@ enum AppLanguage: String, CaseIterable, Identifiable {
 
     var localeIdentifier: String { rawValue }
 
+    static func normalized(from value: String) -> AppLanguage? {
+        let normalized = value
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "_", with: "-")
+            .lowercased()
+
+        switch normalized {
+        case "zh-hans", "zh-cn", "zh-sg":
+            return .zhHans
+        case "zh-hant", "zh-tw", "zh-hk", "zh-mo":
+            return .zhHant
+        case "ja", "ja-jp":
+            return .ja
+        case "ko", "ko-kr":
+            return .ko
+        case "de", "de-de":
+            return .de
+        case "en", "en-us", "en-gb":
+            return .en
+        default:
+            return nil
+        }
+    }
+
     static var preferred: AppLanguage {
         let preferredIdentifiers = Locale.preferredLanguages.map { $0.lowercased() }
         if preferredIdentifiers.contains(where: { $0.hasPrefix("zh-hant") || $0.hasPrefix("zh-tw") || $0.hasPrefix("zh-hk") || $0.hasPrefix("zh-mo") }) {

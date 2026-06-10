@@ -7,6 +7,7 @@ struct ContentView: View {
     @StateObject private var downloadManager = DownloadManager.shared
     @State private var selectedCategory: ModelCategory? = nil
     @State private var selectedModel: ModelItem? = nil
+    @State private var previewModel: ModelItem? = nil
     @State private var arModel: ModelItem? = nil
     @State private var statusText = ""
     @State private var isARModelLoaded = false
@@ -19,18 +20,21 @@ struct ContentView: View {
     @FocusState private var isSearchFocused: Bool
     @AppStorage("hasSeenOnboarding") private var hasSeenOnboarding = false
     @AppStorage("appLanguage") private var appLanguageRaw = AppLanguage.preferred.rawValue
+    private let snapshot: SnapshotLaunchConfiguration
 
     private var appLanguage: AppLanguage {
-        AppLanguage(rawValue: appLanguageRaw) ?? .preferred
+        AppLanguage.normalized(from: appLanguageRaw) ?? .preferred
     }
 
     init() {
         let snapshot = SnapshotLaunchConfiguration.current
+        self.snapshot = snapshot
         if let language = snapshot.language {
             UserDefaults.standard.set(language.rawValue, forKey: "appLanguage")
         }
         _selectedCategory = State(initialValue: snapshot.category)
         _selectedModel = State(initialValue: snapshot.screen == .detail ? snapshot.model : nil)
+        _previewModel = State(initialValue: nil)
         _showDownloads = State(initialValue: snapshot.screen == .downloads)
         _showAbout = State(initialValue: snapshot.screen == .about)
         _searchText = State(initialValue: snapshot.searchText)
@@ -46,7 +50,15 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            if let arItem = arModel {
+            if snapshot.screen == .preview, let model = snapshot.model {
+                NavigationStack {
+                    ModelPreviewView(
+                        model: model,
+                        modelURL: downloadManager.localURL(for: model),
+                        language: appLanguage
+                    )
+                }
+            } else if let arItem = arModel {
                 arView(for: arItem)
                     .zIndex(1)
             } else {
@@ -80,6 +92,10 @@ struct ContentView: View {
                 model: model,
                 downloadManager: downloadManager,
                 language: appLanguage,
+                onPreview: {
+                    previewModel = model
+                    selectedModel = nil
+                },
                 onLaunchAR: {
                     statusText = ""
                     isARModelLoaded = false
@@ -87,6 +103,18 @@ struct ContentView: View {
                     selectedModel = nil
                 }
             )
+        }
+        .sheet(item: $previewModel) { model in
+            NavigationStack {
+                ModelPreviewView(
+                    model: model,
+                    modelURL: downloadManager.localURL(for: model),
+                    language: appLanguage
+                )
+                #if os(macOS)
+                .frame(minWidth: 760, minHeight: 640)
+                #endif
+            }
         }
         .sheet(isPresented: $showDownloads) {
             NavigationStack {
@@ -252,31 +280,37 @@ struct ContentView: View {
                             dismissSearchKeyboard()
                         }
                 } else {
-                    ScrollView {
-                        LazyVGrid(columns: modelGridColumns, alignment: .center, spacing: 12) {
-                            ForEach(filteredModels) { model in
-                                ModelCard(
-                                    model: model,
-                                    state: downloadManager.downloadStates[model.id] ?? .notDownloaded,
-                                    language: appLanguage,
-                                    onRetry: { downloadManager.retry(model) }
-                                )
-                                    .onTapGesture {
-                                        dismissSearchKeyboard()
-                                        selectedModel = model
-                                    }
+                    ScrollViewReader { proxy in
+                        ScrollView {
+                            LazyVGrid(columns: modelGridColumns, alignment: .center, spacing: 12) {
+                                ForEach(filteredModels) { model in
+                                    ModelCard(
+                                        model: model,
+                                        state: downloadManager.downloadStates[model.id] ?? .notDownloaded,
+                                        language: appLanguage,
+                                        onRetry: { downloadManager.retry(model) }
+                                    )
+                                        .id(model.id)
+                                        .onTapGesture {
+                                            dismissSearchKeyboard()
+                                            selectedModel = model
+                                        }
+                                }
                             }
+                            .padding(.horizontal)
+                            .padding(.top, 10)
+                            .padding(.bottom, 8)
                         }
-                        .padding(.horizontal)
-                        .padding(.top, 10)
-                        .padding(.bottom, 8)
+                        .simultaneousGesture(
+                            DragGesture(minimumDistance: 4).onChanged { _ in
+                                dismissSearchKeyboard()
+                            }
+                        )
+                        .scrollDismissesKeyboard(.interactively)
+                        .task(id: filteredModels.map(\.id)) {
+                            await performSnapshotCatalogAutoScroll(using: proxy)
+                        }
                     }
-                    .simultaneousGesture(
-                        DragGesture(minimumDistance: 4).onChanged { _ in
-                            dismissSearchKeyboard()
-                        }
-                    )
-                    .scrollDismissesKeyboard(.interactively)
                 }
             }
             .navigationTitle(L10n.t("app.name", appLanguage))
@@ -345,6 +379,51 @@ struct ContentView: View {
         #endif
     }
 
+    private func performSnapshotCatalogAutoScroll(using proxy: ScrollViewProxy) async {
+        guard snapshot.autoScrollCatalog, snapshot.screen == .catalog, filteredModels.count > 12 else { return }
+
+        let firstID = filteredModels[0].id
+        await MainActor.run {
+            proxy.scrollTo(firstID, anchor: .top)
+        }
+
+        if snapshot.autoScrollStyle == "slow" {
+            try? await Task.sleep(nanoseconds: 2_000_000_000)
+            guard !Task.isCancelled else { return }
+
+            let targetIndex = min(filteredModels.count - 1, max(0, filteredModels.count * 2 / 5))
+            let targetID = filteredModels[targetIndex].id
+            await MainActor.run {
+                withAnimation(.easeInOut(duration: 8.8)) {
+                    proxy.scrollTo(targetID, anchor: .center)
+                }
+            }
+            return
+        }
+
+        try? await Task.sleep(nanoseconds: 3_500_000_000)
+        guard !Task.isCancelled else { return }
+
+        let midpointIndex = min(filteredModels.count - 1, max(0, filteredModels.count / 3))
+        let midpointID = filteredModels[midpointIndex].id
+        await MainActor.run {
+            withAnimation(.easeInOut(duration: 4.2)) {
+                proxy.scrollTo(midpointID, anchor: .center)
+            }
+        }
+
+        try? await Task.sleep(nanoseconds: 4_600_000_000)
+        guard !Task.isCancelled else { return }
+
+        let finalIndex = min(filteredModels.count - 1, max(0, filteredModels.count * 2 / 3))
+        let finalID = filteredModels[finalIndex].id
+        await MainActor.run {
+            withAnimation(.easeInOut(duration: 3.4)) {
+                proxy.scrollTo(finalID, anchor: .center)
+            }
+        }
+    }
+
     private var bottomFilterBar: some View {
         VStack(spacing: 10) {
             SearchField(
@@ -388,6 +467,7 @@ struct ContentView: View {
 private enum SnapshotScreen: String {
     case catalog
     case detail
+    case preview
     case downloads
     case about
 }
@@ -398,6 +478,8 @@ private struct SnapshotLaunchConfiguration {
     let model: ModelItem?
     let searchText: String
     let language: AppLanguage?
+    let autoScrollCatalog: Bool
+    let autoScrollStyle: String?
 
     static var current: SnapshotLaunchConfiguration {
         let arguments = ProcessInfo.processInfo.arguments
@@ -413,7 +495,9 @@ private struct SnapshotLaunchConfiguration {
         let modelID = value(for: "FFISH_SNAPSHOT_MODEL_ID")
         let model = ModelCatalog.fallbackModels.first { $0.id == modelID } ?? ModelCatalog.fallbackModels.first
         let searchText = value(for: "FFISH_SNAPSHOT_SEARCH") ?? ""
-        let language = value(for: "FFISH_SNAPSHOT_APP_LANGUAGE").flatMap(AppLanguage.init(rawValue:))
+        let language = value(for: "FFISH_SNAPSHOT_APP_LANGUAGE").flatMap(AppLanguage.normalized(from:))
+        let autoScrollCatalog = value(for: "FFISH_SNAPSHOT_AUTOSCROLL") == "1"
+        let autoScrollStyle = value(for: "FFISH_SNAPSHOT_AUTOSCROLL_STYLE")
         let category: ModelCategory?
         switch value(for: "FFISH_SNAPSHOT_CATEGORY") {
         case "plant": category = .plant
@@ -427,7 +511,9 @@ private struct SnapshotLaunchConfiguration {
             category: category,
             model: model,
             searchText: searchText,
-            language: language
+            language: language,
+            autoScrollCatalog: autoScrollCatalog,
+            autoScrollStyle: autoScrollStyle
         )
     }
 }
@@ -577,6 +663,7 @@ private struct ModelDetailSheet: View {
     let model: ModelItem
     @ObservedObject var downloadManager: DownloadManager
     let language: AppLanguage
+    let onPreview: () -> Void
     let onLaunchAR: () -> Void
 
     var body: some View {
@@ -709,12 +796,22 @@ private struct ModelDetailSheet: View {
         case .downloaded:
             VStack(spacing: 10) {
                 Button {
+                    onPreview()
+                } label: {
+                    Label(L10n.t("action.preview3D", language), systemImage: "cube.transparent")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+
+                #if os(iOS)
+                Button {
                     onLaunchAR()
                 } label: {
                     Label(L10n.t("action.openAR", language), systemImage: "viewfinder")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
+                #endif
 
                 Button(role: .destructive) {
                     downloadManager.delete(model)
