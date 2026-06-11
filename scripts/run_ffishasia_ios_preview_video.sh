@@ -10,6 +10,8 @@ SCHEME="${FFISHASIA_IOS_SCHEME:-FFishAsia}"
 CONFIGURATION="${FFISHASIA_IOS_CONFIGURATION:-Debug}"
 DEVICE_NAME="${1:-${FFISHASIA_IOS_VIDEO_DEVICE:-iPhone 17 Pro Max}}"
 LOCALES_FILTER="${LOCALES:-en-US}"
+USE_TEMP_SIMULATOR="${FFISHASIA_IOS_VIDEO_USE_TEMP_SIMULATOR:-1}"
+TEMP_DEVICE_ID=""
 if [[ "$DEVICE_NAME" == *iPad* ]]; then
   DEVICE_LABEL="${FFISHASIA_IOS_VIDEO_DEVICE_LABEL:-iPad}"
   FASTLANE_DEVICE_PREFIX="${FFISHASIA_IOS_VIDEO_FASTLANE_PREFIX:-IPAD_PRO_3GEN_129-}"
@@ -27,7 +29,8 @@ MODEL_SOURCE="${FFISHASIA_IOS_VIDEO_MODEL_SOURCE:-$ROOT_DIR/usdz_resources/02/$M
 INTRO_SECONDS="${FFISHASIA_IOS_VIDEO_INTRO_SECONDS:-4}"
 CATALOG_SECONDS="${FFISHASIA_IOS_VIDEO_CATALOG_SECONDS:-12}"
 MODEL_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_SECONDS:-10}"
-MODEL_LOAD_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_LOAD_SECONDS:-8}"
+MODEL_LOAD_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_LOAD_SECONDS:-10}"
+MODEL_PREROLL_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_PREROLL_SECONDS:-3}"
 OUTRO_SECONDS="${FFISHASIA_IOS_VIDEO_OUTRO_SECONDS:-4}"
 FFMPEG_PATH="$(command -v ffmpeg 2>/dev/null || true)"
 FFPROBE_PATH="$(command -v ffprobe 2>/dev/null || true)"
@@ -76,6 +79,36 @@ if matches:
     matches.sort()
     print(matches[-1][1])
 PY
+}
+
+device_metadata() {
+  python3 - "$1" <<'PY'
+import json
+import subprocess
+import sys
+
+target = sys.argv[1]
+devices = json.loads(subprocess.check_output(["xcrun", "simctl", "list", "devices", "available", "-j"], text=True))
+for runtime, items in devices.get("devices", {}).items():
+    for device in items:
+        if device.get("udid") == target:
+            device_type = device.get("deviceTypeIdentifier")
+            if not device_type:
+                raise SystemExit(f"Missing deviceTypeIdentifier for simulator {target}")
+            print(f"{runtime} {device_type}")
+            raise SystemExit(0)
+raise SystemExit(f"Could not find simulator metadata for {target}")
+PY
+}
+
+create_temporary_simulator() {
+  local source_device_id="$1"
+  local runtime device_type temp_name
+  read -r runtime device_type < <(device_metadata "$source_device_id")
+  temp_name="FFishAsia Preview ${DEVICE_LABEL} $$"
+  TEMP_DEVICE_ID="$(xcrun simctl create "$temp_name" "$device_type" "$runtime")"
+  DEVICE_ID="$TEMP_DEVICE_ID"
+  echo "Created temporary simulator: $temp_name ($TEMP_DEVICE_ID)"
 }
 
 locale_to_apple_language() {
@@ -209,6 +242,11 @@ cleanup() {
   if [ -n "${DEVICE_ID:-}" ]; then
     xcrun simctl terminate "$DEVICE_ID" "$APP_BUNDLE_ID" >/dev/null 2>&1 || true
   fi
+  if [ -n "${TEMP_DEVICE_ID:-}" ]; then
+    xcrun simctl shutdown "$TEMP_DEVICE_ID" >/dev/null 2>&1 || true
+    xcrun simctl delete "$TEMP_DEVICE_ID" >/dev/null 2>&1 || true
+    echo "Deleted temporary simulator: $TEMP_DEVICE_ID"
+  fi
   rm -rf "$DERIVED_DATA_PATH" "$WORK_DIR"
   if [ "$status" -eq 0 ]; then
     echo "Cleaned temporary iOS preview video files."
@@ -256,13 +294,34 @@ launch_snapshot_screen() {
 record_simulator_video() {
   local output="$1"
   local seconds="$2"
+  local status_file="$WORK_DIR/raw/$(basename "$output").record.log"
+  local waited=0
 
   rm -f "$output"
-  xcrun simctl io "$DEVICE_ID" recordVideo --codec=h264 --force "$output" &
+  rm -f "$status_file"
+  xcrun simctl io "$DEVICE_ID" recordVideo --codec=h264 --force "$output" 2>"$status_file" &
   local record_pid=$!
+  until grep -q "Recording started" "$status_file" 2>/dev/null; do
+    if ! kill -0 "$record_pid" >/dev/null 2>&1; then
+      cat "$status_file" >&2 || true
+      echo "Failed to start simulator video recording: $output" >&2
+      exit 1
+    fi
+    if [ "$waited" -ge 30 ]; then
+      cat "$status_file" >&2 || true
+      echo "Timed out waiting for simulator video recording to start: $output" >&2
+      kill -INT "$record_pid" >/dev/null 2>&1 || true
+      wait "$record_pid" >/dev/null 2>&1 || true
+      exit 1
+    fi
+    sleep 1
+    waited=$((waited + 1))
+  done
+
   sleep "$seconds"
   kill -INT "$record_pid" >/dev/null 2>&1 || true
   wait "$record_pid" >/dev/null 2>&1 || true
+  cat "$status_file" || true
 
   if [ ! -s "$output" ]; then
     echo "Failed to record simulator video: $output" >&2
@@ -364,7 +423,14 @@ encode_recorded_segment() {
   local caption_overlay="$2"
   local seconds="$3"
   local output="$4"
+  local trim_start="${5:-0}"
+  local ffmpeg_args=()
+  if [ "$trim_start" != "0" ] && [ "$trim_start" != "0.0" ]; then
+    ffmpeg_args=(-ss "$trim_start")
+  fi
+
   "$FFMPEG_PATH" -y \
+    "${ffmpeg_args[@]+"${ffmpeg_args[@]}"}" \
     -i "$raw" \
     -i "$caption_overlay" \
     -t "$seconds" \
@@ -432,6 +498,9 @@ if [ -z "$DEVICE_ID" ]; then
   echo "Could not find an available simulator named '$DEVICE_NAME'." >&2
   exit 1
 fi
+if [ "$USE_TEMP_SIMULATOR" = "1" ]; then
+  create_temporary_simulator "$DEVICE_ID"
+fi
 
 cd "$ROOT_DIR"
 mkdir -p "$WORK_DIR/raw" "$WORK_DIR/overlays" "$WORK_DIR/segments"
@@ -458,6 +527,7 @@ if xcrun simctl get_app_container "$DEVICE_ID" "$APP_BUNDLE_ID" >/dev/null 2>&1;
   xcrun simctl uninstall "$DEVICE_ID" "$APP_BUNDLE_ID" || true
 fi
 xcrun simctl install "$DEVICE_ID" "$APP_PATH"
+xcrun simctl privacy "$DEVICE_ID" grant camera "$APP_BUNDLE_ID" >/dev/null 2>&1 || true
 seed_preview_model
 
 for locale in $LOCALES_FILTER; do
@@ -506,8 +576,14 @@ for locale in $LOCALES_FILTER; do
 
   launch_snapshot_screen "$locale" preview 0
   sleep "$MODEL_LOAD_SECONDS"
-  record_simulator_video "$model_raw" "$MODEL_SECONDS"
-  encode_recorded_segment "$model_raw" "$model_caption_overlay" "$MODEL_SECONDS" "$model_video"
+  model_record_seconds="$(python3 - "$MODEL_SECONDS" "$MODEL_PREROLL_SECONDS" <<'PY'
+import sys
+
+print(float(sys.argv[1]) + float(sys.argv[2]))
+PY
+)"
+  record_simulator_video "$model_raw" "$model_record_seconds"
+  encode_recorded_segment "$model_raw" "$model_caption_overlay" "$MODEL_SECONDS" "$model_video" "$MODEL_PREROLL_SECONDS"
 
   encode_static_segment "$outro_image" "$OUTRO_SECONDS" "$outro_video"
 
