@@ -10,12 +10,24 @@ SCHEME="${FFISHASIA_IOS_SCHEME:-FFishAsia}"
 CONFIGURATION="${FFISHASIA_IOS_CONFIGURATION:-Debug}"
 DEVICE_NAME="${1:-${FFISHASIA_IOS_VIDEO_DEVICE:-iPhone 17 Pro Max}}"
 LOCALES_FILTER="${LOCALES:-en-US}"
+if [[ "$DEVICE_NAME" == *iPad* ]]; then
+  DEVICE_LABEL="${FFISHASIA_IOS_VIDEO_DEVICE_LABEL:-iPad}"
+  FASTLANE_DEVICE_PREFIX="${FFISHASIA_IOS_VIDEO_FASTLANE_PREFIX:-IPAD_PRO_3GEN_129-}"
+  DEFAULT_OUTPUT_WIDTH=1200
+  DEFAULT_OUTPUT_HEIGHT=1600
+else
+  DEVICE_LABEL="${FFISHASIA_IOS_VIDEO_DEVICE_LABEL:-iPhone}"
+  FASTLANE_DEVICE_PREFIX="${FFISHASIA_IOS_VIDEO_FASTLANE_PREFIX:-IPHONE_67-}"
+  DEFAULT_OUTPUT_WIDTH=886
+  DEFAULT_OUTPUT_HEIGHT=1920
+fi
 MODEL_ID="${FFISHASIA_IOS_VIDEO_MODEL_ID:-35559c2236d04c1a80ccbe08cae863c6}"
 MODEL_FILE="${FFISHASIA_IOS_VIDEO_MODEL_FILE:-japanese_freshwater_crab_lowpoly.usdz}"
 MODEL_SOURCE="${FFISHASIA_IOS_VIDEO_MODEL_SOURCE:-$ROOT_DIR/usdz_resources/02/$MODEL_FILE}"
 INTRO_SECONDS="${FFISHASIA_IOS_VIDEO_INTRO_SECONDS:-4}"
 CATALOG_SECONDS="${FFISHASIA_IOS_VIDEO_CATALOG_SECONDS:-12}"
 MODEL_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_SECONDS:-10}"
+MODEL_LOAD_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_LOAD_SECONDS:-8}"
 OUTRO_SECONDS="${FFISHASIA_IOS_VIDEO_OUTRO_SECONDS:-4}"
 FFMPEG_PATH="$(command -v ffmpeg 2>/dev/null || true)"
 FFPROBE_PATH="$(command -v ffprobe 2>/dev/null || true)"
@@ -136,42 +148,42 @@ localized_text() {
   case "$locale:$key" in
     zh-Hans:intro_title) echo "Little Nature" ;;
     zh-Hans:intro_caption) echo "用 3D 模型探索亚洲动植物与自然。" ;;
-    zh-Hans:catalog_caption) echo "在 iPhone 上浏览不断扩展的模型目录。" ;;
+    zh-Hans:catalog_caption) echo "在 ${DEVICE_LABEL} 上浏览亚洲动植物的 3D 模型。" ;;
     zh-Hans:model_caption) echo "打开 3D 预览，查看会动的模型细节。" ;;
     zh-Hans:outro_title) echo "用 3D 重新认识自然" ;;
     zh-Hans:outro_caption) echo "按需下载模型，离线查看，并继续发现更多物种。" ;;
 
     zh-Hant:intro_title) echo "Little Nature" ;;
     zh-Hant:intro_caption) echo "用 3D 模型探索亞洲動植物與自然。" ;;
-    zh-Hant:catalog_caption) echo "在 iPhone 上瀏覽不斷擴展的模型目錄。" ;;
+    zh-Hant:catalog_caption) echo "在 ${DEVICE_LABEL} 上瀏覽亞洲動植物的 3D 模型。" ;;
     zh-Hant:model_caption) echo "開啟 3D 預覽，查看會動的模型細節。" ;;
     zh-Hant:outro_title) echo "用 3D 重新認識自然" ;;
     zh-Hant:outro_caption) echo "按需下載模型，離線查看，並繼續發現更多物種。" ;;
 
     ja:intro_title) echo "Little Nature" ;;
     ja:intro_caption) echo "3Dモデルでアジアの動植物と自然を探索。" ;;
-    ja:catalog_caption) echo "iPhoneで拡充中のモデルカタログを閲覧。" ;;
+    ja:catalog_caption) echo "${DEVICE_LABEL}でアジアの動植物の3Dモデルを閲覧。" ;;
     ja:model_caption) echo "3Dプレビューで動きのあるモデルを確認。" ;;
     ja:outro_title) echo "自然を3Dで再発見" ;;
     ja:outro_caption) echo "モデルをダウンロードしてオフラインでも閲覧し、さらに多くの種を探索できます。" ;;
 
     ko:intro_title) echo "Little Nature" ;;
     ko:intro_caption) echo "3D 모델로 아시아 동식물과 자연을 탐색하세요." ;;
-    ko:catalog_caption) echo "iPhone에서 계속 확장되는 모델 카탈로그를 둘러보세요." ;;
+    ko:catalog_caption) echo "${DEVICE_LABEL}에서 아시아 동식물 3D 모델을 둘러보세요." ;;
     ko:model_caption) echo "3D 미리보기로 움직이는 모델의 세부 모습을 확인하세요." ;;
     ko:outro_title) echo "자연을 3D로 다시 보기" ;;
     ko:outro_caption) echo "모델을 다운로드해 오프라인으로 보고, 더 많은 종을 계속 탐색하세요." ;;
 
     de-DE:intro_title) echo "Little Nature" ;;
     de-DE:intro_caption) echo "Asiatische Tiere, Pflanzen und Natur in 3D entdecken." ;;
-    de-DE:catalog_caption) echo "Den wachsenden Modellkatalog auf dem iPhone durchsuchen." ;;
+    de-DE:catalog_caption) echo "3D-Modelle asiatischer Tiere und Pflanzen auf dem ${DEVICE_LABEL} ansehen." ;;
     de-DE:model_caption) echo "Die 3D-Vorschau zeigt animierte Modelldetails." ;;
     de-DE:outro_title) echo "Natur in 3D entdecken" ;;
     de-DE:outro_caption) echo "Modelle laden, offline ansehen und weitere Arten entdecken." ;;
 
     en-US:intro_title|*:intro_title) echo "Little Nature" ;;
     en-US:intro_caption|*:intro_caption) echo "Explore Asian animals, plants, and nature in detailed 3D." ;;
-    en-US:catalog_caption|*:catalog_caption) echo "Browse the growing model catalog on iPhone." ;;
+    en-US:catalog_caption|*:catalog_caption) echo "Browse 3D models of Asian plants and animals on ${DEVICE_LABEL}." ;;
     en-US:model_caption|*:model_caption) echo "Open the 3D preview to watch animated model details." ;;
     en-US:outro_title|*:outro_title) echo "Explore nature in 3D" ;;
     en-US:outro_caption|*:outro_caption) echo "Download models for offline viewing, then keep discovering more species." ;;
@@ -450,9 +462,10 @@ seed_preview_model
 
 for locale in $LOCALES_FILTER; do
   fastlane_locale_dir="$FASTLANE_DIR/$locale"
-  catalog_image="$fastlane_locale_dir/01-catalog.png"
-  output_path="$fastlane_locale_dir/00-preview.mov"
-  read -r OUTPUT_WIDTH OUTPUT_HEIGHT < <(detect_output_size "$catalog_image")
+  catalog_image="$fastlane_locale_dir/${FASTLANE_DEVICE_PREFIX}01-catalog.png"
+  output_path="$fastlane_locale_dir/${FASTLANE_DEVICE_PREFIX}00-preview.mov"
+  OUTPUT_WIDTH="${FFISHASIA_IOS_VIDEO_WIDTH:-$DEFAULT_OUTPUT_WIDTH}"
+  OUTPUT_HEIGHT="${FFISHASIA_IOS_VIDEO_HEIGHT:-$DEFAULT_OUTPUT_HEIGHT}"
 
   intro_image="$WORK_DIR/segments/$locale-intro.png"
   outro_image="$WORK_DIR/segments/$locale-outro.png"
@@ -492,7 +505,7 @@ for locale in $LOCALES_FILTER; do
   encode_recorded_segment "$catalog_raw" "$catalog_caption_overlay" "$CATALOG_SECONDS" "$catalog_video"
 
   launch_snapshot_screen "$locale" preview 0
-  sleep 4
+  sleep "$MODEL_LOAD_SECONDS"
   record_simulator_video "$model_raw" "$MODEL_SECONDS"
   encode_recorded_segment "$model_raw" "$model_caption_overlay" "$MODEL_SECONDS" "$model_video"
 

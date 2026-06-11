@@ -4,9 +4,10 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 LOCALES_FILTER="${LOCALES:-en-US}"
 MODES_FILTER="${MODES:-light}"
+SCREENS_FILTER="${SCREENS:-catalog detail downloads}"
 OPTIMIZE_SCREENSHOTS="${FFISH_OPTIMIZE_SCREENSHOTS:-1}"
 
-PROJECT_DIR="$ROOT_DIR" LOCALES_FILTER="$LOCALES_FILTER" MODES_FILTER="$MODES_FILTER" OPTIMIZE_SCREENSHOTS="$OPTIMIZE_SCREENSHOTS" python3 - <<'PY'
+PROJECT_DIR="$ROOT_DIR" LOCALES_FILTER="$LOCALES_FILTER" MODES_FILTER="$MODES_FILTER" SCREENS_FILTER="$SCREENS_FILTER" OPTIMIZE_SCREENSHOTS="$OPTIMIZE_SCREENSHOTS" python3 - <<'PY'
 import copy
 import json
 import os
@@ -117,6 +118,15 @@ shots = [
     ('detail', 'detail.png', '02-detail-light.png', '#166534'),
     ('downloads', 'downloads.png', '03-downloads-light.png', '#2563EB'),
 ]
+requested_screens = [item for item in os.environ.get('SCREENS_FILTER', '').split() if item]
+valid_screens = {slug for slug, _, _, _ in shots}
+invalid_screens = [screen for screen in requested_screens if screen not in valid_screens]
+if invalid_screens:
+    raise SystemExit(f'Unsupported screens in SCREENS: {", ".join(invalid_screens)}')
+if requested_screens:
+    screen_order = {screen: index for index, screen in enumerate(requested_screens)}
+    shots = [shot for shot in shots if shot[0] in screen_order]
+    shots.sort(key=lambda shot: screen_order[shot[0]])
 
 def raw_candidate(device, locale, mode, slug):
     spec = locale_specs[locale]
@@ -173,8 +183,6 @@ for locale in locale_order:
     spec = locale_specs[locale]
     fastlane_locale_root = fastlane / spec['fastlane_dir']
     fastlane_locale_root.mkdir(parents=True, exist_ok=True)
-    for old_png in fastlane_locale_root.glob('*.png'):
-        old_png.unlink()
     for device_name in ('iphone', 'ipad13'):
         device = device_specs[device_name]
         src_dir = device['output_root'] / spec['fastlane_dir']
@@ -185,7 +193,9 @@ for locale in locale_order:
                 source_path = src_dir / source_name
                 if not source_path.exists():
                     raise FileNotFoundError(f'MISSING OUTPUT {source_path}')
-                shutil.copy2(source_path, fastlane_locale_root / f"{device['fastlane_prefix']}{target_name}")
+                target_path = fastlane_locale_root / f"{device['fastlane_prefix']}{target_name}"
+                target_path.unlink(missing_ok=True)
+                shutil.copy2(source_path, target_path)
     print(f'SYNC final upload set -> {fastlane_locale_root}')
 
 def optimize_pngs(paths):

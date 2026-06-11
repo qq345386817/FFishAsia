@@ -3,11 +3,56 @@ fastlane_version("2.228.0")
 require "fileutils"
 require "pathname"
 require "tmpdir"
+require "deliver/upload_metadata"
+require "spaceship/connect_api/models/app_preview_set"
 
 PROJECT_ROOT = File.expand_path("..", __dir__)
 FASTLANE_ROOT = __dir__
+PROJECT_FILE = File.join(PROJECT_ROOT, "FFishAsia.xcodeproj", "project.pbxproj")
 FFISHASIA_APP_IDENTIFIER = ENV.fetch("FFISHASIA_APP_IDENTIFIER", "")
 FFISHASIA_APP_STORE_ID = ENV.fetch("FFISHASIA_APP_STORE_ID", "")
+ENV["DELIVER_NUMBER_OF_THREADS"] ||= "1"
+
+class ::Deliver::UploadMetadata
+  alias ffishasia_original_fetch_edit_app_info fetch_edit_app_info
+  alias ffishasia_original_updating_localized_app_info? updating_localized_app_info?
+
+  def fetch_edit_app_info(app)
+    return nil if ENV["FFISHASIA_SKIP_APP_INFO_METADATA"] == "1"
+
+    ffishasia_original_fetch_edit_app_info(app)
+  end
+
+  def updating_localized_app_info?(app, app_info)
+    return false if ENV["FFISHASIA_SKIP_APP_INFO_METADATA"] == "1"
+
+    ffishasia_original_updating_localized_app_info?(app, app_info)
+  end
+end
+
+class ::Spaceship::ConnectAPI::AppPreviewSet
+  alias ffishasia_original_upload_preview upload_preview
+
+  def upload_preview(client: nil, path: nil, wait_for_processing: true, position: nil, frame_time_code: nil)
+    if ENV["FFISHASIA_SKIP_PREVIEW_PROCESSING_WAIT"] == "1"
+      return ffishasia_original_upload_preview(
+        client: client,
+        path: path,
+        wait_for_processing: false,
+        position: position,
+        frame_time_code: nil
+      )
+    end
+
+    ffishasia_original_upload_preview(
+      client: client,
+      path: path,
+      wait_for_processing: wait_for_processing,
+      position: position,
+      frame_time_code: frame_time_code
+    )
+  end
+end
 
 def resolve_project_path(path)
   return path if Pathname.new(path).absolute?
@@ -29,10 +74,60 @@ def api_key
   )
 end
 
+def current_app_version
+  env_version = ENV.fetch("FFISHASIA_APP_VERSION", "").strip
+  return env_version unless env_version.empty?
+
+  project_contents = File.read(PROJECT_FILE)
+  match = project_contents.match(/MARKETING_VERSION = ([^;]+);/)
+  UI.user_error!("Unable to determine MARKETING_VERSION from #{PROJECT_FILE}") unless match
+
+  match[1].strip
+end
+
+def app_store_connect_app
+  api_key
+  app = Spaceship::ConnectAPI::App.find(FFISHASIA_APP_IDENTIFIER)
+  UI.user_error!("Unable to find app #{FFISHASIA_APP_IDENTIFIER}") unless app
+
+  app
+end
+
+def ensure_editable_app_version!(platform:)
+  app = app_store_connect_app
+  version = current_app_version
+  connect_platform = Spaceship::ConnectAPI::Platform.map(platform)
+  changed = app.ensure_version!(version, platform: connect_platform)
+  if changed
+    UI.success("Ensured editable App Store version '#{version}' for #{platform}.")
+  else
+    UI.success("Editable App Store version '#{version}' already exists for #{platform}.")
+  end
+end
+
+def configure_app_info_metadata_upload(platform:)
+  return unless platform == "ios"
+
+  app = app_store_connect_app
+  edit_app_info = app.fetch_edit_app_info
+  if edit_app_info
+    ENV.delete("FFISHASIA_SKIP_APP_INFO_METADATA")
+    UI.success("Editable App Info exists: #{edit_app_info.id} (#{edit_app_info.state}).")
+    return
+  end
+
+  app_infos = Spaceship::ConnectAPI.get_app_infos(app_id: app.id).all_pages.flat_map(&:to_models)
+  states = app_infos.map { |info| "#{info.id}:#{info.state}" }.join(", ")
+  UI.important("No editable App Info is available. Existing App Info states: #{states}")
+  UI.important("Skipping App Info fields for this metadata upload; version metadata will still be uploaded.")
+  ENV["FFISHASIA_SKIP_APP_INFO_METADATA"] = "1"
+end
+
 def deliver_base_options(platform:)
   {
     api_key: api_key,
     app_identifier: FFISHASIA_APP_IDENTIFIER,
+    app_version: current_app_version,
     platform: platform,
     force: true,
     run_precheck_before_submit: true,
@@ -41,6 +136,9 @@ def deliver_base_options(platform:)
 end
 
 def upload_metadata_only(platform:, metadata_path:)
+  ensure_editable_app_version!(platform: platform)
+  configure_app_info_metadata_upload(platform: platform)
+
   deliver(
     deliver_base_options(platform: platform).merge(
       metadata_path: resolve_project_path(metadata_path),
@@ -60,9 +158,29 @@ def upload_screenshots_only(platform:, screenshots_path:, languages: nil)
       languages: languages,
       skip_binary_upload: true,
       skip_metadata: true,
-      overwrite_screenshots: true
+      overwrite_screenshots: true,
+      overwrite_preview_videos: true
     )
   )
+end
+
+def upload_preview_videos_only(platform:, app_previews_path:, languages: nil)
+  ENV["FFISHASIA_SKIP_PREVIEW_PROCESSING_WAIT"] = "1"
+  begin
+    deliver(
+      deliver_base_options(platform: platform).merge(
+        app_previews_path: resolve_project_path(app_previews_path),
+        languages: languages,
+        skip_binary_upload: true,
+        skip_metadata: true,
+        skip_screenshots: true,
+        overwrite_preview_videos: true,
+        preview_frame_time_code: nil
+      )
+    )
+  ensure
+    ENV.delete("FFISHASIA_SKIP_PREVIEW_PROCESSING_WAIT")
+  end
 end
 
 def screenshot_locales(screenshots_path:)
@@ -80,8 +198,7 @@ end
 def upload_screenshots_in_batches(platform:, screenshots_path:)
   screenshots_path = resolve_project_path(screenshots_path)
   locales = screenshot_locales(screenshots_path: screenshots_path)
-  batch_size = ENV.fetch("FASTLANE_SCREENSHOT_BATCH_SIZE", "3").to_i
-  UI.user_error!("FASTLANE_SCREENSHOT_BATCH_SIZE must be greater than 0") if batch_size <= 0
+  batch_size = one_locale_batch_size!
   UI.user_error!("No screenshot locale directories found in #{screenshots_path}") if locales.empty?
 
   batches = locales.each_slice(batch_size).to_a
@@ -107,9 +224,67 @@ def upload_screenshots_in_batches(platform:, screenshots_path:)
   end
 end
 
+def upload_preview_videos_in_batches(platform:, app_previews_path:)
+  app_previews_path = resolve_project_path(app_previews_path)
+  locales = screenshot_locales(screenshots_path: app_previews_path)
+  batch_size = one_locale_batch_size!
+  UI.user_error!("No preview video locale directories found in #{app_previews_path}") if locales.empty?
+
+  batches = locales.each_slice(batch_size).to_a
+  UI.message("Uploading #{FFISHASIA_APP_IDENTIFIER} preview videos for App Store ID #{FFISHASIA_APP_STORE_ID}.")
+  UI.message("Uploading preview videos in #{batches.length} batch(es), #{batch_size} locale(s) per batch.")
+
+  batches.each_with_index do |batch_locales, index|
+    UI.header("Preview video upload batch #{index + 1}/#{batches.length}: #{batch_locales.join(', ')}")
+
+    Dir.mktmpdir("ffishasia-previews-") do |tmp_root|
+      batch_locales.each do |locale|
+        source = File.join(app_previews_path, locale)
+        UI.user_error!("Missing preview video locale directory: #{source}") unless File.directory?(source)
+        FileUtils.cp_r(source, tmp_root)
+      end
+
+      upload_preview_videos_only(
+        platform: platform,
+        app_previews_path: tmp_root,
+        languages: batch_locales
+      )
+    end
+  end
+end
+
+def one_locale_batch_size!
+  configured_batch_size = ENV.fetch("FASTLANE_SCREENSHOT_BATCH_SIZE", "1").to_i
+  if configured_batch_size != 1
+    UI.important("Ignoring FASTLANE_SCREENSHOT_BATCH_SIZE=#{configured_batch_size}; uploading one locale per batch.")
+  end
+
+  1
+end
+
 default_platform(:ios)
 
 platform :ios do
+  desc "Print iOS App Store Connect edit state"
+  lane :asc_state do
+    api_key
+    app = Spaceship::ConnectAPI::App.find(FFISHASIA_APP_IDENTIFIER)
+    UI.user_error!("Unable to find app #{FFISHASIA_APP_IDENTIFIER}") unless app
+
+    platform = Spaceship::ConnectAPI::Platform::IOS
+    UI.message("App Store versions:")
+    app.get_app_store_versions(filter: { platform: platform }).each do |version|
+      UI.message("- #{version.version_string}: #{version.app_version_state}")
+    end
+
+    UI.message("App infos:")
+    Spaceship::ConnectAPI.get_app_infos(app_id: app.id).all_pages.each do |info|
+      info.to_models.each do |app_info|
+        UI.message("- #{app_info.id}: #{app_info.state}")
+      end
+    end
+  end
+
   desc "Upload iOS App Store metadata only"
   lane :upload_metadata do
     upload_metadata_only(platform: "ios", metadata_path: "fastlane/metadata_ios")
@@ -118,6 +293,12 @@ platform :ios do
   desc "Upload iOS App Store screenshots and preview videos only"
   lane :upload_screenshots do
     upload_screenshots_in_batches(platform: "ios", screenshots_path: "fastlane/screenshots")
+    upload_preview_videos_in_batches(platform: "ios", app_previews_path: "fastlane/screenshots")
+  end
+
+  desc "Upload iOS App Store preview videos only"
+  lane :upload_preview_videos do
+    upload_preview_videos_in_batches(platform: "ios", app_previews_path: "fastlane/screenshots")
   end
 
   desc "Upload iOS metadata + screenshots, and optionally binary when ipa is provided"
@@ -158,6 +339,12 @@ platform :mac do
   desc "Upload macOS App Store screenshots and preview videos only"
   lane :upload_screenshots do
     upload_screenshots_in_batches(platform: "osx", screenshots_path: "fastlane/screenshots_macos")
+    upload_preview_videos_in_batches(platform: "osx", app_previews_path: "fastlane/screenshots_macos")
+  end
+
+  desc "Upload macOS App Store preview videos only"
+  lane :upload_preview_videos do
+    upload_preview_videos_in_batches(platform: "osx", app_previews_path: "fastlane/screenshots_macos")
   end
 
   lane :screenshots do

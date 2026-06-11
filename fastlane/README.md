@@ -15,6 +15,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios asc_state
+
+```sh
+[bundle exec] fastlane ios asc_state
+```
+
+Print iOS App Store Connect edit state
+
 ### ios upload_metadata
 
 ```sh
@@ -30,6 +38,14 @@ Upload iOS App Store metadata only
 ```
 
 Upload iOS App Store screenshots and preview videos only
+
+### ios upload_preview_videos
+
+```sh
+[bundle exec] fastlane ios upload_preview_videos
+```
+
+Upload iOS App Store preview videos only
 
 ### ios upload
 
@@ -83,6 +99,14 @@ Upload macOS App Store metadata only
 ```
 
 Upload macOS App Store screenshots and preview videos only
+
+### mac upload_preview_videos
+
+```sh
+[bundle exec] fastlane mac upload_preview_videos
+```
+
+Upload macOS App Store preview videos only
 
 ### mac screenshots
 
