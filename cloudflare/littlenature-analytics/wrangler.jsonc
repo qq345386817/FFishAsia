@@ -1,0 +1,35 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "little-nature-analytics",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-03",
+  "routes": [
+    {
+      "pattern": "littlenature-api.luopeike.com",
+      "custom_domain": true
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "little-nature-analytics",
+      "database_id": "afa7b222-9867-414f-8bdd-f9523b8999d3"
+    }
+  ],
+  "ratelimits": [
+    {
+      "name": "INSTALLATION_RATE_LIMITER",
+      "namespace_id": "6766551832",
+      "simple": { "limit": 60, "period": 60 }
+    },
+    {
+      "name": "GLOBAL_RATE_LIMITER",
+      "namespace_id": "6766551833",
+      "simple": { "limit": 1000, "period": 60 }
+    }
+  ],
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 0.1
+  }
+}
