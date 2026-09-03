@@ -1,35 +1,81 @@
-//
-//  FFishAsiaTests.swift
-//  FFishAsiaTests
-//
-//  Created by PK on 2024/8/9.
-//
-
 import XCTest
 
+#if os(macOS)
+@testable import Little_Nature
+#else
+@testable import FFishAsia
+#endif
+
 final class FFishAsiaTests: XCTestCase {
+    func testManifestDecodingBuildsFallbackDownloadURL() throws {
+        let model = try XCTUnwrap(ModelCatalog.decodeManifest(from: manifestData()).first)
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        XCTAssertEqual(model.id, "test-model")
+        XCTAssertEqual(model.downloadURL, ModelCatalog.modelsBaseURL.appendingPathComponent("test.usdz"))
+        XCTAssertEqual(model.localizedDisplayName(for: .zhHans), "测试花")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testAnimatedModelUsesSpecialCategory() throws {
+        let model = try XCTUnwrap(ModelCatalog.decodeManifest(from: manifestData()).first)
+
+        XCTAssertTrue(model.hasAnimation)
+        XCTAssertEqual(model.category, .special)
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testSearchMatchesLocalizedNamesIgnoringCaseAndDiacritics() throws {
+        let model = try XCTUnwrap(ModelCatalog.decodeManifest(from: manifestData()).first)
+
+        XCTAssertTrue(model.matches(keyword: "creme blossom"))
+        XCTAssertTrue(model.matches(keyword: "测试花"))
+        XCTAssertFalse(model.matches(keyword: "freshwater crab"))
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testMerchandisedCatalogStartsWithIncludedAnimatedModel() throws {
+        let models = ModelCatalog.merchandised(ModelCatalog.fallbackModels)
+
+        XCTAssertEqual(models.first?.id, ModelCatalog.starterModelID)
+        XCTAssertEqual(models.first?.hasAnimation, true)
+        XCTAssertEqual(Set(models.map(\.id)), Set(ModelCatalog.fallbackModels.map(\.id)))
+    }
+
+    @MainActor
+    func testReviewEligibilityRequiresTwoDifferentSuccessfulPreviews() throws {
+        let suiteName = "ProductAnalyticsTests-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+        let analytics = ProductAnalytics(defaults: defaults, version: { "1.2.2" })
+        let models = ModelCatalog.merchandised(ModelCatalog.fallbackModels)
+        let first = try XCTUnwrap(models.first)
+        let second = try XCTUnwrap(models.dropFirst().first)
+
+        XCTAssertFalse(analytics.recordSuccessfulPreview(model: first, bundled: true))
+        XCTAssertFalse(analytics.recordSuccessfulPreview(model: first, bundled: true))
+        XCTAssertTrue(analytics.recordSuccessfulPreview(model: second, bundled: false))
+        analytics.markReviewPromptRequested()
+        XCTAssertFalse(analytics.recordSuccessfulPreview(model: try XCTUnwrap(models.dropFirst(2).first), bundled: false))
+    }
+
+    private func manifestData() -> Data {
+        Data(
+            """
+            {
+              "models": [
+                {
+                  "id": "test-model",
+                  "filename": "test.usdz",
+                  "file_size_mb": 1.5,
+                  "category": "plant",
+                  "name_ja": "テストの花",
+                  "name_en": "Crème Blossom",
+                  "name_zh_hans": "测试花",
+                  "name_zh_hant": "測試花",
+                  "scientific_name": "Flora exemplaris",
+                  "has_animation": true
+                }
+              ]
+            }
+            """.utf8
+        )
     }
 
 }

@@ -89,31 +89,42 @@ final class DownloadManager: NSObject, ObservableObject {
     }
 
     func refreshManifest() {
-        let url = ModelCatalog.manifestURL
-        let task = session.dataTask(with: url) { [weak self] data, _, error in
-            guard let self else { return }
+        var request = URLRequest(url: ModelCatalog.manifestURL)
+        request.cachePolicy = .reloadRevalidatingCacheData
+        let task = session.dataTask(with: request) { [weak self] data, response, error in
+            let result: Result<[ModelItem], Error>
+            if let error {
+                result = .failure(error)
+            } else if let response = response as? HTTPURLResponse,
+                      !(200..<300).contains(response.statusCode) {
+                result = .failure(URLError(.badServerResponse))
+            } else if let data, !data.isEmpty {
+                result = Result {
+                    let models = try ModelCatalog.decodeManifest(from: data)
+                    guard !models.isEmpty else {
+                        throw URLError(.cannotParseResponse)
+                    }
+                    return models
+                }
+            } else {
+                result = .failure(URLError(.zeroByteResource))
+            }
+
             Task { @MainActor in
-                if let error {
-                    print("⚠️ manifest 下载失败: \(error.localizedDescription)")
-                    self.remoteModels = ModelCatalog.fallbackModels
+                guard let self else { return }
+                switch result {
+                case .success(let models):
+                    self.remoteModels = models
                     self.syncDownloadStates()
-                    return
+                    self.refreshCacheStats()
+                case .failure(let error):
+                    // Keep the latest usable catalog during transient network failures.
+                    print("⚠️ manifest 更新失败: \(error.localizedDescription)")
+                    if self.remoteModels.isEmpty {
+                        self.remoteModels = ModelCatalog.fallbackModels
+                        self.syncDownloadStates()
+                    }
                 }
-
-                guard let data else {
-                    self.remoteModels = ModelCatalog.fallbackModels
-                    self.syncDownloadStates()
-                    return
-                }
-
-                do {
-                    self.remoteModels = try ModelCatalog.decodeManifest(from: data)
-                } catch {
-                    print("⚠️ manifest 解析失败: \(error.localizedDescription)")
-                    self.remoteModels = ModelCatalog.fallbackModels
-                }
-                self.syncDownloadStates()
-                self.refreshCacheStats()
             }
         }
         task.resume()
@@ -121,7 +132,19 @@ final class DownloadManager: NSObject, ObservableObject {
 
     func localURL(for model: ModelItem) -> URL? {
         let url = modelsDirectory.appendingPathComponent(model.filename)
-        return fileManager.fileExists(atPath: url.path) ? url : nil
+        if fileManager.fileExists(atPath: url.path) {
+            return url
+        }
+        guard isBundled(model) else { return nil }
+        let fileURL = URL(fileURLWithPath: model.filename)
+        return Bundle.main.url(
+            forResource: fileURL.deletingPathExtension().lastPathComponent,
+            withExtension: fileURL.pathExtension
+        )
+    }
+
+    func isBundled(_ model: ModelItem) -> Bool {
+        model.id == ModelCatalog.starterModelID
     }
 
     func isDownloaded(_ model: ModelItem) -> Bool {
@@ -152,6 +175,7 @@ final class DownloadManager: NSObject, ObservableObject {
         activeDownloads[task.taskIdentifier] = model
         activeTaskByModelID[model.id] = task.taskIdentifier
         downloadStates[model.id] = .downloading(progress: 0)
+        ProductAnalytics.shared.track(.modelDownloadStart, model: model)
         presentToast(L10n.t("toast.startDownload", currentLanguage, model.localizedDisplayName(for: currentLanguage)), style: .info)
         task.resume()
     }
@@ -164,6 +188,7 @@ final class DownloadManager: NSObject, ObservableObject {
     }
 
     func delete(_ model: ModelItem) {
+        guard !isBundled(model) else { return }
         let url = modelsDirectory.appendingPathComponent(model.filename)
         if fileManager.fileExists(atPath: url.path) {
             try? fileManager.removeItem(at: url)
@@ -191,7 +216,7 @@ final class DownloadManager: NSObject, ObservableObject {
     }
 
     func refreshCacheStats() {
-        let downloadedModels = remoteModels.filter(isDownloaded)
+        let downloadedModels = downloadedModels()
         let injectedModelIDs = snapshotDownloadedModelIDs
         let totalBytes = downloadedModels.reduce(Int64(0)) { partial, model in
             if injectedModelIDs.contains(model.id) {
@@ -215,7 +240,10 @@ final class DownloadManager: NSObject, ObservableObject {
     }
 
     func downloadedModels() -> [ModelItem] {
-        remoteModels.filter(isDownloaded)
+        remoteModels.filter { model in
+            let url = modelsDirectory.appendingPathComponent(model.filename)
+            return fileManager.fileExists(atPath: url.path) || snapshotDownloadedModelIDs.contains(model.id)
+        }
     }
 
     func downloadingModels() -> [ModelItem] {
@@ -257,6 +285,10 @@ extension DownloadManager: URLSessionDownloadDelegate {
         let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
         Task { @MainActor [weak self] in
             guard let self, let model = self.activeDownloads[downloadTask.taskIdentifier] else { return }
+            if case let .downloading(currentProgress) = self.downloadStates[model.id],
+               Int(currentProgress * 100) == Int(progress * 100) {
+                return
+            }
             self.downloadStates[model.id] = .downloading(progress: progress)
         }
     }
@@ -281,6 +313,7 @@ extension DownloadManager: URLSessionDownloadDelegate {
             switch moveResult {
             case .success:
                 self.downloadStates[model.id] = .downloaded
+                ProductAnalytics.shared.track(.modelDownloadComplete, model: model)
                 self.presentToast(L10n.t("toast.downloadComplete", self.currentLanguage, model.localizedDisplayName(for: self.currentLanguage)), style: .success)
             case .failure(let error):
                 self.downloadStates[model.id] = .failed(message: self.errorMessage(from: error))

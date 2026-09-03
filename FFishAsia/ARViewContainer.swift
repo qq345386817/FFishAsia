@@ -70,6 +70,7 @@ struct ARViewContainer: UIViewRepresentable {
         private var currentAnchor: AnchorEntity?
         private var currentModel: Entity?
         private var lastLoadedURL: URL?
+        private var loadGeneration = 0
         private var animationTimer: Timer?
         private var floatPhase: Float = 0
         private var rotatingEntity: Entity?
@@ -122,6 +123,7 @@ struct ARViewContainer: UIViewRepresentable {
         }
 
         func cleanup() {
+            loadGeneration += 1
             animationTimer?.invalidate()
             animationTimer = nil
             rotatingEntity = nil
@@ -134,7 +136,7 @@ struct ARViewContainer: UIViewRepresentable {
         }
 
         func loadModel(url: URL, hasBuiltInAnimation: Bool) {
-            guard let arView, !isLoading, lastLoadedURL != url else { return }
+            guard let arView, lastLoadedURL != url else { return }
             isLoading = true
             isModelLoaded = false
             lastLoadedURL = url
@@ -143,57 +145,86 @@ struct ARViewContainer: UIViewRepresentable {
             if let oldAnchor = currentAnchor {
                 arView.scene.removeAnchor(oldAnchor)
             }
+            currentAnchor = nil
             animationTimer?.invalidate()
+            loadGeneration += 1
+            let generation = loadGeneration
+            let anchorPosition = initialAnchorPosition(in: arView)
 
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let result = Result { try ModelEntity.load(contentsOf: url) }
+                DispatchQueue.main.async {
+                    guard let self,
+                          self.loadGeneration == generation,
+                          self.lastLoadedURL == url,
+                          let arView = self.arView else { return }
+
+                    switch result {
+                    case .success(let modelEntity):
+                        self.finishLoading(
+                            modelEntity,
+                            url: url,
+                            anchorPosition: anchorPosition,
+                            hasBuiltInAnimation: hasBuiltInAnimation,
+                            in: arView
+                        )
+                    case .failure(let error):
+                        self.isLoading = false
+                        self.isModelLoaded = false
+                        self.lastLoadedURL = nil
+                        self.updateParent(
+                            statusText: L10n.t("ar.loadFailed", self.parent.language, error.localizedDescription),
+                            isModelLoaded: false
+                        )
+                    }
+                }
+            }
+        }
+
+        private func finishLoading(
+            _ modelEntity: Entity,
+            url: URL,
+            anchorPosition: SIMD3<Float>,
+            hasBuiltInAnimation: Bool,
+            in arView: ARView
+        ) {
             // Use an immediate world anchor instead of waiting for plane detection.
-            // This avoids staying on “initializing AR” when ARKit is slow to find a plane,
-            // and it makes repeated open/close of the same model deterministic.
-            let anchor = AnchorEntity(world: simd_float4x4(translation: initialAnchorPosition(in: arView)))
+            let anchor = AnchorEntity(world: simd_float4x4(translation: anchorPosition))
             currentAnchor = anchor
+            hideSketchfabHelperCubes(in: modelEntity)
+            makeMaterialsDoubleSided(in: modelEntity)
 
-            do {
-                let modelEntity = try ModelEntity.load(contentsOf: url)
-                hideSketchfabHelperCubes(in: modelEntity)
-                makeMaterialsDoubleSided(in: modelEntity)
-
-                let bounds = modelEntity.visualBounds(relativeTo: nil)
-                let maxExtent = max(bounds.extents.x, bounds.extents.y, bounds.extents.z)
+            let bounds = modelEntity.visualBounds(relativeTo: nil)
+            let maxExtent = max(bounds.extents.x, bounds.extents.y, bounds.extents.z)
                 // Keep the first AR view comfortably inside the camera frame.
                 // Some Sketchfab USDZ files use very large source units, so the lower
                 // scale bound must be tiny instead of clamped to 0.02.
-                let targetMaxSize: Float = 0.035
-                let fittedScale = maxExtent > 0 ? min(max(targetMaxSize / maxExtent, 0.00005), 2.0) : 0.035
+            let targetMaxSize: Float = 0.035
+            let fittedScale = maxExtent > 0 ? min(max(targetMaxSize / maxExtent, 0.00005), 2.0) : 0.035
 
-                let memoryKey = transformMemoryKey(for: url)
-                initialModelScale = SIMD3<Float>(repeating: fittedScale)
-                initialModelPosition = -bounds.center * fittedScale
-                modelEntity.scale = initialModelScale
-                modelEntity.position = initialModelPosition
-                modelEntity.generateCollisionShapes(recursive: true)
-                currentModel = modelEntity
+            let memoryKey = transformMemoryKey(for: url)
+            initialModelScale = SIMD3<Float>(repeating: fittedScale)
+            initialModelPosition = -bounds.center * fittedScale
+            modelEntity.scale = initialModelScale
+            modelEntity.position = initialModelPosition
+            modelEntity.generateCollisionShapes(recursive: true)
+            currentModel = modelEntity
 
-                anchor.addChild(modelEntity)
-                restoreTransform(memoryKey: memoryKey, anchor: anchor, model: modelEntity)
-                arView.scene.addAnchor(anchor)
+            anchor.addChild(modelEntity)
+            restoreTransform(memoryKey: memoryKey, anchor: anchor, model: modelEntity)
+            arView.scene.addAnchor(anchor)
 
-                isLoading = false
-                isModelLoaded = true
-                updateParent(isModelLoaded: true)
-                let animations = modelEntity.availableAnimations
-                if hasBuiltInAnimation || !animations.isEmpty {
-                    for animation in animations {
-                        modelEntity.playAnimation(animation.repeat(), transitionDuration: 0.3)
-                    }
-                    updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language))
-                } else {
-                    updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language))
+            isLoading = false
+            isModelLoaded = true
+            updateParent(isModelLoaded: true)
+            let animations = modelEntity.availableAnimations
+            if hasBuiltInAnimation || !animations.isEmpty {
+                for animation in animations {
+                    modelEntity.playAnimation(animation.repeat(), transitionDuration: 0.3)
                 }
-            } catch {
-                isLoading = false
-                isModelLoaded = false
-                updateParent(isModelLoaded: false)
-                lastLoadedURL = nil
-                updateParent(statusText: L10n.t("ar.loadFailed", parent.language, error.localizedDescription))
+                updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language))
+            } else {
+                updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language))
             }
         }
 
@@ -488,7 +519,8 @@ struct ARViewContainer: NSViewRepresentable {
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
         sceneView.backgroundColor = .windowBackgroundColor
-        sceneView.rendersContinuously = true
+        sceneView.rendersContinuously = hasBuiltInAnimation
+        sceneView.preferredFramesPerSecond = 30
         context.coordinator.sceneView = sceneView
         context.coordinator.updateParent(statusText: L10n.t("ar.initializing", language))
         return sceneView
@@ -496,6 +528,7 @@ struct ARViewContainer: NSViewRepresentable {
 
     func updateNSView(_ sceneView: SCNView, context: Context) {
         context.coordinator.parent = self
+        sceneView.rendersContinuously = hasBuiltInAnimation
 
         guard let url = modelURL else {
             DispatchQueue.main.async {
@@ -522,6 +555,7 @@ struct ARViewContainer: NSViewRepresentable {
         weak var sceneView: SCNView?
         private var lastLoadedURL: URL?
         private var lastHandledResetRequestID = 0
+        private var loadGeneration = 0
 
         init(_ parent: ARViewContainer) {
             self.parent = parent
@@ -546,6 +580,7 @@ struct ARViewContainer: NSViewRepresentable {
         }
 
         func cleanup() {
+            loadGeneration += 1
             lastLoadedURL = nil
             updateParent(isModelLoaded: false)
         }
@@ -560,29 +595,45 @@ struct ARViewContainer: NSViewRepresentable {
         }
 
         func loadModel(url: URL) {
-            guard let sceneView, lastLoadedURL != url else { return }
+            guard sceneView != nil, lastLoadedURL != url else { return }
             lastLoadedURL = url
             updateParent(statusText: L10n.t("ar.loadingModel", parent.language), isModelLoaded: false)
+            loadGeneration += 1
+            let generation = loadGeneration
 
-            do {
-                let sourceScene = try SCNScene(url: url, options: [.checkConsistency: true])
-                let scene = emptyScene()
-                let modelRoot = SCNNode()
-                sourceScene.rootNode.childNodes.forEach { node in
-                    node.removeFromParentNode()
-                    modelRoot.addChildNode(node)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let result = Result { try SCNScene(url: url, options: [.checkConsistency: true]) }
+                DispatchQueue.main.async {
+                    guard let self,
+                          self.loadGeneration == generation,
+                          self.lastLoadedURL == url,
+                          let sceneView = self.sceneView else { return }
+
+                    switch result {
+                    case .success(let sourceScene):
+                        self.finishLoading(sourceScene, in: sceneView)
+                    case .failure(let error):
+                        self.lastLoadedURL = nil
+                        self.updateParent(statusText: L10n.t("ar.loadFailed", self.parent.language, error.localizedDescription), isModelLoaded: false)
+                    }
                 }
-                hideSketchfabHelperCubes(in: modelRoot)
-                makeMaterialsDoubleSided(in: modelRoot)
-                fitModel(modelRoot)
-                scene.rootNode.addChildNode(modelRoot)
-                sceneView.scene = scene
-
-                updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
-            } catch {
-                lastLoadedURL = nil
-                updateParent(statusText: L10n.t("ar.loadFailed", parent.language, error.localizedDescription), isModelLoaded: false)
             }
+        }
+
+        private func finishLoading(_ sourceScene: SCNScene, in sceneView: SCNView) {
+            let scene = emptyScene()
+            let modelRoot = SCNNode()
+            sourceScene.rootNode.childNodes.forEach { node in
+                node.removeFromParentNode()
+                modelRoot.addChildNode(node)
+            }
+            hideSketchfabHelperCubes(in: modelRoot)
+            makeMaterialsDoubleSided(in: modelRoot)
+            fitModel(modelRoot)
+            scene.rootNode.addChildNode(modelRoot)
+            sceneView.scene = scene
+
+            updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
         }
 
         private func installCameraAndLights(in scene: SCNScene) {

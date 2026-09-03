@@ -1886,6 +1886,16 @@
         }
       }
     },
+    "badge.included": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Included" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "収録済み" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "已内置" } },
+        "zh-Hant": { "stringUnit": { "state": "translated", "value": "已內建" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "기본 제공" } },
+        "de": { "stringUnit": { "state": "translated", "value": "Enthalten" } }
+      }
+    },
     "badge.failed": {
       "localizations": {
         "en": {
@@ -2485,6 +2495,16 @@
             "value": "Nein"
           }
         }
+      }
+    },
+    "detail.modelInformation": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "3D Model Information" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "3Dモデル情報" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "3D 模型信息" } },
+        "zh-Hant": { "stringUnit": { "state": "translated", "value": "3D 模型資訊" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "3D 모델 정보" } },
+        "de": { "stringUnit": { "state": "translated", "value": "3D-Modellinformationen" } }
       }
     },
     "detail.sketchfab": {
@@ -3732,37 +3752,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "An AR biological model field guide for browsing Asian animals and plants in 3D and viewing them in your real space."
+            "value": "Explore Asian animals and plants in 3D. An animated model is included, so you can begin immediately."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "アジアの動植物の3Dモデルを閲覧し、現実空間にAR表示できる生物モデル図鑑です。"
+            "value": "アジアの動植物を3Dで観察。アニメーションモデルを収録しているので、すぐに始められます。"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "这是一个 AR 生物模型图鉴，你可以浏览亚洲生物与植物的 3D 模型，并在现实空间中查看。"
+            "value": "以 3D 方式探索亚洲动物与植物。App 已内置动画模型，可以立即开始体验。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "這是一個 AR 生物模型圖鑑，你可以瀏覽亚洲生物與植物的 3D 模型，并在現實空間中查看。"
+            "value": "以 3D 方式探索亞洲動物與植物。App 已內建動畫模型，可以立即開始體驗。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "아시아의 동물과 식물을 3D로 탐색하고 실제 공간에서 볼 수 있는 AR 생물 모델 도감입니다."
+            "value": "아시아의 동물과 식물을 3D로 살펴보세요. 애니메이션 모델이 기본 제공되어 바로 시작할 수 있습니다."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein AR-Feldführer für biologische Modelle, mit dem du asiatische Tiere und Pflanzen in 3D erkundest und in deinem realen Raum ansiehst."
+            "value": "Entdecke asiatische Tiere und Pflanzen in 3D. Ein animiertes Modell ist enthalten, damit du sofort starten kannst."
           }
         }
       }
@@ -4165,6 +4185,16 @@
             "value": "Auf diesem Gerät gespeichert"
           }
         }
+      }
+    },
+    "status.included": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Included with the app" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "Appに収録済み" } },
+        "zh-Hans": { "stringUnit": { "state": "translated", "value": "App 已内置" } },
+        "zh-Hant": { "stringUnit": { "state": "translated", "value": "App 已內建" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "App에 기본 제공" } },
+        "de": { "stringUnit": { "state": "translated", "value": "In der App enthalten" } }
       }
     },
     "status.downloading": {

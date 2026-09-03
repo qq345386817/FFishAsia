@@ -8,6 +8,7 @@ struct ModelPreviewView: View {
     let model: ModelItem
     let modelURL: URL?
     let language: AppLanguage
+    let onModelLoaded: () -> Void
 
     @State private var statusText = ""
     @State private var isModelLoaded = false
@@ -19,7 +20,8 @@ struct ModelPreviewView: View {
                 isModelLoaded: $isModelLoaded,
                 modelURL: modelURL,
                 hasBuiltInAnimation: model.hasAnimation,
-                language: language
+                language: language,
+                onModelLoaded: onModelLoaded
             )
             .ignoresSafeArea()
 
@@ -50,6 +52,7 @@ private struct ModelPreviewContainer: UIViewRepresentable {
     let modelURL: URL?
     let hasBuiltInAnimation: Bool
     let language: AppLanguage
+    let onModelLoaded: () -> Void
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -86,6 +89,7 @@ private struct ModelPreviewContainer: UIViewRepresentable {
         weak var arView: ARView?
         private var currentModel: Entity?
         private var lastLoadedURL: URL?
+        private var loadGeneration = 0
         private var lastPanTranslation: CGPoint = .zero
         private var lastPinchScale: CGFloat = 1
         private let previewDepthOffset: Float = 3.0
@@ -107,6 +111,7 @@ private struct ModelPreviewContainer: UIViewRepresentable {
         }
 
         func cleanup() {
+            loadGeneration += 1
             currentModel = nil
             lastLoadedURL = nil
             updateParent(isModelLoaded: false)
@@ -117,32 +122,49 @@ private struct ModelPreviewContainer: UIViewRepresentable {
             lastLoadedURL = url
             updateParent(statusText: L10n.t("ar.loadingModel", parent.language), isModelLoaded: false)
             arView.scene.anchors.removeAll()
+            loadGeneration += 1
+            let generation = loadGeneration
 
-            do {
-                let modelEntity = try ModelEntity.load(contentsOf: url)
-                hideSketchfabHelperCubes(in: modelEntity)
-                makeMaterialsDoubleSided(in: modelEntity)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let result = Result { try ModelEntity.load(contentsOf: url) }
+                DispatchQueue.main.async {
+                    guard let self,
+                          self.loadGeneration == generation,
+                          self.lastLoadedURL == url,
+                          let arView = self.arView else { return }
 
-                let fittedModel = Entity()
-                fittedModel.addChild(modelEntity)
-                fit(fittedModel, sourceBounds: modelEntity.visualBounds(relativeTo: nil))
-                fittedModel.generateCollisionShapes(recursive: true)
-
-                let anchor = AnchorEntity(world: .zero)
-                anchor.addChild(fittedModel)
-                anchor.addChild(makeCamera(for: fittedModel))
-                anchor.addChild(makeLight())
-                arView.scene.addAnchor(anchor)
-
-                currentModel = fittedModel
-                for animation in modelEntity.availableAnimations {
-                    modelEntity.playAnimation(animation.repeat(), transitionDuration: 0.3)
+                    switch result {
+                    case .success(let modelEntity):
+                        self.finishLoading(modelEntity, in: arView)
+                    case .failure(let error):
+                        self.lastLoadedURL = nil
+                        self.updateParent(statusText: L10n.t("ar.loadFailed", self.parent.language, error.localizedDescription), isModelLoaded: false)
+                    }
                 }
-                updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
-            } catch {
-                lastLoadedURL = nil
-                updateParent(statusText: L10n.t("ar.loadFailed", parent.language, error.localizedDescription), isModelLoaded: false)
             }
+        }
+
+        private func finishLoading(_ modelEntity: Entity, in arView: ARView) {
+            hideSketchfabHelperCubes(in: modelEntity)
+            makeMaterialsDoubleSided(in: modelEntity)
+
+            let fittedModel = Entity()
+            fittedModel.addChild(modelEntity)
+            fit(fittedModel, sourceBounds: modelEntity.visualBounds(relativeTo: nil))
+            fittedModel.generateCollisionShapes(recursive: true)
+
+            let anchor = AnchorEntity(world: .zero)
+            anchor.addChild(fittedModel)
+            anchor.addChild(makeCamera(for: fittedModel))
+            anchor.addChild(makeLight())
+            arView.scene.addAnchor(anchor)
+
+            currentModel = fittedModel
+            for animation in modelEntity.availableAnimations {
+                modelEntity.playAnimation(animation.repeat(), transitionDuration: 0.3)
+            }
+            updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
+            parent.onModelLoaded()
         }
 
         private func updateParent(statusText: String? = nil, isModelLoaded: Bool? = nil) {
@@ -280,13 +302,21 @@ struct ModelPreviewView: View {
     let model: ModelItem
     let modelURL: URL?
     let language: AppLanguage
+    let onModelLoaded: () -> Void
 
     @State private var statusText = ""
     @State private var isModelLoaded = false
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            ModelPreviewContainer(statusText: $statusText, isModelLoaded: $isModelLoaded, modelURL: modelURL, language: language)
+            ModelPreviewContainer(
+                statusText: $statusText,
+                isModelLoaded: $isModelLoaded,
+                modelURL: modelURL,
+                hasBuiltInAnimation: model.hasAnimation,
+                language: language,
+                onModelLoaded: onModelLoaded
+            )
                 .ignoresSafeArea()
 
             VStack(spacing: 6) {
@@ -312,7 +342,9 @@ private struct ModelPreviewContainer: NSViewRepresentable {
     @Binding var statusText: String
     @Binding var isModelLoaded: Bool
     let modelURL: URL?
+    let hasBuiltInAnimation: Bool
     let language: AppLanguage
+    let onModelLoaded: () -> Void
 
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
@@ -323,13 +355,15 @@ private struct ModelPreviewContainer: NSViewRepresentable {
         sceneView.allowsCameraControl = true
         sceneView.autoenablesDefaultLighting = true
         sceneView.backgroundColor = .windowBackgroundColor
-        sceneView.rendersContinuously = true
+        sceneView.rendersContinuously = hasBuiltInAnimation
+        sceneView.preferredFramesPerSecond = 30
         context.coordinator.sceneView = sceneView
         return sceneView
     }
 
     func updateNSView(_ sceneView: SCNView, context: Context) {
         context.coordinator.parent = self
+        sceneView.rendersContinuously = hasBuiltInAnimation
         guard let modelURL else {
             DispatchQueue.main.async {
                 statusText = L10n.t("ar.downloadFirst", language)
@@ -341,6 +375,7 @@ private struct ModelPreviewContainer: NSViewRepresentable {
     }
 
     static func dismantleNSView(_ nsView: SCNView, coordinator: Coordinator) {
+        coordinator.cleanup()
         nsView.scene = nil
     }
 
@@ -348,35 +383,59 @@ private struct ModelPreviewContainer: NSViewRepresentable {
         var parent: ModelPreviewContainer
         weak var sceneView: SCNView?
         private var lastLoadedURL: URL?
+        private var loadGeneration = 0
 
         init(_ parent: ModelPreviewContainer) {
             self.parent = parent
         }
 
+        func cleanup() {
+            loadGeneration += 1
+            lastLoadedURL = nil
+            updateParent(isModelLoaded: false)
+        }
+
         func loadModel(url: URL) {
-            guard let sceneView, lastLoadedURL != url else { return }
+            guard sceneView != nil, lastLoadedURL != url else { return }
             lastLoadedURL = url
             updateParent(statusText: L10n.t("ar.loadingModel", parent.language), isModelLoaded: false)
+            loadGeneration += 1
+            let generation = loadGeneration
 
-            do {
-                let sourceScene = try SCNScene(url: url, options: [.checkConsistency: true])
-                let scene = SCNScene()
-                installCameraAndLights(in: scene)
-                let modelRoot = SCNNode()
-                sourceScene.rootNode.childNodes.forEach { node in
-                    node.removeFromParentNode()
-                    modelRoot.addChildNode(node)
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+                let result = Result { try SCNScene(url: url, options: [.checkConsistency: true]) }
+                DispatchQueue.main.async {
+                    guard let self,
+                          self.loadGeneration == generation,
+                          self.lastLoadedURL == url,
+                          let sceneView = self.sceneView else { return }
+
+                    switch result {
+                    case .success(let sourceScene):
+                        self.finishLoading(sourceScene, in: sceneView)
+                    case .failure(let error):
+                        self.lastLoadedURL = nil
+                        self.updateParent(statusText: L10n.t("ar.loadFailed", self.parent.language, error.localizedDescription), isModelLoaded: false)
+                    }
                 }
-                hideSketchfabHelperCubes(in: modelRoot)
-                makeMaterialsDoubleSided(in: modelRoot)
-                fitModel(modelRoot)
-                scene.rootNode.addChildNode(modelRoot)
-                sceneView.scene = scene
-                updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
-            } catch {
-                lastLoadedURL = nil
-                updateParent(statusText: L10n.t("ar.loadFailed", parent.language, error.localizedDescription), isModelLoaded: false)
             }
+        }
+
+        private func finishLoading(_ sourceScene: SCNScene, in sceneView: SCNView) {
+            let scene = SCNScene()
+            installCameraAndLights(in: scene)
+            let modelRoot = SCNNode()
+            sourceScene.rootNode.childNodes.forEach { node in
+                node.removeFromParentNode()
+                modelRoot.addChildNode(node)
+            }
+            hideSketchfabHelperCubes(in: modelRoot)
+            makeMaterialsDoubleSided(in: modelRoot)
+            fitModel(modelRoot)
+            scene.rootNode.addChildNode(modelRoot)
+            sceneView.scene = scene
+            updateParent(statusText: L10n.t("ar.loaded.gesture", parent.language), isModelLoaded: true)
+            parent.onModelLoaded()
         }
 
         private func updateParent(statusText: String? = nil, isModelLoaded: Bool? = nil) {

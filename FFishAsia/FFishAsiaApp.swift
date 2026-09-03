@@ -12,9 +12,15 @@ import AppKit
 
 @main
 struct FFishAsiaApp: App {
+    @Environment(\.scenePhase) private var scenePhase
     #if os(macOS)
     @NSApplicationDelegateAdaptor(FFishAsiaAppDelegate.self) private var appDelegate
     #endif
+
+    init() {
+        ProductAnalyticsUploader.install()
+        ProductAnalytics.shared.recordAppOpen()
+    }
 
     var body: some Scene {
         #if os(macOS)
@@ -23,9 +29,19 @@ struct FFishAsiaApp: App {
                 .frame(minWidth: 760, minHeight: 640)
         }
         .defaultSize(width: 960, height: 720)
+        .onChange(of: scenePhase) { phase in
+            if phase == .background {
+                Task { await ProductAnalyticsUploader.shared.flush() }
+            }
+        }
         #else
         WindowGroup {
             ContentView()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .background {
+                Task { await ProductAnalyticsUploader.shared.flush() }
+            }
         }
         #endif
     }

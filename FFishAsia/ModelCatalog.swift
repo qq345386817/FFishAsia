@@ -30,7 +30,7 @@ enum ModelCategory: String, CaseIterable, Codable {
     }
 }
 
-struct ModelItem: Identifiable, Codable, Hashable {
+struct ModelItem: Identifiable, Hashable {
     let id: String
     let displayName: String
     let englishName: String
@@ -58,6 +58,7 @@ struct ModelItem: Identifiable, Codable, Hashable {
     let downloadURL: URL?
     let thumbName: String
     let previewName: String
+    private let searchIndex: String
 
     var sketchfabURL: URL? {
         if !sketchfabUID.isEmpty {
@@ -121,13 +122,8 @@ struct ModelItem: Identifiable, Codable, Hashable {
     }
 
     func matches(keyword: String) -> Bool {
-        let query = keyword.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !query.isEmpty else { return true }
-
-        let normalizedQuery = query.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current)
-        return ModelNameLocalization.searchableNames(for: self)
-            .map { $0.folding(options: [.diacriticInsensitive, .caseInsensitive], locale: .current) }
-            .contains { $0.localizedCaseInsensitiveContains(normalizedQuery) }
+        let normalizedQuery = Self.normalizedSearchText(keyword)
+        return normalizedQuery.isEmpty || searchIndex.contains(normalizedQuery)
     }
 
     init(
@@ -186,6 +182,31 @@ struct ModelItem: Identifiable, Codable, Hashable {
         let baseName = URL(fileURLWithPath: filename).deletingPathExtension().lastPathComponent
         self.thumbName = "\(baseName)_thumb.jpeg"
         self.previewName = "\(baseName)_preview.jpeg"
+        self.searchIndex = Self.normalizedSearchText([
+            displayName,
+            englishName,
+            localizedNameZhHans,
+            localizedNameZhHant,
+            localizedNameJa,
+            localizedNameKo,
+            localizedNameDe,
+            localizedNameEn,
+            scientificName,
+            taxonomicInfo,
+            localizedTaxonomicInfoZhHans,
+            localizedTaxonomicInfoZhHant,
+            localizedTaxonomicInfoJa,
+            localizedTaxonomicInfoKo,
+            localizedTaxonomicInfoDe,
+            localizedTaxonomicInfoEn
+        ].joined(separator: "\n"))
+    }
+
+    private static func normalizedSearchText(_ value: String) -> String {
+        value
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: .current)
+            .lowercased()
     }
 }
 
@@ -221,9 +242,26 @@ private struct RemoteManifestModel: Decodable {
 }
 
 struct ModelCatalog {
+    static let starterModelID = "35559c2236d04c1a80ccbe08cae863c6"
     static let manifestURL = URL(string: "https://pub-0154a542ca38442c855387e2736c8f19.r2.dev/manifest.json")!
     static let modelsBaseURL = URL(string: "https://pub-0154a542ca38442c855387e2736c8f19.r2.dev/models/")!
     static let fallbackModels: [ModelItem] = loadBundledManifestModels()
+
+    static func merchandised(_ models: [ModelItem]) -> [ModelItem] {
+        let starter = models.first { $0.id == starterModelID }
+        var buckets = Dictionary(grouping: models.filter { $0.id != starterModelID }, by: \ModelItem.category)
+        let categoryOrder: [ModelCategory] = [.animal, .plant, .special]
+        var result = starter.map { [$0] } ?? []
+
+        while categoryOrder.contains(where: { !(buckets[$0] ?? []).isEmpty }) {
+            for category in categoryOrder {
+                guard var bucket = buckets[category], !bucket.isEmpty else { continue }
+                result.append(bucket.removeFirst())
+                buckets[category] = bucket
+            }
+        }
+        return result
+    }
 
     static func decodeManifest(from data: Data) throws -> [ModelItem] {
         let manifest = try JSONDecoder().decode(RemoteManifest.self, from: data)

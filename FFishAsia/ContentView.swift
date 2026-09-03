@@ -1,6 +1,8 @@
+import StoreKit
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.requestReview) private var requestReview
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -41,11 +43,15 @@ struct ContentView: View {
     }
 
     private var filteredModels: [ModelItem] {
-        downloadManager.remoteModels.filter { model in
+        let models = downloadManager.remoteModels.filter { model in
             let matchesCategory = selectedCategory == nil || model.category == selectedCategory
             let matchesSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || model.matches(keyword: searchText)
             return matchesCategory && matchesSearch
         }
+        guard selectedCategory == nil, searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return models
+        }
+        return ModelCatalog.merchandised(models)
     }
 
     var body: some View {
@@ -55,7 +61,8 @@ struct ContentView: View {
                     ModelPreviewView(
                         model: model,
                         modelURL: downloadManager.localURL(for: model),
-                        language: appLanguage
+                        language: appLanguage,
+                        onModelLoaded: {}
                     )
                 }
             } else if let arItem = arModel {
@@ -78,10 +85,10 @@ struct ContentView: View {
         }
         .animation(.spring(response: 0.3, dampingFraction: 0.9), value: visibleToast?.id)
         .task {
-            downloadManager.currentLanguage = appLanguage
+            ProductAnalytics.shared.track(.catalogView)
             downloadManager.refreshManifest()
         }
-        .onChange(of: appLanguageRaw) { _ in
+        .task(id: appLanguageRaw) {
             downloadManager.currentLanguage = appLanguage
         }
         .onReceive(downloadManager.$toast.compactMap { $0 }) { toast in
@@ -109,7 +116,8 @@ struct ContentView: View {
                 ModelPreviewView(
                     model: model,
                     modelURL: downloadManager.localURL(for: model),
-                    language: appLanguage
+                    language: appLanguage,
+                    onModelLoaded: { recordSuccessfulPreview(of: model) }
                 )
                 #if os(macOS)
                 .frame(minWidth: 760, minHeight: 640)
@@ -134,6 +142,7 @@ struct ContentView: View {
         .platformOnboardingCover(isPresented: .constant(!hasSeenOnboarding)) {
             OnboardingView(language: appLanguage) {
                 hasSeenOnboarding = true
+                ProductAnalytics.shared.track(.onboardingComplete)
             }
         }
     }
@@ -158,6 +167,18 @@ struct ContentView: View {
 
     private func dismissSearchKeyboard() {
         isSearchFocused = false
+    }
+
+    private func recordSuccessfulPreview(of model: ModelItem) {
+        guard ProductAnalytics.shared.recordSuccessfulPreview(
+            model: model,
+            bundled: downloadManager.isBundled(model)
+        ) else { return }
+        ProductAnalytics.shared.markReviewPromptRequested()
+        Task { @MainActor in
+            try? await Task.sleep(for: .seconds(1))
+            requestReview()
+        }
     }
 
     private func emptyStateText() -> (title: String, description: String) {
@@ -287,12 +308,18 @@ struct ContentView: View {
                                     ModelCard(
                                         model: model,
                                         state: downloadManager.downloadStates[model.id] ?? .notDownloaded,
+                                        isBundled: downloadManager.isBundled(model),
                                         language: appLanguage,
                                         onRetry: { downloadManager.retry(model) }
                                     )
                                         .id(model.id)
                                         .onTapGesture {
                                             dismissSearchKeyboard()
+                                            ProductAnalytics.shared.track(
+                                                .modelDetailOpen,
+                                                model: model,
+                                                bundled: downloadManager.isBundled(model)
+                                            )
                                             selectedModel = model
                                         }
                                 }
@@ -600,6 +627,7 @@ private struct SearchField: View {
 private struct ModelCard: View {
     let model: ModelItem
     let state: DownloadManager.DownloadState
+    let isBundled: Bool
     let language: AppLanguage
     let onRetry: () -> Void
 
@@ -621,7 +649,7 @@ private struct ModelCard: View {
                     .foregroundStyle(categoryColor)
                     .clipShape(Capsule())
                 Spacer()
-                DownloadStateBadge(state: state, language: language, onRetry: onRetry)
+                DownloadStateBadge(state: state, isBundled: isBundled, language: language, onRetry: onRetry)
             }
 
             Text(model.formattedSize)
@@ -686,18 +714,30 @@ private struct ModelDetailSheet: View {
                                 .font(.subheadline.italic())
                                 .foregroundStyle(.secondary)
                         }
+                        HStack(spacing: 8) {
+                            Label(model.category.detailLabel(in: language), systemImage: model.category.symbolName)
+                            if model.hasAnimation {
+                                Label(L10n.t("detail.hasAnimation", language), systemImage: "play.circle.fill")
+                            }
+                            if downloadManager.isBundled(model) {
+                                Label(L10n.t("status.included", language), systemImage: "checkmark.circle.fill")
+                            }
+                        }
+                        .font(.caption.weight(.medium))
+                        .foregroundStyle(.secondary)
+                        .padding(.top, 6)
                     }
                     .padding(.horizontal)
 
                     Divider()
 
-                    VStack(alignment: .leading, spacing: 10) {
-                        InfoRow(title: L10n.t("detail.downloadStatus", language), value: statusText)
-                        InfoRow(title: L10n.t("detail.category", language), value: model.category.detailLabel(in: language))
-                        InfoRow(title: L10n.t("detail.faces", language), value: model.formattedFaces)
-                        InfoRow(title: L10n.t("detail.vertices", language), value: model.formattedVertices)
-                        InfoRow(title: L10n.t("detail.fileSize", language), value: model.formattedSize)
-                        InfoRow(title: L10n.t("detail.animation", language), value: model.hasAnimation ? L10n.t("detail.hasAnimation", language) : L10n.t("detail.noAnimation", language))
+                    VStack(alignment: .leading, spacing: 6) {
+                        Label(L10n.t("detail.taxonomy", language), systemImage: "leaf.fill")
+                            .font(.headline)
+                        Text(model.localizedTaxonomicInfo(for: language))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .lineSpacing(3)
                     }
                     .padding(.horizontal)
 
@@ -713,22 +753,21 @@ private struct ModelDetailSheet: View {
 
                     Divider()
 
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(L10n.t("detail.taxonomy", language))
-                            .font(.subheadline.bold())
-                        Text(model.localizedTaxonomicInfo(for: language))
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(8)
+                    DisclosureGroup(L10n.t("detail.modelInformation", language)) {
+                        VStack(alignment: .leading, spacing: 10) {
+                            InfoRow(title: L10n.t("detail.downloadStatus", language), value: statusText)
+                            InfoRow(title: L10n.t("detail.fileSize", language), value: model.formattedSize)
+                            InfoRow(title: L10n.t("detail.faces", language), value: model.formattedFaces)
+                            InfoRow(title: L10n.t("detail.vertices", language), value: model.formattedVertices)
+                            if let url = model.sketchfabURL {
+                                Link(L10n.t("detail.sketchfab", language), destination: url)
+                                    .font(.subheadline)
+                            }
+                        }
+                        .padding(.top, 8)
                     }
+                    .font(.subheadline.weight(.semibold))
                     .padding(.horizontal)
-
-                    if let url = model.sketchfabURL {
-                        Divider()
-                        Link(L10n.t("detail.sketchfab", language), destination: url)
-                            .font(.subheadline)
-                            .padding(.horizontal)
-                    }
                 }
                 .padding(.vertical)
             }
@@ -746,7 +785,9 @@ private struct ModelDetailSheet: View {
         case .notDownloaded:
             return L10n.t("status.notDownloaded", language)
         case .downloaded:
-            return L10n.t("status.downloaded", language)
+            return downloadManager.isBundled(model)
+                ? L10n.t("status.included", language)
+                : L10n.t("status.downloaded", language)
         case .downloading(let progress):
             return L10n.t("status.downloading", language, Int(progress * 100))
         case .failed(let message):
@@ -805,6 +846,11 @@ private struct ModelDetailSheet: View {
 
                 #if os(iOS)
                 Button {
+                    ProductAnalytics.shared.track(
+                        .arStart,
+                        model: model,
+                        bundled: downloadManager.isBundled(model)
+                    )
                     onLaunchAR()
                 } label: {
                     Label(L10n.t("action.openAR", language), systemImage: "viewfinder")
@@ -813,13 +859,15 @@ private struct ModelDetailSheet: View {
                 .buttonStyle(.borderedProminent)
                 #endif
 
-                Button(role: .destructive) {
-                    downloadManager.delete(model)
-                } label: {
-                    Label(L10n.t("action.deleteDownloaded", language), systemImage: "trash")
-                        .frame(maxWidth: .infinity)
+                if !downloadManager.isBundled(model) {
+                    Button(role: .destructive) {
+                        downloadManager.delete(model)
+                    } label: {
+                        Label(L10n.t("action.deleteDownloaded", language), systemImage: "trash")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
                 }
-                .buttonStyle(.bordered)
             }
         }
     }
@@ -844,6 +892,7 @@ private struct InfoRow: View {
 
 private struct DownloadStateBadge: View {
     let state: DownloadManager.DownloadState
+    let isBundled: Bool
     let language: AppLanguage
     let onRetry: () -> Void
 
@@ -855,7 +904,7 @@ private struct DownloadStateBadge: View {
                 .foregroundStyle(.secondary)
 
         case .downloaded:
-            Text(L10n.t("badge.downloaded", language))
+            Text(L10n.t(isBundled ? "badge.included" : "badge.downloaded", language))
                 .font(.caption2.weight(.medium))
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
@@ -915,41 +964,18 @@ private struct ToastBanner: View {
 private struct OnboardingView: View {
     let language: AppLanguage
     let onFinish: () -> Void
-    @State private var selection = 0
 
     var body: some View {
         VStack(spacing: 24) {
-            TabView(selection: $selection) {
-                OnboardingPage(
-                    title: L10n.t("onboarding.1.title", language),
-                    subtitle: L10n.t("onboarding.1.subtitle", language),
-                    systemImage: "cube.fill"
-                )
-                .tag(0)
-
-                OnboardingPage(
-                    title: L10n.t("onboarding.2.title", language),
-                    subtitle: L10n.t("onboarding.2.subtitle", language),
-                    systemImage: "arrow.down.circle"
-                )
-                .tag(1)
-
-                OnboardingPage(
-                    title: L10n.t("onboarding.3.title", language),
-                    subtitle: L10n.t("onboarding.3.subtitle", language),
-                    systemImage: "camera.viewfinder"
-                )
-                .tag(2)
-            }
-            .platformOnboardingTabStyle()
+            OnboardingPage(
+                title: L10n.t("onboarding.1.title", language),
+                subtitle: L10n.t("onboarding.1.subtitle", language),
+                systemImage: "cube.transparent.fill"
+            )
 
             VStack(spacing: 12) {
-                Button(selection == 2 ? L10n.t("action.start", language) : L10n.t("action.continue", language)) {
-                    if selection == 2 {
-                        onFinish()
-                    } else {
-                        withAnimation { selection += 1 }
-                    }
+                Button(L10n.t("action.start", language)) {
+                    onFinish()
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.large)
