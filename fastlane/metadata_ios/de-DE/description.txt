@@ -11,4 +11,4 @@ Hauptfunktionen:
 - Downloadverwaltung: gespeicherte Modellinhalte prüfen und löschen
 - Modelldetails: Basisdaten wie Flächen, Eckpunkte und Dateigröße ansehen
 
-Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen zum Durchsuchen, Herunterladen und Anzeigen in AR verwendet. Little Nature fragt nur bei Nutzung von AR-Funktionen nach Kamerazugriff. Es gibt keine Benutzerkonten und keine Uploads persönlicher Daten.
+Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen zum Durchsuchen, Herunterladen und Anzeigen in AR verwendet. Little Nature fragt nur bei Nutzung von AR-Funktionen nach Kamerazugriff. Ein Konto ist nicht erforderlich. Anonyme, eigene Produktanalysen helfen, Katalog und Vorschau zu verbessern; sie dienen weder Werbung noch Tracking.

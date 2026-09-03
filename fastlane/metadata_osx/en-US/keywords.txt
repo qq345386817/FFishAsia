@@ -1,1 +1,1 @@
-3D models,animals,plants,Asian nature,biology,wildlife,specimens,insects,flowers,field guide
+species,taxonomy,biology,field guide,natural history,flora,fauna,insects,flowers,education

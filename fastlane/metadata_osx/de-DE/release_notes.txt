@@ -1,1 +1,2 @@
-- Diese Version unterstützt weitere Sprachen.
+- Enthält jetzt ein animiertes 3D-Modell zur sofortigen Vorschau.
+- Verbesserte Modellübersicht und Artinformationen.

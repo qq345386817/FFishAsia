@@ -1,1 +1,2 @@
-- This version adds support for more languages.
+- Added an included animated 3D model for instant preview.
+- Improved the model catalog and species details.

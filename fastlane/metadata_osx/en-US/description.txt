@@ -1,14 +1,16 @@
-Little Nature for Mac is a desktop field guide for browsing a growing collection of CC0-based 3D biological model records from Asian animals and plants. It gives you a larger workspace for exploring the catalog, reviewing model details, and managing saved model content.
+Little Nature for Mac is an interactive 3D field guide to Asian wildlife and plants. Rotate, zoom, and study animated animals, flowers, insects, amphibians, marine life, and other organisms in a spacious desktop viewer.
 
-Use it for natural history reference, education, model selection, or simply browsing the shapes and taxonomy of flowers, insects, amphibians, marine life, and other organisms.
+Start immediately with an included animated model. Download more models only when you need them and keep favorites available offline.
 
 Key features:
-- Desktop catalog: browse curated 3D animal and plant model records on Mac
+- Interactive 3D: rotate and zoom models, including animated species
+- Desktop catalog: browse curated animal and plant models on Mac
+- Scientific classification: review localized names, scientific names, and taxonomy
 - Category browsing: filter by All / Animals / Plants / Special
 - Quick search: find models by Japanese, English, Chinese, or scientific name
 - On-demand downloads: download models only when needed to reduce storage use
 - Offline access: review saved model content after it has been downloaded
 - Download management: check saved models and clear local content
-- Model details: view face count, vertex count, file size, category, and source links
+- Model details: review scientific and technical information in one place
 
-Model resources are curated from public sources and used under CC0 license terms for browsing and local reference. Little Nature does not provide user accounts or upload personal data.
+Model resources are curated from public sources and used under CC0 license terms for browsing and local reference. No account is required. First-party anonymous product analytics are used to improve the catalog and preview experience; they are not used for advertising or tracking.
