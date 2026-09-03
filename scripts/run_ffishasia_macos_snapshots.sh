@@ -18,7 +18,7 @@ SCENES_FILTER="${SCENES:-}"
 MODES_FILTER="${MODES:-light dark}"
 BUILD_LOG_PATH="${FFISHASIA_MACOS_BUILD_LOG_PATH:-/tmp/ffishasia_macos_snapshot_build.log}"
 PLAN_PATH="${FFISHASIA_MACOS_PLAN_PATH:-/tmp/ffishasia_macos_snapshot_plan.tsv}"
-MODEL_ID="${FFISHASIA_SNAPSHOT_MODEL_ID:-f5e6f5a985ea4fc2a14ee0b4b37572b5}"
+MODEL_ID="${FFISHASIA_SNAPSHOT_MODEL_ID:-35559c2236d04c1a80ccbe08cae863c6}"
 
 mkdir -p "$RAW_DIR" "$RUN_DIR" "$REPORT_DIR"
 
@@ -73,12 +73,12 @@ locales = locales_filter.split() if locales_filter.strip() else ["zh-Hans", "zh-
 requested_scenes = set(scenes_filter.split()) if scenes_filter.strip() else None
 modes = modes_filter.split() if modes_filter.strip() else ["light"]
 base_scenes = [
-    {"id": "01-catalog", "screen": "catalog", "category": "all", "search": ""},
-    {"id": "02-detail", "screen": "detail", "category": "all", "search": ""},
-    {"id": "03-downloads", "screen": "downloads", "category": "all", "search": ""},
+    {"id": "01-preview", "screen": "preview", "category": "all", "search": ""},
+    {"id": "02-catalog", "screen": "catalog", "category": "all", "search": ""},
+    {"id": "03-detail", "screen": "detail", "category": "all", "search": ""},
 ]
 dark_scenes = [
-    {"id": "01-catalog", "screen": "catalog", "category": "all", "search": ""},
+    {"id": "01-preview", "screen": "preview", "category": "all", "search": ""},
 ]
 for locale in locales:
     for mode in modes:

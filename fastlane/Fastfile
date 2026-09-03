@@ -2,6 +2,7 @@ fastlane_version("2.228.0")
 
 require "fileutils"
 require "pathname"
+require "shellwords"
 require "tmpdir"
 require "deliver/upload_metadata"
 require "spaceship/connect_api/models/app_preview_set"
@@ -151,6 +152,27 @@ def upload_metadata_only(platform:, metadata_path:)
   )
 end
 
+def submit_app_store_review(platform:)
+  build_number = ENV.fetch("FFISHASIA_BUILD_NUMBER", "").strip
+  if build_number.empty?
+    project_contents = File.read(PROJECT_FILE)
+    match = project_contents.match(/CURRENT_PROJECT_VERSION = ([^;]+);/)
+    UI.user_error!("Unable to determine CURRENT_PROJECT_VERSION from #{PROJECT_FILE}") unless match
+    build_number = match[1].strip
+  end
+
+  deliver(
+    deliver_base_options(platform: platform).merge(
+      build_number: build_number,
+      skip_binary_upload: true,
+      skip_metadata: true,
+      skip_screenshots: true,
+      submit_for_review: true,
+      automatic_release: false
+    )
+  )
+end
+
 def upload_screenshots_only(platform:, screenshots_path:, languages: nil)
   deliver(
     deliver_base_options(platform: platform).merge(
@@ -253,6 +275,80 @@ def upload_preview_videos_in_batches(platform:, app_previews_path:)
   end
 end
 
+def app_store_export_options
+  path = resolve_project_path(ENV.fetch("FASTLANE_EXPORT_OPTIONS", "fastlane/ExportOptions.plist"))
+  return path if File.file?(path)
+
+  {
+    method: "app-store",
+    teamID: ENV.fetch("DEVELOPER_PORTAL_TEAM_ID", ""),
+    signingStyle: "automatic",
+    manageAppVersionAndBuildNumber: false,
+    uploadSymbols: true
+  }
+end
+
+def build_ios_ipa
+  output_dir = resolve_project_path(ENV.fetch("FASTLANE_IOS_OUTPUT_DIR", "build/ios"))
+  archive_path = resolve_project_path(ENV.fetch("FASTLANE_IOS_ARCHIVE_PATH", "build/ios/LittleNature-iOS.xcarchive"))
+  output_name = ENV.fetch("FASTLANE_IOS_IPA_NAME", "LittleNature-iOS.ipa")
+  FileUtils.mkdir_p(output_dir)
+
+  build_app(
+    project: resolve_project_path("FFishAsia.xcodeproj"),
+    scheme: ENV.fetch("FASTLANE_IOS_SCHEME", "FFishAsia"),
+    configuration: "Release",
+    clean: true,
+    sdk: "iphoneos",
+    destination: "generic/platform=iOS",
+    output_directory: output_dir,
+    output_name: output_name,
+    archive_path: archive_path,
+    export_method: "app-store",
+    export_options: app_store_export_options,
+    xcargs: "-allowProvisioningUpdates"
+  )
+  File.join(output_dir, output_name)
+end
+
+def build_macos_pkg
+  archive_path = resolve_project_path(ENV.fetch("FASTLANE_MACOS_ARCHIVE_PATH", "build/macos/LittleNature-macOS.xcarchive"))
+  export_path = resolve_project_path(ENV.fetch("FASTLANE_MACOS_EXPORT_PATH", "build/macos/export"))
+  FileUtils.rm_rf(export_path)
+  FileUtils.mkdir_p(File.dirname(archive_path))
+  FileUtils.mkdir_p(export_path)
+
+  sh([
+    "xcodebuild", "-project", resolve_project_path("FFishAsia.xcodeproj"),
+    "-scheme", ENV.fetch("FASTLANE_MACOS_SCHEME", "FFishAsia"),
+    "-configuration", "Release", "-destination", "generic/platform=macOS",
+    "-archivePath", archive_path, "archive", "-allowProvisioningUpdates"
+  ].map(&:shellescape).join(" "))
+  sh([
+    "xcodebuild", "-exportArchive", "-archivePath", archive_path,
+    "-exportPath", export_path, "-exportOptionsPlist", app_store_export_options,
+    "-allowProvisioningUpdates"
+  ].map(&:shellescape).join(" "))
+  pkg_path = Dir[File.join(export_path, "*.pkg")].sort.first
+  UI.user_error!("No exported macOS pkg found in #{export_path}") unless pkg_path
+  pkg_path
+end
+
+def upload_testflight_artifact(app_platform:, ipa_path: nil, pkg_path: nil)
+  artifact_path = resolve_project_path(ipa_path || pkg_path)
+  UI.user_error!("Missing TestFlight artifact: #{artifact_path}") unless File.file?(artifact_path)
+  options = {
+    api_key: api_key,
+    app_identifier: FFISHASIA_APP_IDENTIFIER,
+    apple_id: FFISHASIA_APP_STORE_ID,
+    app_platform: app_platform,
+    skip_waiting_for_build_processing: true,
+    uses_non_exempt_encryption: false
+  }
+  options[ipa_path ? :ipa : :pkg] = artifact_path
+  upload_to_testflight(**options)
+end
+
 def one_locale_batch_size!
   configured_batch_size = ENV.fetch("FASTLANE_SCREENSHOT_BATCH_SIZE", "1").to_i
   if configured_batch_size != 1
@@ -265,6 +361,18 @@ end
 default_platform(:ios)
 
 platform :ios do
+  desc "Build iOS App Store IPA"
+  lane :build_binary do
+    build_ios_ipa
+  end
+
+  desc "Build and upload iOS IPA to TestFlight"
+  lane :upload_testflight do
+    ipa_path = ENV["FASTLANE_IOS_IPA_PATH"]
+    ipa_path = build_ios_ipa if ipa_path.to_s.empty?
+    upload_testflight_artifact(app_platform: "ios", ipa_path: ipa_path)
+  end
+
   desc "Print iOS App Store Connect edit state"
   lane :asc_state do
     api_key
@@ -288,6 +396,11 @@ platform :ios do
   desc "Upload iOS App Store metadata only"
   lane :upload_metadata do
     upload_metadata_only(platform: "ios", metadata_path: "fastlane/metadata_ios")
+  end
+
+  desc "Submit the current iOS version and build for App Review"
+  lane :submit_review do
+    submit_app_store_review(platform: "ios")
   end
 
   desc "Upload iOS App Store screenshots and preview videos only"
@@ -331,9 +444,26 @@ platform :ios do
 end
 
 platform :mac do
+  desc "Build macOS App Store PKG"
+  lane :build_binary do
+    build_macos_pkg
+  end
+
+  desc "Build and upload macOS PKG to TestFlight"
+  lane :upload_testflight do
+    pkg_path = ENV["FASTLANE_MACOS_PKG_PATH"]
+    pkg_path = build_macos_pkg if pkg_path.to_s.empty?
+    upload_testflight_artifact(app_platform: "osx", pkg_path: pkg_path)
+  end
+
   desc "Upload macOS App Store metadata only"
   lane :upload_metadata do
     upload_metadata_only(platform: "osx", metadata_path: "fastlane/metadata_osx")
+  end
+
+  desc "Submit the current macOS version and build for App Review"
+  lane :submit_review do
+    submit_app_store_review(platform: "osx")
   end
 
   desc "Upload macOS App Store screenshots and preview videos only"

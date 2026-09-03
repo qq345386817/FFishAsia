@@ -15,6 +15,22 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## iOS
 
+### ios build_binary
+
+```sh
+[bundle exec] fastlane ios build_binary
+```
+
+Build iOS App Store IPA
+
+### ios upload_testflight
+
+```sh
+[bundle exec] fastlane ios upload_testflight
+```
+
+Build and upload iOS IPA to TestFlight
+
 ### ios asc_state
 
 ```sh
@@ -30,6 +46,14 @@ Print iOS App Store Connect edit state
 ```
 
 Upload iOS App Store metadata only
+
+### ios submit_review
+
+```sh
+[bundle exec] fastlane ios submit_review
+```
+
+Submit the current iOS version and build for App Review
 
 ### ios upload_screenshots
 
@@ -84,6 +108,22 @@ Upload iOS metadata + screenshots, and optionally binary when ipa is provided
 
 ## Mac
 
+### mac build_binary
+
+```sh
+[bundle exec] fastlane mac build_binary
+```
+
+Build macOS App Store PKG
+
+### mac upload_testflight
+
+```sh
+[bundle exec] fastlane mac upload_testflight
+```
+
+Build and upload macOS PKG to TestFlight
+
 ### mac upload_metadata
 
 ```sh
@@ -91,6 +131,14 @@ Upload iOS metadata + screenshots, and optionally binary when ipa is provided
 ```
 
 Upload macOS App Store metadata only
+
+### mac submit_review
+
+```sh
+[bundle exec] fastlane mac submit_review
+```
+
+Submit the current macOS version and build for App Review
 
 ### mac upload_screenshots
 

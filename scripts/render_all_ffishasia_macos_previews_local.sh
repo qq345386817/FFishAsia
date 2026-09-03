@@ -39,48 +39,48 @@ locale_specs = {
 }
 
 scene_specs = {
-    "01-catalog": "01-catalog.png",
-    "02-detail": "02-detail.png",
-    "03-downloads": "03-downloads.png",
-    "01-catalog-dark": "04-catalog-dark.png",
+    "01-preview": "01-preview.png",
+    "02-catalog": "02-catalog.png",
+    "03-detail": "03-detail.png",
+    "01-preview-dark": "04-preview-dark.png",
 }
 
 translations = {
     "en-US": {
-        "01-catalog": ("Browse 3D Animals & Plants", "A calm model catalog for nature and biology."),
-        "02-detail": ("See each species up close", "Names, taxonomy, size, and source stay together on the Mac."),
-        "03-downloads": ("Keep models offline", "Download only what you need and manage local storage clearly."),
-        "01-catalog-dark": ("Browse 3D Animals & Plants", "A calm model catalog for nature and biology."),
+        "01-preview": ("Asian Wildlife, Alive in 3D", "Rotate, zoom, and watch animated species on your Mac."),
+        "02-catalog": ("Explore Animals & Plants", "Browse a curated field guide to Asian nature."),
+        "03-detail": ("Learn the Species", "Names, scientific classification, and sources stay together."),
+        "01-preview-dark": ("Asian Wildlife, Alive in 3D", "Animated nature, beautifully presented in Dark Mode."),
     },
     "zh-Hans": {
-        "01-catalog": ("精选 3D 自然模型", "在原生 Mac 目录中浏览动物与植物。"),
-        "02-detail": ("近距离查看物种细节", "名称、分类、大小和来源信息集中呈现。"),
-        "03-downloads": ("离线保留所需模型", "按需下载模型，并清晰管理本地存储。"),
-        "01-catalog-dark": ("精选 3D 自然模型", "在深色模式下浏览完整 Mac 模型目录。"),
+        "01-preview": ("鲜活呈现的亚洲物种", "在 Mac 上旋转、缩放并观看模型动画。"),
+        "02-catalog": ("探索动物与植物", "浏览精心整理的亚洲自然图鉴。"),
+        "03-detail": ("了解每一个物种", "名称、科学分类和模型来源集中呈现。"),
+        "01-preview-dark": ("鲜活呈现的亚洲物种", "在深色模式中欣赏生动的自然模型。"),
     },
     "zh-Hant": {
-        "01-catalog": ("精選 3D 自然模型", "在原生 Mac 目錄中瀏覽動物與植物。"),
-        "02-detail": ("近距離查看物種細節", "名稱、分類、大小和來源資訊集中呈現。"),
-        "03-downloads": ("離線保留所需模型", "按需下載模型，並清晰管理本地儲存。"),
-        "01-catalog-dark": ("精選 3D 自然模型", "在深色模式下瀏覽完整 Mac 模型目錄。"),
+        "01-preview": ("鮮活呈現的亞洲物種", "在 Mac 上旋轉、縮放並觀看模型動畫。"),
+        "02-catalog": ("探索動物與植物", "瀏覽精心整理的亞洲自然圖鑑。"),
+        "03-detail": ("了解每一個物種", "名稱、科學分類和模型來源集中呈現。"),
+        "01-preview-dark": ("鮮活呈現的亞洲物種", "在深色模式中欣賞生動的自然模型。"),
     },
     "ja": {
-        "01-catalog": ("厳選された3D自然モデル", "Macのネイティブな一覧で動物と植物を閲覧。"),
-        "02-detail": ("種の詳細を近くで確認", "名称、分類、サイズ、出典を一か所で確認できます。"),
-        "03-downloads": ("モデルをオフライン保存", "必要なモデルだけを保存し、容量も管理できます。"),
-        "01-catalog-dark": ("厳選された3D自然モデル", "ダークモードでMacのモデル一覧を閲覧。"),
+        "01-preview": ("アジアの生きものを3Dで", "Macで回転・拡大し、モデルの動きを観察。"),
+        "02-catalog": ("動物と植物を探索", "厳選されたアジアの自然図鑑を閲覧。"),
+        "03-detail": ("生きものを詳しく知る", "名称、科学分類、出典を一か所で確認。"),
+        "01-preview-dark": ("アジアの生きものを3Dで", "ダークモードで動く自然モデルを観察。"),
     },
     "ko": {
-        "01-catalog": ("엄선된 3D 자연 모델", "Mac 카탈로그에서 동물과 식물을 둘러보세요."),
-        "02-detail": ("종의 세부 정보를 가까이서", "이름, 분류, 크기, 출처 정보를 한곳에 모았습니다."),
-        "03-downloads": ("필요한 모델을 오프라인으로 보관", "필요할 때 다운로드하고 로컬 저장 공간을 명확하게 관리하세요."),
-        "01-catalog-dark": ("엄선된 3D 자연 모델", "다크 모드에서 전체 Mac 카탈로그를 둘러보세요."),
+        "01-preview": ("아시아 생물을 생생한 3D로", "Mac에서 회전하고 확대하며 모델의 움직임을 관찰하세요."),
+        "02-catalog": ("동물과 식물 탐색", "엄선된 아시아 자연 도감을 둘러보세요."),
+        "03-detail": ("각 생물을 더 깊이 이해", "이름, 과학적 분류와 출처를 한곳에서 확인하세요."),
+        "01-preview-dark": ("아시아 생물을 생생한 3D로", "다크 모드에서 움직이는 자연 모델을 감상하세요."),
     },
     "de-DE": {
-        "01-catalog": ("Kuratierte 3D-Naturmodelle", "Tiere und Pflanzen im nativen Mac-Katalog durchsuchen."),
-        "02-detail": ("Arten aus der Nähe ansehen", "Namen, Taxonomie, Größe und Quelle bleiben zusammen."),
-        "03-downloads": ("Modelle offline behalten", "Nur bei Bedarf laden und lokalen Speicher klar verwalten."),
-        "01-catalog-dark": ("Kuratierte 3D-Naturmodelle", "Den vollständigen Mac-Katalog im Dark Mode durchsuchen."),
+        "01-preview": ("Asiens Artenwelt in lebendigem 3D", "Drehen, zoomen und animierte Arten auf dem Mac beobachten."),
+        "02-catalog": ("Tiere und Pflanzen entdecken", "Ein kuratierter Naturführer zu asiatischen Arten."),
+        "03-detail": ("Arten besser kennenlernen", "Namen, wissenschaftliche Einordnung und Quellen an einem Ort."),
+        "01-preview-dark": ("Asiens Artenwelt in lebendigem 3D", "Animierte Naturmodelle im Dark Mode erleben."),
     },
 }
 
@@ -122,10 +122,10 @@ invalid_modes = [mode for mode in mode_order if mode not in {"light", "dark"}]
 if invalid_modes:
     raise SystemExit(f"Unsupported modes in MODES: {', '.join(invalid_modes)}")
 
-base_scene_ids = ["01-catalog", "02-detail", "03-downloads"]
+base_scene_ids = ["01-preview", "02-catalog", "03-detail"]
 scene_ids = []
 for mode in mode_order:
-    mode_scene_ids = ["01-catalog"] if mode == "dark" else base_scene_ids
+    mode_scene_ids = ["01-preview"] if mode == "dark" else base_scene_ids
     for scene in mode_scene_ids:
         scene_ids.append(scene if mode == "light" else f"{scene}-dark")
 scenes = [(scene, scene_specs[scene]) for scene in scene_ids]
