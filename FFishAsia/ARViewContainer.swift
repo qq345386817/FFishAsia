@@ -1,6 +1,7 @@
 import SwiftUI
 
 #if os(iOS)
+import Combine
 import RealityKit
 import ARKit
 import UIKit
@@ -71,6 +72,7 @@ struct ARViewContainer: UIViewRepresentable {
         private var currentModel: Entity?
         private var lastLoadedURL: URL?
         private var loadGeneration = 0
+        private var loadCancellable: AnyCancellable?
         private var animationTimer: Timer?
         private var floatPhase: Float = 0
         private var rotatingEntity: Entity?
@@ -124,6 +126,8 @@ struct ARViewContainer: UIViewRepresentable {
 
         func cleanup() {
             loadGeneration += 1
+            loadCancellable?.cancel()
+            loadCancellable = nil
             animationTimer?.invalidate()
             animationTimer = nil
             rotatingEntity = nil
@@ -151,24 +155,15 @@ struct ARViewContainer: UIViewRepresentable {
             let generation = loadGeneration
             let anchorPosition = initialAnchorPosition(in: arView)
 
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                let result = Result { try ModelEntity.load(contentsOf: url) }
-                DispatchQueue.main.async {
+            loadCancellable?.cancel()
+            loadCancellable = RealityKitModelLoader.loadModel(contentsOf: url)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] completion in
                     guard let self,
                           self.loadGeneration == generation,
-                          self.lastLoadedURL == url,
-                          let arView = self.arView else { return }
-
-                    switch result {
-                    case .success(let modelEntity):
-                        self.finishLoading(
-                            modelEntity,
-                            url: url,
-                            anchorPosition: anchorPosition,
-                            hasBuiltInAnimation: hasBuiltInAnimation,
-                            in: arView
-                        )
-                    case .failure(let error):
+                          self.lastLoadedURL == url else { return }
+                    self.loadCancellable = nil
+                    if case .failure(let error) = completion {
                         self.isLoading = false
                         self.isModelLoaded = false
                         self.lastLoadedURL = nil
@@ -177,8 +172,19 @@ struct ARViewContainer: UIViewRepresentable {
                             isModelLoaded: false
                         )
                     }
+                } receiveValue: { [weak self] modelEntity in
+                    guard let self,
+                          self.loadGeneration == generation,
+                          self.lastLoadedURL == url,
+                          let arView = self.arView else { return }
+                    self.finishLoading(
+                        modelEntity,
+                        url: url,
+                        anchorPosition: anchorPosition,
+                        hasBuiltInAnimation: hasBuiltInAnimation,
+                        in: arView
+                    )
                 }
-            }
         }
 
         private func finishLoading(

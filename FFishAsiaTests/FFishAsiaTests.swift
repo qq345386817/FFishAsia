@@ -1,5 +1,10 @@
 import XCTest
 
+#if os(iOS)
+import Combine
+import RealityKit
+#endif
+
 #if os(macOS)
 @testable import Little_Nature
 #else
@@ -37,6 +42,28 @@ final class FFishAsiaTests: XCTestCase {
         XCTAssertEqual(models.first?.hasAnimation, true)
         XCTAssertEqual(Set(models.map(\.id)), Set(ModelCatalog.fallbackModels.map(\.id)))
     }
+
+    #if os(iOS)
+    func testRealityKitModelLoadingHopsToMainThread() async {
+        let operationStarted = expectation(description: "Model loading operation started")
+
+        await Task.detached {
+            let publisher = await RealityKitModelLoader.loadModel(
+                contentsOf: URL(fileURLWithPath: "/tmp/test.usdz"),
+                using: { _ in
+                    XCTAssertTrue(Thread.isMainThread)
+                    operationStarted.fulfill()
+                    return Empty<ModelEntity, Error>(completeImmediately: true)
+                        .eraseToAnyPublisher()
+                }
+            )
+            let cancellable = publisher.sink(receiveCompletion: { _ in }, receiveValue: { _ in })
+            withExtendedLifetime(cancellable) {}
+        }.value
+
+        await fulfillment(of: [operationStarted], timeout: 1)
+    }
+    #endif
 
     @MainActor
     func testReviewEligibilityRequiresTwoDifferentSuccessfulPreviews() throws {

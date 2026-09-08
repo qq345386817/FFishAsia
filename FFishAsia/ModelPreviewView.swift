@@ -1,6 +1,7 @@
 import SwiftUI
 
 #if os(iOS)
+import Combine
 import RealityKit
 import UIKit
 
@@ -90,6 +91,7 @@ private struct ModelPreviewContainer: UIViewRepresentable {
         private var currentModel: Entity?
         private var lastLoadedURL: URL?
         private var loadGeneration = 0
+        private var loadCancellable: AnyCancellable?
         private var lastPanTranslation: CGPoint = .zero
         private var lastPinchScale: CGFloat = 1
         private let previewDepthOffset: Float = 3.0
@@ -112,6 +114,8 @@ private struct ModelPreviewContainer: UIViewRepresentable {
 
         func cleanup() {
             loadGeneration += 1
+            loadCancellable?.cancel()
+            loadCancellable = nil
             currentModel = nil
             lastLoadedURL = nil
             updateParent(isModelLoaded: false)
@@ -125,23 +129,28 @@ private struct ModelPreviewContainer: UIViewRepresentable {
             loadGeneration += 1
             let generation = loadGeneration
 
-            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
-                let result = Result { try ModelEntity.load(contentsOf: url) }
-                DispatchQueue.main.async {
+            loadCancellable?.cancel()
+            loadCancellable = RealityKitModelLoader.loadModel(contentsOf: url)
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] completion in
+                    guard let self,
+                          self.loadGeneration == generation,
+                          self.lastLoadedURL == url else { return }
+                    self.loadCancellable = nil
+                    if case .failure(let error) = completion {
+                        self.lastLoadedURL = nil
+                        self.updateParent(
+                            statusText: L10n.t("ar.loadFailed", self.parent.language, error.localizedDescription),
+                            isModelLoaded: false
+                        )
+                    }
+                } receiveValue: { [weak self] modelEntity in
                     guard let self,
                           self.loadGeneration == generation,
                           self.lastLoadedURL == url,
                           let arView = self.arView else { return }
-
-                    switch result {
-                    case .success(let modelEntity):
-                        self.finishLoading(modelEntity, in: arView)
-                    case .failure(let error):
-                        self.lastLoadedURL = nil
-                        self.updateParent(statusText: L10n.t("ar.loadFailed", self.parent.language, error.localizedDescription), isModelLoaded: false)
-                    }
+                    self.finishLoading(modelEntity, in: arView)
                 }
-            }
         }
 
         private func finishLoading(_ modelEntity: Entity, in arView: ARView) {

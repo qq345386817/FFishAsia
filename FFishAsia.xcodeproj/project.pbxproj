@@ -14,6 +14,7 @@
 		7A10D5AF2FF1000000010001 /* ModelPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A10D5AE2FF1000000010001 /* ModelPreviewView.swift */; };
 		A41A00112FFA000000100001 /* ProductAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A00102FFA000000100001 /* ProductAnalytics.swift */; };
 		A41A00132FFA000000100001 /* ProductAnalyticsUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A00122FFA000000100001 /* ProductAnalyticsUploader.swift */; };
+		A41A00152FFA000000100001 /* RealityKitModelLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41A00142FFA000000100001 /* RealityKitModelLoader.swift */; };
 		F32D6CB22C65CD0B001C1D60 /* FFishAsiaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32D6CB12C65CD0B001C1D60 /* FFishAsiaApp.swift */; };
 		F32D6CB42C65CD0B001C1D60 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32D6CB32C65CD0B001C1D60 /* ContentView.swift */; };
 		F32D6CB62C65CD0D001C1D60 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F32D6CB52C65CD0D001C1D60 /* Assets.xcassets */; };
@@ -49,6 +50,7 @@
 		7A10D5AE2FF1000000010001 /* ModelPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelPreviewView.swift; sourceTree = "<group>"; };
 		A41A00102FFA000000100001 /* ProductAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAnalytics.swift; sourceTree = "<group>"; };
 		A41A00122FFA000000100001 /* ProductAnalyticsUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductAnalyticsUploader.swift; sourceTree = "<group>"; };
+		A41A00142FFA000000100001 /* RealityKitModelLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityKitModelLoader.swift; sourceTree = "<group>"; };
 		E99F2C1F68ECBF227DFB78BA /* ModelCatalog.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ModelCatalog.swift; sourceTree = "<group>"; };
 		F32D6CAE2C65CD0B001C1D60 /* Little Nature.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Little Nature.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F32D6CB12C65CD0B001C1D60 /* FFishAsiaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFishAsiaApp.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 				7A10D5AE2FF1000000010001 /* ModelPreviewView.swift */,
 				A41A00102FFA000000100001 /* ProductAnalytics.swift */,
 				A41A00122FFA000000100001 /* ProductAnalyticsUploader.swift */,
+				A41A00142FFA000000100001 /* RealityKitModelLoader.swift */,
 				F32D6CDC2C65CD30001C1D60 /* ARViewContainer.swift */,
 				F32D6CB52C65CD0D001C1D60 /* Assets.xcassets */,
 				F32D6CB72C65CD0D001C1D60 /* FFishAsia.entitlements */,
@@ -309,6 +312,7 @@
 				7A10D5AF2FF1000000010001 /* ModelPreviewView.swift in Sources */,
 				A41A00112FFA000000100001 /* ProductAnalytics.swift in Sources */,
 				A41A00132FFA000000100001 /* ProductAnalyticsUploader.swift in Sources */,
+				A41A00152FFA000000100001 /* RealityKitModelLoader.swift in Sources */,
 				F32D6CB22C65CD0B001C1D60 /* FFishAsiaApp.swift in Sources */,
 				F32D6CE62C65E81B001C1D60 /* ARViewContainer.swift in Sources */,
 				FED600D940C6FB52176D78F5 /* ModelCatalog.swift in Sources */,
@@ -383,7 +387,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -446,7 +450,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
