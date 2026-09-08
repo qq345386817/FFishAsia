@@ -37,6 +37,7 @@ struct ContentView: View {
         _selectedCategory = State(initialValue: snapshot.category)
         _selectedModel = State(initialValue: snapshot.screen == .detail ? snapshot.model : nil)
         _previewModel = State(initialValue: nil)
+        _arModel = State(initialValue: snapshot.screen == .ar ? snapshot.model : nil)
         _showDownloads = State(initialValue: snapshot.screen == .downloads)
         _showAbout = State(initialValue: snapshot.screen == .about)
         _searchText = State(initialValue: snapshot.searchText)
@@ -495,6 +496,7 @@ private enum SnapshotScreen: String {
     case catalog
     case detail
     case preview
+    case ar
     case downloads
     case about
 }

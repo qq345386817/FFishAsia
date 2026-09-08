@@ -26,12 +26,10 @@ fi
 MODEL_ID="${FFISHASIA_IOS_VIDEO_MODEL_ID:-35559c2236d04c1a80ccbe08cae863c6}"
 MODEL_FILE="${FFISHASIA_IOS_VIDEO_MODEL_FILE:-japanese_freshwater_crab_lowpoly.usdz}"
 MODEL_SOURCE="${FFISHASIA_IOS_VIDEO_MODEL_SOURCE:-$ROOT_DIR/usdz_resources/02/$MODEL_FILE}"
-INTRO_SECONDS="${FFISHASIA_IOS_VIDEO_INTRO_SECONDS:-4}"
 CATALOG_SECONDS="${FFISHASIA_IOS_VIDEO_CATALOG_SECONDS:-12}"
 MODEL_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_SECONDS:-10}"
 MODEL_LOAD_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_LOAD_SECONDS:-10}"
 MODEL_PREROLL_SECONDS="${FFISHASIA_IOS_VIDEO_MODEL_PREROLL_SECONDS:-3}"
-OUTRO_SECONDS="${FFISHASIA_IOS_VIDEO_OUTRO_SECONDS:-4}"
 FFMPEG_PATH="$(command -v ffmpeg 2>/dev/null || true)"
 FFPROBE_PATH="$(command -v ffprobe 2>/dev/null || true)"
 MAGICK_PATH="$(command -v magick 2>/dev/null || true)"
@@ -179,47 +177,23 @@ localized_text() {
   local locale="$1"
   local key="$2"
   case "$locale:$key" in
-    zh-Hans:intro_title) echo "Little Nature" ;;
-    zh-Hans:intro_caption) echo "用 3D 模型探索亚洲动植物与自然。" ;;
     zh-Hans:catalog_caption) echo "在 ${DEVICE_LABEL} 上浏览亚洲动植物的 3D 模型。" ;;
     zh-Hans:model_caption) echo "打开 3D 预览，查看会动的模型细节。" ;;
-    zh-Hans:outro_title) echo "用 3D 重新认识自然" ;;
-    zh-Hans:outro_caption) echo "按需下载模型，离线查看，并继续发现更多物种。" ;;
 
-    zh-Hant:intro_title) echo "Little Nature" ;;
-    zh-Hant:intro_caption) echo "用 3D 模型探索亞洲動植物與自然。" ;;
     zh-Hant:catalog_caption) echo "在 ${DEVICE_LABEL} 上瀏覽亞洲動植物的 3D 模型。" ;;
     zh-Hant:model_caption) echo "開啟 3D 預覽，查看會動的模型細節。" ;;
-    zh-Hant:outro_title) echo "用 3D 重新認識自然" ;;
-    zh-Hant:outro_caption) echo "按需下載模型，離線查看，並繼續發現更多物種。" ;;
 
-    ja:intro_title) echo "Little Nature" ;;
-    ja:intro_caption) echo "3Dモデルでアジアの動植物と自然を探索。" ;;
     ja:catalog_caption) echo "${DEVICE_LABEL}でアジアの動植物の3Dモデルを閲覧。" ;;
     ja:model_caption) echo "3Dプレビューで動きのあるモデルを確認。" ;;
-    ja:outro_title) echo "自然を3Dで再発見" ;;
-    ja:outro_caption) echo "モデルをダウンロードしてオフラインでも閲覧し、さらに多くの種を探索できます。" ;;
 
-    ko:intro_title) echo "Little Nature" ;;
-    ko:intro_caption) echo "3D 모델로 아시아 동식물과 자연을 탐색하세요." ;;
     ko:catalog_caption) echo "${DEVICE_LABEL}에서 아시아 동식물 3D 모델을 둘러보세요." ;;
     ko:model_caption) echo "3D 미리보기로 움직이는 모델의 세부 모습을 확인하세요." ;;
-    ko:outro_title) echo "자연을 3D로 다시 보기" ;;
-    ko:outro_caption) echo "모델을 다운로드해 오프라인으로 보고, 더 많은 종을 계속 탐색하세요." ;;
 
-    de-DE:intro_title) echo "Little Nature" ;;
-    de-DE:intro_caption) echo "Asiatische Tiere, Pflanzen und Natur in 3D entdecken." ;;
     de-DE:catalog_caption) echo "3D-Modelle asiatischer Tiere und Pflanzen auf dem ${DEVICE_LABEL} ansehen." ;;
     de-DE:model_caption) echo "Die 3D-Vorschau zeigt animierte Modelldetails." ;;
-    de-DE:outro_title) echo "Natur in 3D entdecken" ;;
-    de-DE:outro_caption) echo "Modelle laden, offline ansehen und weitere Arten entdecken." ;;
 
-    en-US:intro_title|*:intro_title) echo "Little Nature" ;;
-    en-US:intro_caption|*:intro_caption) echo "Explore Asian animals, plants, and nature in detailed 3D." ;;
     en-US:catalog_caption|*:catalog_caption) echo "Browse 3D models of Asian plants and animals on ${DEVICE_LABEL}." ;;
     en-US:model_caption|*:model_caption) echo "Open the 3D preview to watch animated model details." ;;
-    en-US:outro_title|*:outro_title) echo "Explore nature in 3D" ;;
-    en-US:outro_caption|*:outro_caption) echo "Download models for offline viewing, then keep discovering more species." ;;
   esac
 }
 
@@ -295,38 +269,64 @@ record_simulator_video() {
   local output="$1"
   local seconds="$2"
   local status_file="$WORK_DIR/raw/$(basename "$output").record.log"
-  local waited=0
+  local minimum_duration minimum_frames
+  read -r minimum_duration minimum_frames < <(python3 - "$seconds" <<'PY'
+import sys
 
-  rm -f "$output"
-  rm -f "$status_file"
-  xcrun simctl io "$DEVICE_ID" recordVideo --codec=h264 --force "$output" 2>"$status_file" &
-  local record_pid=$!
-  until grep -q "Recording started" "$status_file" 2>/dev/null; do
-    if ! kill -0 "$record_pid" >/dev/null 2>&1; then
-      cat "$status_file" >&2 || true
-      echo "Failed to start simulator video recording: $output" >&2
-      exit 1
-    fi
-    if [ "$waited" -ge 30 ]; then
-      cat "$status_file" >&2 || true
-      echo "Timed out waiting for simulator video recording to start: $output" >&2
+seconds = float(sys.argv[1])
+print(seconds * 0.75, max(int(seconds * 5), 1))
+PY
+)
+
+  local attempt
+  for attempt in 1 2 3; do
+    local waited=0
+    rm -f "$output" "$status_file"
+    xcrun simctl io "$DEVICE_ID" recordVideo --codec=h264 --force "$output" 2>"$status_file" &
+    local record_pid=$!
+    until grep -q "Recording started" "$status_file" 2>/dev/null; do
+      if ! kill -0 "$record_pid" >/dev/null 2>&1; then
+        cat "$status_file" >&2 || true
+        break
+      fi
+      if [ "$waited" -ge 30 ]; then
+        kill -INT "$record_pid" >/dev/null 2>&1 || true
+        wait "$record_pid" >/dev/null 2>&1 || true
+        break
+      fi
+      sleep 1
+      waited=$((waited + 1))
+    done
+
+    if kill -0 "$record_pid" >/dev/null 2>&1; then
+      sleep "$seconds"
       kill -INT "$record_pid" >/dev/null 2>&1 || true
       wait "$record_pid" >/dev/null 2>&1 || true
-      exit 1
     fi
-    sleep 1
-    waited=$((waited + 1))
+    cat "$status_file" || true
+
+    local actual_duration="0" actual_frames="0"
+    if [ -s "$output" ]; then
+      actual_duration="$("$FFPROBE_PATH" -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 "$output" 2>/dev/null || echo 0)"
+      actual_frames="$("$FFPROBE_PATH" -v error -count_frames -select_streams v:0 -show_entries stream=nb_read_frames -of default=noprint_wrappers=1:nokey=1 "$output" 2>/dev/null || echo 0)"
+    fi
+    if python3 - "$actual_duration" "$minimum_duration" "$actual_frames" "$minimum_frames" <<'PY'
+import sys
+
+duration_ok = float(sys.argv[1]) >= float(sys.argv[2])
+frames_ok = int(sys.argv[3]) >= int(sys.argv[4])
+raise SystemExit(0 if duration_ok and frames_ok else 1)
+PY
+    then
+      return
+    fi
+
+    echo "Simulator recording attempt $attempt was incomplete (${actual_duration}s, ${actual_frames} frames); retrying: $output" >&2
+    sleep 2
   done
 
-  sleep "$seconds"
-  kill -INT "$record_pid" >/dev/null 2>&1 || true
-  wait "$record_pid" >/dev/null 2>&1 || true
-  cat "$status_file" || true
-
-  if [ ! -s "$output" ]; then
-    echo "Failed to record simulator video: $output" >&2
-    exit 1
-  fi
+  echo "Failed to record a complete simulator video after 3 attempts: $output" >&2
+  exit 1
 }
 
 seed_preview_model() {
@@ -362,62 +362,6 @@ render_caption_overlay() {
     "png32:$output"
 }
 
-render_title_card() {
-  local locale="$1"
-  local title="$2"
-  local caption="$3"
-  local source_image="$4"
-  local output="$5"
-  local font title_width caption_width title_height caption_height title_size caption_size
-  font="$(font_for_locale "$locale")"
-  title_width=$((OUTPUT_WIDTH - 180))
-  caption_width=$((OUTPUT_WIDTH - 210))
-  title_height=$((OUTPUT_HEIGHT / 9))
-  caption_height=$((OUTPUT_HEIGHT / 11))
-  title_size=$((OUTPUT_WIDTH / 13))
-  caption_size=$((OUTPUT_WIDTH / 27))
-
-  if [ -f "$source_image" ]; then
-    "$MAGICK_PATH" "$source_image" \
-      -resize "${OUTPUT_WIDTH}x${OUTPUT_HEIGHT}^" \
-      -gravity center \
-      -extent "${OUTPUT_WIDTH}x${OUTPUT_HEIGHT}" \
-      -blur 0x8 \
-      -fill "#081410B8" -colorize 62% \
-      \( -size "${title_width}x${title_height}" -background none -fill "#F6FBF8" -font "$font" -pointsize "$title_size" -gravity center caption:"$title" \) \
-      -gravity center -geometry +0-$((OUTPUT_HEIGHT / 18)) -composite \
-      \( -size "${caption_width}x${caption_height}" -background none -fill "#D2E1DC" -font "$font" -pointsize "$caption_size" -gravity center caption:"$caption" \) \
-      -gravity center -geometry +0+$((OUTPUT_HEIGHT / 24)) -composite \
-      "png32:$output"
-  else
-    "$MAGICK_PATH" -size "${OUTPUT_WIDTH}x${OUTPUT_HEIGHT}" "gradient:#10211D-#2F574D" \
-      \( -size "${title_width}x${title_height}" -background none -fill "#F6FBF8" -font "$font" -pointsize "$title_size" -gravity center caption:"$title" \) \
-      -gravity center -geometry +0-$((OUTPUT_HEIGHT / 18)) -composite \
-      \( -size "${caption_width}x${caption_height}" -background none -fill "#D2E1DC" -font "$font" -pointsize "$caption_size" -gravity center caption:"$caption" \) \
-      -gravity center -geometry +0+$((OUTPUT_HEIGHT / 24)) -composite \
-      "png32:$output"
-  fi
-}
-
-encode_static_segment() {
-  local image="$1"
-  local seconds="$2"
-  local output="$3"
-  "$FFMPEG_PATH" -y \
-    -loop 1 \
-    -t "$seconds" \
-    -i "$image" \
-    -vf "format=yuv420p,fps=30" \
-    -c:v libx264 \
-    -profile:v high \
-    -level 5.1 \
-    -preset slow \
-    -crf 18 \
-    -movflags +faststart \
-    -an \
-    "$output"
-}
-
 encode_recorded_segment() {
   local raw="$1"
   local caption_overlay="$2"
@@ -434,7 +378,7 @@ encode_recorded_segment() {
     -i "$raw" \
     -i "$caption_overlay" \
     -t "$seconds" \
-    -filter_complex "[0:v]scale=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}:force_original_aspect_ratio=decrease:flags=lanczos,pad=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}:(ow-iw)/2:(oh-ih)/2:color=0x101816[base];[base][1:v]overlay=0:0,format=yuv420p,fps=30[v]" \
+    -filter_complex "[0:v]scale=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}:force_original_aspect_ratio=increase:flags=lanczos,crop=${OUTPUT_WIDTH}:${OUTPUT_HEIGHT}[base];[base][1:v]overlay=0:0,format=yuv420p,fps=30[v]" \
     -map "[v]" \
     -c:v libx264 \
     -profile:v high \
@@ -489,6 +433,42 @@ PY
     "$output"
 }
 
+validate_preview_video() {
+  local input="$1"
+  local expected_width="$2"
+  local expected_height="$3"
+  local probe_file="$WORK_DIR/$(basename "$input").probe.json"
+  "$FFPROBE_PATH" -v error -show_streams -show_format -of json "$input" > "$probe_file"
+  python3 - "$probe_file" "$input" "$expected_width" "$expected_height" <<'PY'
+import json
+import sys
+
+probe_file, path = sys.argv[1], sys.argv[2]
+expected_width, expected_height = int(sys.argv[3]), int(sys.argv[4])
+with open(probe_file, encoding="utf-8") as handle:
+    data = json.load(handle)
+streams = data.get("streams", [])
+video = next((stream for stream in streams if stream.get("codec_type") == "video"), None)
+audio = next((stream for stream in streams if stream.get("codec_type") == "audio"), None)
+duration = float(data.get("format", {}).get("duration", 0))
+
+errors = []
+if video is None:
+    errors.append("missing video stream")
+elif (video.get("codec_name"), video.get("width"), video.get("height")) != ("h264", expected_width, expected_height):
+    errors.append(f"unexpected video stream: {video.get('codec_name')} {video.get('width')}x{video.get('height')}")
+if audio is None:
+    errors.append("missing audio stream")
+elif audio.get("codec_name") != "aac" or int(audio.get("channels", 0)) != 2:
+    errors.append(f"unexpected audio stream: {audio.get('codec_name')} {audio.get('channels')} channels")
+if not 15.0 <= duration <= 30.0:
+    errors.append(f"duration {duration:.3f}s is outside the 15-30s App Preview range")
+
+if errors:
+    raise SystemExit(f"Invalid App Preview video {path}: " + "; ".join(errors))
+PY
+}
+
 trap cleanup EXIT
 trap 'exit 130' INT
 trap 'exit 143' TERM
@@ -532,17 +512,12 @@ seed_preview_model
 
 for locale in $LOCALES_FILTER; do
   fastlane_locale_dir="$FASTLANE_DIR/$locale"
-  catalog_image="$fastlane_locale_dir/${FASTLANE_DEVICE_PREFIX}01-catalog.png"
   output_path="$fastlane_locale_dir/${FASTLANE_DEVICE_PREFIX}00-preview.mov"
   OUTPUT_WIDTH="${FFISHASIA_IOS_VIDEO_WIDTH:-$DEFAULT_OUTPUT_WIDTH}"
   OUTPUT_HEIGHT="${FFISHASIA_IOS_VIDEO_HEIGHT:-$DEFAULT_OUTPUT_HEIGHT}"
 
-  intro_image="$WORK_DIR/segments/$locale-intro.png"
-  outro_image="$WORK_DIR/segments/$locale-outro.png"
-  intro_video="$WORK_DIR/segments/$locale-01-intro.mov"
-  catalog_video="$WORK_DIR/segments/$locale-02-catalog.mov"
-  model_video="$WORK_DIR/segments/$locale-03-model.mov"
-  outro_video="$WORK_DIR/segments/$locale-04-outro.mov"
+  catalog_video="$WORK_DIR/segments/$locale-01-catalog.mov"
+  model_video="$WORK_DIR/segments/$locale-02-model.mov"
   silent_video="$WORK_DIR/segments/$locale-silent.mov"
   concat_list="$WORK_DIR/segments/$locale-concat.txt"
   catalog_raw="$WORK_DIR/raw/$locale-catalog.mp4"
@@ -554,20 +529,8 @@ for locale in $LOCALES_FILTER; do
 
   echo
   echo "========== Render iOS App Preview video: $locale (${OUTPUT_WIDTH}x${OUTPUT_HEIGHT}) =========="
-  render_title_card "$locale" \
-    "$(localized_text "$locale" intro_title)" \
-    "$(localized_text "$locale" intro_caption)" \
-    "$catalog_image" \
-    "$intro_image"
-  render_title_card "$locale" \
-    "$(localized_text "$locale" outro_title)" \
-    "$(localized_text "$locale" outro_caption)" \
-    "$catalog_image" \
-    "$outro_image"
   render_caption_overlay "$locale" "$(localized_text "$locale" catalog_caption)" "$catalog_caption_overlay"
   render_caption_overlay "$locale" "$(localized_text "$locale" model_caption)" "$model_caption_overlay"
-
-  encode_static_segment "$intro_image" "$INTRO_SECONDS" "$intro_video"
 
   launch_snapshot_screen "$locale" catalog 1
   sleep 1
@@ -585,17 +548,14 @@ PY
   record_simulator_video "$model_raw" "$model_record_seconds"
   encode_recorded_segment "$model_raw" "$model_caption_overlay" "$MODEL_SECONDS" "$model_video" "$MODEL_PREROLL_SECONDS"
 
-  encode_static_segment "$outro_image" "$OUTRO_SECONDS" "$outro_video"
-
   {
-    printf "file '%s'\n" "$intro_video"
     printf "file '%s'\n" "$catalog_video"
     printf "file '%s'\n" "$model_video"
-    printf "file '%s'\n" "$outro_video"
   } > "$concat_list"
 
   concat_segments "$concat_list" "$silent_video"
   add_music_track "$silent_video" "$output_path"
+  validate_preview_video "$output_path" "$OUTPUT_WIDTH" "$OUTPUT_HEIGHT"
 
   "$FFPROBE_PATH" -v error \
     -select_streams v:0 \
