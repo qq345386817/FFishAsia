@@ -1,2 +1,2 @@
-- Added an included animated 3D model for instant preview.
-- Improved the model catalog and species details.
+- Added animal models and animated previews.
+- Improved catalog updates and image loading.

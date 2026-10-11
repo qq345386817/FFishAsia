@@ -1,2 +1,2 @@
-- Enthält jetzt ein animiertes 3D-Modell zur sofortigen Vorschau.
-- Verbesserte Modellübersicht und Artinformationen.
+- Neue Tiermodelle und animierte Vorschauen.
+- Modellaktualisierungen und Bildladen verbessert.
