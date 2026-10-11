@@ -82,6 +82,44 @@ final class FFishAsiaTests: XCTestCase {
         XCTAssertFalse(analytics.recordSuccessfulPreview(model: try XCTUnwrap(models.dropFirst(2).first), bundled: false))
     }
 
+    func testManifestUsesExplicitImageURLsAndDerivesLegacyFallbacks() throws {
+        let legacy = try XCTUnwrap(ModelCatalog.decodeManifest(from: manifestData()).first)
+        XCTAssertEqual(legacy.thumbnailURL?.lastPathComponent, "test_thumb.jpeg")
+        XCTAssertEqual(legacy.previewURL?.lastPathComponent, "test_preview.jpeg")
+        var manifest = try XCTUnwrap(JSONSerialization.jsonObject(with: manifestData()) as? [String: Any])
+        var models = try XCTUnwrap(manifest["models"] as? [[String: Any]])
+        models[0]["thumbnail_url"] = "https://example.com/images/thumbnail-version.jpeg"
+        models[0]["preview_url"] = "https://example.com/images/preview-version.jpeg"
+        manifest["models"] = models
+        let explicit = try XCTUnwrap(ModelCatalog.decodeManifest(from: JSONSerialization.data(withJSONObject: manifest)).first)
+        XCTAssertEqual(explicit.thumbnailURL?.absoluteString, "https://example.com/images/thumbnail-version.jpeg")
+        XCTAssertEqual(explicit.previewURL?.absoluteString, "https://example.com/images/preview-version.jpeg")
+    }
+
+    func testBundledCatalogHasUniqueModelsAndCompleteTranslations() throws {
+        let models = ModelCatalog.fallbackModels
+        XCTAssertFalse(models.isEmpty)
+        XCTAssertEqual(Set(models.map(\.id)).count, models.count)
+        XCTAssertEqual(Set(models.map(\.filename)).count, models.count)
+        for model in models {
+            for language in AppLanguage.allCases {
+                XCTAssertFalse(model.localizedName(for: language)?.isEmpty ?? true, "\(model.filename): \(language)")
+                XCTAssertFalse(model.localizedTaxonomicInfo(for: language).isEmpty, model.filename)
+            }
+            XCTAssertEqual(model.downloadURL?.pathExtension, "usdz")
+            XCTAssertGreaterThan(model.fileSizeMB, 0)
+        }
+    }
+
+    func testNewAnimatedCatfishKeepsItsAnimationAndLocalizedSearchNames() throws {
+        let model = try XCTUnwrap(ModelCatalog.fallbackModels.first { $0.id == "51e0cc7840c54790bfd674d70dfb6bab" })
+        XCTAssertTrue(model.hasAnimation)
+        XCTAssertEqual(model.category, .special)
+        for name in ["有明溪鲶", "アリアケギバチ", "Ariake Stream Catfish", "Tachysurus aurantiacus"] {
+            XCTAssertTrue(model.matches(keyword: name))
+        }
+    }
+
     private func manifestData() -> Data {
         Data(
             """

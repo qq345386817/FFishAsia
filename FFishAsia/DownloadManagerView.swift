@@ -69,7 +69,7 @@ struct DownloadManagerView: View {
                         onOpenModel(model)
                     } label: {
                         HStack(spacing: 12) {
-                            ThumbnailView(imageName: model.thumbName, width: 60, height: 60)
+                            ThumbnailView(imageName: model.thumbName, width: 60, height: 60, remoteURL: model.thumbnailURL)
 
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(model.localizedDisplayName(for: language))

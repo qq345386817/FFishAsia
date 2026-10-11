@@ -58,6 +58,8 @@ struct ModelItem: Identifiable, Hashable {
     let downloadURL: URL?
     let thumbName: String
     let previewName: String
+    let thumbnailURL: URL?
+    let previewURL: URL?
     private let searchIndex: String
 
     var sketchfabURL: URL? {
@@ -151,7 +153,9 @@ struct ModelItem: Identifiable, Hashable {
         sketchfabUID: String,
         hasAnimation: Bool,
         category: ModelCategory,
-        downloadURL: URL?
+        downloadURL: URL?,
+        thumbnailURL: URL? = nil,
+        previewURL: URL? = nil
     ) {
         self.id = id
         self.displayName = displayName
@@ -182,6 +186,8 @@ struct ModelItem: Identifiable, Hashable {
         let baseName = URL(fileURLWithPath: filename).deletingPathExtension().lastPathComponent
         self.thumbName = "\(baseName)_thumb.jpeg"
         self.previewName = "\(baseName)_preview.jpeg"
+        self.thumbnailURL = thumbnailURL ?? Self.imageURL(named: self.thumbName, modelURL: downloadURL)
+        self.previewURL = previewURL ?? Self.imageURL(named: self.previewName, modelURL: downloadURL)
         self.searchIndex = Self.normalizedSearchText([
             displayName,
             englishName,
@@ -208,6 +214,12 @@ struct ModelItem: Identifiable, Hashable {
             .folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: .current)
             .lowercased()
     }
+
+    private static func imageURL(named filename: String, modelURL: URL?) -> URL? {
+        modelURL?.deletingLastPathComponent().deletingLastPathComponent()
+            .appendingPathComponent("thumbnails")
+            .appendingPathComponent(filename)
+    }
 }
 
 private struct RemoteManifest: Decodable {
@@ -218,6 +230,8 @@ private struct RemoteManifestModel: Decodable {
     let id: String
     let filename: String
     let download_url: URL?
+    let thumbnail_url: URL?
+    let preview_url: URL?
     let file_size_mb: Double?
     let category: String?
     let name_ja: String?
@@ -297,7 +311,9 @@ struct ModelCatalog {
                 sketchfabUID: raw.sketchfab_url?.lastPathComponent ?? raw.id,
                 hasAnimation: hasAnimation,
                 category: hasAnimation ? .special : parseCategory(from: raw.category),
-                downloadURL: downloadURL
+                downloadURL: downloadURL,
+                thumbnailURL: raw.thumbnail_url,
+                previewURL: raw.preview_url
             )
         }
     }

@@ -635,7 +635,7 @@ private struct ModelCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            ThumbnailView(imageName: model.thumbName, width: nil, height: 96)
+            ThumbnailView(imageName: model.thumbName, width: nil, height: 96, remoteURL: model.thumbnailURL)
 
             Text(model.localizedDisplayName(for: language))
                 .font(.subheadline.weight(.semibold))
@@ -700,7 +700,7 @@ private struct ModelDetailSheet: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    ThumbnailView(imageName: model.previewName, width: nil, height: 220)
+                    ThumbnailView(imageName: model.previewName, width: nil, height: 220, remoteURL: model.previewURL)
                         .padding(.horizontal)
 
                     VStack(alignment: .leading, spacing: 4) {
@@ -1024,6 +1024,7 @@ struct ThumbnailView: View {
     let imageName: String
     let width: CGFloat?
     let height: CGFloat
+    var remoteURL: URL? = nil
 
     var body: some View {
         if let width {
@@ -1047,14 +1048,26 @@ struct ThumbnailView: View {
                 .resizable()
                 .scaledToFill()
                 .clipped()
-        } else {
-            ZStack {
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .fill(Self.placeholderColor)
-                Image(systemName: "photo")
-                    .font(.title2)
-                    .foregroundStyle(.secondary)
+        } else if let remoteURL {
+            AsyncImage(url: remoteURL) { phase in
+                if let image = phase.image {
+                    image.resizable().scaledToFill().clipped()
+                } else {
+                    placeholder
+                }
             }
+        } else {
+            placeholder
+        }
+    }
+
+    private var placeholder: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Self.placeholderColor)
+            Image(systemName: "photo")
+                .font(.title2)
+                .foregroundStyle(.secondary)
         }
     }
 
