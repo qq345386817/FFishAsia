@@ -1,3 +1,5 @@
+import { ingestWebEvents } from "./web-events";
+
 interface Env {
   DB: D1Database;
   INSTALLATION_HASH_KEY: string;
@@ -54,10 +56,15 @@ const PLATFORMS = new Set(["ios", "macos"]);
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
+    if (url.pathname === "/v1/web-events") return ingestWebEvents(request, env);
     if (request.method === "GET" && url.pathname === "/health") return healthResponse(env);
     if (request.method === "POST" && url.pathname === "/v1/events") return ingestEvents(request, env);
     return jsonResponse({ error: "not_found" }, 404);
-  }
+  },
+  async scheduled(_controller: ScheduledController, env: Env): Promise<void> {
+    await env.DB.prepare("DELETE FROM web_events WHERE received_at < ?")
+      .bind(Date.now() - 90 * 24 * 60 * 60 * 1000).run();
+  },
 } satisfies ExportedHandler<Env>;
 
 async function healthResponse(env: Env): Promise<Response> {

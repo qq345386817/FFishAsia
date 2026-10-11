@@ -6,6 +6,7 @@
   "scripts": {
     "deploy": "wrangler deploy",
     "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
     "db:migrate:remote": "wrangler d1 migrations apply little-nature-analytics --remote"
   },
   "devDependencies": {
