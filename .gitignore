@@ -20,6 +20,9 @@ usdz_resources/
 
 ## App packaging
 *.ipa
+*.pkg
+*.xcarchive/
+*.xcresult/
 *.dSYM.zip
 *.dSYM
 

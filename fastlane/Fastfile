@@ -1,6 +1,8 @@
 fastlane_version("2.228.0")
 
 require "fileutils"
+require "json"
+require "open3"
 require "pathname"
 require "shellwords"
 require "tmpdir"
@@ -86,6 +88,22 @@ def current_app_version
   match[1].strip
 end
 
+def current_build_number(platform:)
+  destination = platform == "osx" ? "generic/platform=macOS" : "generic/platform=iOS"
+  output, errors, status = Open3.capture3(
+    "xcodebuild", "-project", resolve_project_path("FFishAsia.xcodeproj"),
+    "-scheme", "FFishAsia", "-configuration", "Release",
+    "-destination", destination, "-showBuildSettings", "-json"
+  )
+  UI.user_error!("Unable to read #{platform} build settings: #{errors}") unless status.success?
+
+  app_settings = JSON.parse(output).find { |entry| entry["target"] == "FFishAsia" }&.fetch("buildSettings", nil)
+  build_number = app_settings&.fetch("CURRENT_PROJECT_VERSION", nil).to_s.strip
+  UI.user_error!("Unable to determine #{platform} CURRENT_PROJECT_VERSION") if build_number.empty?
+
+  build_number
+end
+
 def app_store_connect_app
   api_key
   app = Spaceship::ConnectAPI::App.find(FFISHASIA_APP_IDENTIFIER)
@@ -125,6 +143,8 @@ def configure_app_info_metadata_upload(platform:)
 end
 
 def deliver_base_options(platform:)
+  # Deliver omits the precheck platform when authenticating with an API key.
+  ENV["PRECHECK_PLATFORM"] = platform
   {
     api_key: api_key,
     app_identifier: FFISHASIA_APP_IDENTIFIER,
@@ -154,12 +174,7 @@ end
 
 def submit_app_store_review(platform:)
   build_number = ENV.fetch("FFISHASIA_BUILD_NUMBER", "").strip
-  if build_number.empty?
-    project_contents = File.read(PROJECT_FILE)
-    match = project_contents.match(/CURRENT_PROJECT_VERSION = ([^;]+);/)
-    UI.user_error!("Unable to determine CURRENT_PROJECT_VERSION from #{PROJECT_FILE}") unless match
-    build_number = match[1].strip
-  end
+  build_number = current_build_number(platform: platform) if build_number.empty?
 
   deliver(
     deliver_base_options(platform: platform).merge(
