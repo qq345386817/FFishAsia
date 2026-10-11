@@ -63,7 +63,7 @@ struct AboutView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.t("about.version.title", language))
                         .font(.headline)
-                    Text(L10n.t("app.name", language) + " v2.0")
+                    Text(L10n.t("app.name", language) + " v" + appVersion)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                     Text(platformSummary)
@@ -85,6 +85,10 @@ struct AboutView: View {
         #else
         "iOS 17+ · SwiftUI · RealityKit · ARKit"
         #endif
+    }
+
+    private var appVersion: String {
+        Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "-"
     }
 }
 

@@ -90,37 +90,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Model files are downloaded on demand from a remote CDN and are not installed with the app. You can check cache usage in Download Manager and delete saved content anytime."
+            "value": "One animated model is included with the app. Other models are downloaded on demand. Download Manager shows saved files and lets you remove them at any time."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "モデルファイルはリモートCDNから必要時にダウンロードされ、アプリ本体には同梱されません。ダウンロード管理で容量を確認し、いつでも削除できます。"
+            "value": "アニメーション付きモデルを1つ同梱しています。その他のモデルは必要に応じてダウンロードできます。ダウンロード管理では保存済みファイルの確認と削除ができます。"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "模型文件由远程 CDN 按需下载，不会随 App 一起安装。你可以在下载管理中查看缓存占用，并随时删除已下载内容。"
+            "value": "App 内置一个带动画的模型，其余模型可按需下载。你可以在下载管理中查看和删除已保存的模型文件。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "模型文件由遠程 CDN 按需下載，不會隨 App 一起安装。你可以在下載管理中查看缓存佔用，并隨時刪除已下載內容。"
+            "value": "App 內建一個帶動畫的模型，其餘模型可按需下載。你可以在下載管理中查看和刪除已儲存的模型檔案。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "모델 파일은 원격 CDN에서 필요할 때 다운로드되며 앱에 기본 포함되지 않습니다. 다운로드 관리자에서 캐시 사용량을 확인하고 저장된 콘텐츠를 언제든 삭제할 수 있습니다."
+            "value": "애니메이션 모델 하나가 앱에 포함되어 있습니다. 다른 모델은 필요할 때 다운로드할 수 있습니다. 다운로드 관리자에서 저장된 파일을 확인하고 삭제할 수 있습니다."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Modelldateien werden bei Bedarf von einem entfernten CDN geladen und nicht mit der App installiert. Im Download-Manager kannst du die Cache-Nutzung prüfen und gespeicherte Inhalte jederzeit löschen."
+            "value": "Ein animiertes Modell ist in der App enthalten. Weitere Modelle werden bei Bedarf geladen. Im Download-Manager kannst du gespeicherte Dateien prüfen und jederzeit löschen."
           }
         }
       }
@@ -170,37 +170,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "The models are published under the CC0 1.0 Universal license and can be browsed, downloaded, and viewed in AR. Little Nature only provides model browsing, download management, and AR viewing, and does not claim additional rights over the model assets."
+            "value": "The models are published under the CC0 1.0 Universal license. Little Nature provides a model catalog, downloads, and 3D preview, and claims no additional rights to the model assets."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "モデルはCC0 1.0 Universalライセンスで公開されており、閲覧、ダウンロード、AR表示に利用できます。小さな自然アプリはモデル閲覧、ダウンロード管理、AR表示機能を提供するもので、モデル素材への追加的権利を主張しません。"
+            "value": "モデルはCC0 1.0 Universalライセンスで公開されています。小さな自然はモデルの閲覧、ダウンロード、3Dプレビューを提供し、モデル素材への追加的な権利を主張しません。"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "相关模型以 CC0 1.0 Universal 许可发布，可用于浏览、下载与 AR 展示。小小自然 App 本身仅提供模型浏览、下载管理和 AR 展示功能，不主张对模型资源拥有额外权利。"
+            "value": "模型以 CC0 1.0 Universal 许可发布。小小自然提供模型浏览、下载管理和 3D 预览，不主张对模型资源拥有额外权利。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "相關模型以 CC0 1.0 Universal 許可發佈，可用於瀏覽、下載與 AR 展示。小小自然 App 本身仅提供模型瀏覽、下載管理和 AR 展示功能，不主张對模型資源拥有额外權利。"
+            "value": "模型以 CC0 1.0 Universal 授權發佈。小小自然提供模型瀏覽、下載管理和 3D 預覽，不主張對模型資源擁有額外權利。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "모델은 CC0 1.0 Universal 라이선스로 공개되어 탐색, 다운로드, AR 보기에서 사용할 수 있습니다. Little Nature는 모델 탐색, 다운로드 관리, AR 보기 기능만 제공하며 모델 자산에 대한 추가 권리를 주장하지 않습니다."
+            "value": "모델은 CC0 1.0 Universal 라이선스로 공개됩니다. Little Nature는 모델 탐색, 다운로드 관리, 3D 미리보기를 제공하며 모델 자산에 대한 추가 권리를 주장하지 않습니다."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Die Modelle werden unter der CC0 1.0 Universal-Lizenz veröffentlicht und können durchsucht, heruntergeladen und in AR angesehen werden. Little Nature stellt nur Modellkatalog, Downloadverwaltung und AR-Ansicht bereit und erhebt keine zusätzlichen Rechte an den Modellinhalten."
+            "value": "Die Modelle werden unter der CC0 1.0 Universal-Lizenz veröffentlicht. Little Nature bietet Modellkatalog, Downloads und 3D-Vorschau und erhebt keine zusätzlichen Rechte an den Modellinhalten."
           }
         }
       }
@@ -450,37 +450,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "AR 3D biological model field guide"
+            "value": "3D field guide to Asian plants and animals"
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "AR 3D 生物モデル図鑑"
+            "value": "アジアの動植物の3D図鑑"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "AR 3D 生物模型图鉴"
+            "value": "亚洲动植物 3D 图鉴"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "AR 3D 生物模型圖鑑"
+            "value": "亞洲動植物 3D 圖鑑"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "AR 3D 생물 모델 도감"
+            "value": "아시아 동식물 3D 도감"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "AR-Feldführer für biologische 3D-Modelle"
+            "value": "3D-Feldführer für asiatische Tiere und Pflanzen"
           }
         }
       }

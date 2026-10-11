@@ -241,6 +241,7 @@ final class DownloadManager: NSObject, ObservableObject {
 
     func downloadedModels() -> [ModelItem] {
         remoteModels.filter { model in
+            guard !isBundled(model) else { return false }
             let url = modelsDirectory.appendingPathComponent(model.filename)
             return fileManager.fileExists(atPath: url.path) || snapshotDownloadedModelIDs.contains(model.id)
         }

@@ -43,6 +43,12 @@ final class FFishAsiaTests: XCTestCase {
         XCTAssertEqual(Set(models.map(\.id)), Set(ModelCatalog.fallbackModels.map(\.id)))
     }
 
+    @MainActor
+    func testDownloadManagerExcludesIncludedModelFromDownloads() {
+        let downloadManager = DownloadManager.shared
+        XCTAssertFalse(downloadManager.downloadedModels().contains(where: downloadManager.isBundled))
+    }
+
     #if os(iOS)
     func testRealityKitModelLoadingHopsToMainThread() async {
         let operationStarted = expectation(description: "Model loading operation started")
