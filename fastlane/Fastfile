@@ -8,6 +8,7 @@ require "shellwords"
 require "tmpdir"
 require "deliver/upload_metadata"
 require "spaceship/connect_api/models/app_preview_set"
+require_relative "lib/preview_assets"
 
 PROJECT_ROOT = File.expand_path("..", __dir__)
 FASTLANE_ROOT = __dir__
@@ -34,6 +35,16 @@ class ::Deliver::UploadMetadata
 end
 
 class ::Spaceship::ConnectAPI::AppPreviewSet
+  class << self
+    alias ffishasia_original_validate_video_resolution validate_video_resolution
+
+    def validate_video_resolution(width, height, preview_type)
+      return PreviewAssets.valid_desktop_resolution?(width, height) if preview_type == PreviewType::DESKTOP
+
+      ffishasia_original_validate_video_resolution(width, height, preview_type)
+    end
+  end
+
   alias ffishasia_original_upload_preview upload_preview
 
   def upload_preview(client: nil, path: nil, wait_for_processing: true, position: nil, frame_time_code: nil)
@@ -278,7 +289,11 @@ def upload_preview_videos_in_batches(platform:, app_previews_path:)
       batch_locales.each do |locale|
         source = File.join(app_previews_path, locale)
         UI.user_error!("Missing preview video locale directory: #{source}") unless File.directory?(source)
-        FileUtils.cp_r(source, tmp_root)
+        PreviewAssets.stage_locale(
+          source: source,
+          destination: File.join(tmp_root, locale),
+          platform: platform
+        )
       end
 
       upload_preview_videos_only(
