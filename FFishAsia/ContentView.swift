@@ -8,6 +8,8 @@ struct ContentView: View {
     #endif
     @StateObject private var downloadManager = DownloadManager.shared
     @State private var selectedCategory: ModelCategory? = nil
+    @State private var catalogFilter: CatalogFilter = .all
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @State private var selectedModel: ModelItem? = nil
     @State private var previewModel: ModelItem? = nil
     @State private var arModel: ModelItem? = nil
@@ -44,12 +46,14 @@ struct ContentView: View {
     }
 
     private var filteredModels: [ModelItem] {
+        let keyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         let models = downloadManager.remoteModels.filter { model in
             let matchesCategory = selectedCategory == nil || model.category == selectedCategory
-            let matchesSearch = searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || model.matches(keyword: searchText)
-            return matchesCategory && matchesSearch
+            let matchesSearch = keyword.isEmpty || model.matches(keyword: keyword)
+            let isAvailableOffline = downloadManager.downloadStates[model.id] == .downloaded
+            return matchesCategory && matchesSearch && catalogFilter.includes(model, isAvailableOffline: isAvailableOffline)
         }
-        guard selectedCategory == nil, searchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+        guard selectedCategory == nil, keyword.isEmpty else {
             return models
         }
         return ModelCatalog.merchandised(models)
@@ -189,6 +193,9 @@ struct ContentView: View {
         if selectedCategory != nil {
             return (L10n.t("empty.category.title", appLanguage), L10n.t("empty.category.description", appLanguage))
         }
+        if catalogFilter != .all {
+            return (L10n.t(catalogFilter.localizationKey, appLanguage), L10n.t("empty.catalogFilter.description", appLanguage))
+        }
         return (L10n.t("empty.catalog.title", appLanguage), L10n.t("empty.catalog.description", appLanguage))
     }
 
@@ -286,12 +293,22 @@ struct ContentView: View {
     private var browseView: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                HStack {
-                    Text(activeFilterSummary)
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                    Spacer()
+                ViewThatFits(in: .horizontal) {
+                    HStack {
+                        Text(activeFilterSummary)
+                            .fixedSize()
+                        Spacer()
+                        catalogFilterMenu
+                    }
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text(activeFilterSummary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        catalogFilterMenu
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                .font(.footnote)
+                .foregroundStyle(.secondary)
                 .padding(.horizontal)
                 .padding(.top, 6)
 
@@ -311,10 +328,7 @@ struct ContentView: View {
                                         state: downloadManager.downloadStates[model.id] ?? .notDownloaded,
                                         isBundled: downloadManager.isBundled(model),
                                         language: appLanguage,
-                                        onRetry: { downloadManager.retry(model) }
-                                    )
-                                        .id(model.id)
-                                        .onTapGesture {
+                                        onOpen: {
                                             dismissSearchKeyboard()
                                             ProductAnalytics.shared.track(
                                                 .modelDetailOpen,
@@ -323,6 +337,8 @@ struct ContentView: View {
                                             )
                                             selectedModel = model
                                         }
+                                    )
+                                    .id(model.id)
                                 }
                             }
                             .padding(.horizontal)
@@ -341,6 +357,8 @@ struct ContentView: View {
                     }
                 }
             }
+            .platformCatalogBackground()
+            .onChange(of: catalogFilter) { _ in dismissSearchKeyboard() }
             .navigationTitle(L10n.t("app.name", appLanguage))
             .platformNavigationBarTitleDisplayModeInline()
             .safeAreaInset(edge: .bottom) {
@@ -358,6 +376,8 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "tray.full")
                     }
+                    .accessibilityLabel(L10n.t("downloads.title", appLanguage))
+                    .help(L10n.t("downloads.title", appLanguage))
 
                     Menu {
                         ForEach(AppLanguage.allCases) { language in
@@ -383,12 +403,35 @@ struct ContentView: View {
                     } label: {
                         Image(systemName: "info.circle")
                     }
+                    .accessibilityLabel(L10n.t("about.title", appLanguage))
+                    .help(L10n.t("about.title", appLanguage))
                 }
             }
         }
     }
 
+    private var catalogFilterMenu: some View {
+        Menu {
+            Picker(L10n.t("catalog.filter.title", appLanguage), selection: $catalogFilter) {
+                ForEach(CatalogFilter.allCases) { filter in
+                    Label(L10n.t(filter.localizationKey, appLanguage), systemImage: filter.symbolName)
+                        .tag(filter)
+                }
+            }
+        } label: {
+            Label(L10n.t(catalogFilter.localizationKey, appLanguage), systemImage: "line.3.horizontal.decrease")
+                .font(.footnote.weight(.medium))
+                .fixedSize()
+                .padding(.vertical, 12)
+        }
+        .accessibilityIdentifier("catalog.filter")
+        .help(L10n.t("catalog.filter.title", appLanguage))
+    }
+
     private var modelGridColumns: [GridItem] {
+        if dynamicTypeSize.isAccessibilitySize {
+            return [GridItem(.flexible(), alignment: .top)]
+        }
         #if os(iOS)
         if horizontalSizeClass == .regular {
             return [
@@ -401,7 +444,7 @@ struct ContentView: View {
             GridItem(.flexible(minimum: 0, maximum: .infinity), spacing: 12, alignment: .top)
         ]
         #else
-        [
+        return [
             GridItem(.adaptive(minimum: 180, maximum: 220), spacing: 14, alignment: .top)
         ]
         #endif
@@ -563,11 +606,13 @@ private struct CategoryPill: View {
             }
             .padding(.horizontal, 12)
             .padding(.vertical, 7)
+            .frame(minHeight: 44)
             .background(isSelected ? Color.accentColor : Self.unselectedBackground)
             .foregroundStyle(isSelected ? .white : .primary)
             .clipShape(Capsule())
         }
         .buttonStyle(.plain)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 
     private static var unselectedBackground: Color {
@@ -609,11 +654,12 @@ private struct SearchField: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
+                .frame(minWidth: 44, minHeight: 44)
                 .accessibilityLabel(clearAccessibilityLabel)
             }
         }
         .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .frame(minHeight: 48)
         .background(Self.fieldBackground, in: Capsule())
     }
 
@@ -631,37 +677,52 @@ private struct ModelCard: View {
     let state: DownloadManager.DownloadState
     let isBundled: Bool
     let language: AppLanguage
-    let onRetry: () -> Void
+    let onOpen: () -> Void
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ScaledMetric(relativeTo: .subheadline) private var titleHeight = 40
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            ThumbnailView(imageName: model.thumbName, width: nil, height: 96, remoteURL: model.thumbnailURL)
+        Button(action: onOpen) {
+            VStack(alignment: .leading, spacing: 8) {
+                ThumbnailView(imageName: model.thumbName, width: nil, height: 96, remoteURL: model.thumbnailURL)
+                    .overlay(alignment: .topLeading) {
+                        if model.hasAnimation {
+                            Label(L10n.t("catalog.filter.animated", language), systemImage: "play.circle.fill")
+                                .font(.caption2.weight(.semibold))
+                                .dynamicTypeSize(...DynamicTypeSize.xxxLarge)
+                                .padding(6)
+                                .foregroundStyle(.white)
+                                .background(.black.opacity(0.75), in: RoundedRectangle(cornerRadius: 6))
+                                .padding(6)
+                        }
+                    }
 
-            Text(model.localizedDisplayName(for: language))
-                .font(.subheadline.weight(.semibold))
-                .lineLimit(2)
-                .frame(minHeight: 36, alignment: .topLeading)
+                Text(model.localizedDisplayName(for: language))
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(dynamicTypeSize.isAccessibilitySize ? nil : 2)
+                    .frame(minHeight: titleHeight, alignment: .topLeading)
 
-            HStack {
-                Text(model.category.label(in: language))
-                    .font(.caption2)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(categoryColor.opacity(0.15))
-                    .foregroundStyle(categoryColor)
-                    .clipShape(Capsule())
-                Spacer()
-                DownloadStateBadge(state: state, isBundled: isBundled, language: language, onRetry: onRetry)
+                HStack {
+                    Text(model.category.label(in: language))
+                        .font(.caption2)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(categoryColor.opacity(0.15))
+                        .foregroundStyle(categoryColor)
+                        .clipShape(Capsule())
+                    Spacer()
+                    DownloadStateBadge(state: state, isBundled: isBundled, language: language)
+                }
             }
-
-            Text(model.formattedSize)
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            .padding(8)
+            .frame(maxWidth: Self.maxCardWidth, alignment: .topLeading)
+            .background(Self.cardBackground)
+            .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .contentShape(Rectangle())
         }
-        .padding(10)
-        .frame(maxWidth: Self.maxCardWidth, alignment: .topLeading)
-        .background(Self.cardBackground)
-        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .buttonStyle(.plain)
+        .accessibilityIdentifier("model.\(model.id)")
+        .accessibilityElement(children: .combine)
     }
 
     private static var cardBackground: Color {
@@ -690,6 +751,7 @@ private struct ModelCard: View {
 }
 
 private struct ModelDetailSheet: View {
+    @Environment(\.dismiss) private var dismiss
     let model: ModelItem
     @ObservedObject var downloadManager: DownloadManager
     let language: AppLanguage
@@ -705,7 +767,7 @@ private struct ModelDetailSheet: View {
 
                     VStack(alignment: .leading, spacing: 4) {
                         Text(model.localizedDisplayName(for: language))
-                            .font(.title.bold())
+                            .font(.title2.bold())
                         if let secondaryName = model.localizedSecondaryName(for: language), secondaryName != model.localizedDisplayName(for: language) {
                             Text(secondaryName)
                                 .font(.subheadline)
@@ -716,10 +778,10 @@ private struct ModelDetailSheet: View {
                                 .font(.subheadline.italic())
                                 .foregroundStyle(.secondary)
                         }
-                        HStack(spacing: 8) {
+                        VStack(alignment: .leading, spacing: 6) {
                             Label(model.category.detailLabel(in: language), systemImage: model.category.symbolName)
                             if model.hasAnimation {
-                                Label(L10n.t("detail.hasAnimation", language), systemImage: "play.circle.fill")
+                                Label(L10n.t("catalog.filter.animated", language), systemImage: "play.circle.fill")
                             }
                             if downloadManager.isBundled(model) {
                                 Label(L10n.t("status.included", language), systemImage: "checkmark.circle.fill")
@@ -745,16 +807,6 @@ private struct ModelDetailSheet: View {
 
                     Divider()
 
-                    VStack(alignment: .leading, spacing: 12) {
-                        Text(L10n.t("detail.downloadUse", language))
-                            .font(.subheadline.bold())
-
-                        downloadArea
-                    }
-                    .padding(.horizontal)
-
-                    Divider()
-
                     DisclosureGroup(L10n.t("detail.modelInformation", language)) {
                         VStack(alignment: .leading, spacing: 10) {
                             InfoRow(title: L10n.t("detail.downloadStatus", language), value: statusText)
@@ -765,6 +817,13 @@ private struct ModelDetailSheet: View {
                                 Link(L10n.t("detail.sketchfab", language), destination: url)
                                     .font(.subheadline)
                             }
+                            if downloadState == .downloaded && !downloadManager.isBundled(model) {
+                                Button(role: .destructive) {
+                                    downloadManager.delete(model)
+                                } label: {
+                                    Label(L10n.t("action.deleteDownloaded", language), systemImage: "trash")
+                                }
+                            }
                         }
                         .padding(.top, 8)
                     }
@@ -772,10 +831,39 @@ private struct ModelDetailSheet: View {
                     .padding(.horizontal)
                 }
                 .padding(.vertical)
+                .frame(maxWidth: 680)
+                .frame(maxWidth: .infinity)
+            }
+            .safeAreaInset(edge: .bottom) {
+                VStack(alignment: .leading, spacing: 10) {
+                    HStack {
+                        Text(statusText)
+                        Spacer(minLength: 8)
+                        Text(model.formattedSize)
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    downloadArea
+                        .controlSize(.large)
+                }
+                .frame(maxWidth: 648)
+                .padding(16)
+                .frame(maxWidth: .infinity)
+                .background(.bar)
             }
             .navigationTitle(L10n.t("detail.title", language))
             .platformNavigationBarTitleDisplayModeInline()
+            .toolbar {
+                ToolbarItem(placement: .confirmationAction) {
+                    Button { dismiss() } label: { Image(systemName: "xmark") }
+                        .accessibilityLabel(L10n.t("action.close", language))
+                        .help(L10n.t("action.close", language))
+                }
+            }
         }
+        #if os(macOS)
+        .frame(minWidth: 560, minHeight: 620)
+        #endif
     }
 
     private var downloadState: DownloadManager.DownloadState {
@@ -858,18 +946,8 @@ private struct ModelDetailSheet: View {
                     Label(L10n.t("action.openAR", language), systemImage: "viewfinder")
                         .frame(maxWidth: .infinity)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(.bordered)
                 #endif
-
-                if !downloadManager.isBundled(model) {
-                    Button(role: .destructive) {
-                        downloadManager.delete(model)
-                    } label: {
-                        Label(L10n.t("action.deleteDownloaded", language), systemImage: "trash")
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.bordered)
-                }
             }
         }
     }
@@ -896,23 +974,20 @@ private struct DownloadStateBadge: View {
     let state: DownloadManager.DownloadState
     let isBundled: Bool
     let language: AppLanguage
-    let onRetry: () -> Void
 
     var body: some View {
         switch state {
         case .notDownloaded:
-            Label(L10n.t("badge.notDownloaded", language), systemImage: "arrow.down.circle")
-                .font(.caption2.weight(.medium))
+            Image(systemName: "arrow.down.circle")
+                .font(.subheadline)
                 .foregroundStyle(.secondary)
+                .accessibilityLabel(L10n.t("badge.notDownloaded", language))
 
         case .downloaded:
-            Text(L10n.t(isBundled ? "badge.included" : "badge.downloaded", language))
-                .font(.caption2.weight(.medium))
-                .padding(.horizontal, 8)
-                .padding(.vertical, 4)
-                .background(Color.green.opacity(0.15))
+            Image(systemName: "checkmark.circle.fill")
+                .font(.subheadline)
                 .foregroundStyle(.green)
-                .clipShape(Capsule())
+                .accessibilityLabel(L10n.t(isBundled ? "badge.included" : "badge.downloaded", language))
 
         case .downloading(let progress):
             HStack(spacing: 6) {
@@ -932,11 +1007,6 @@ private struct DownloadStateBadge: View {
                     .background(Color.red.opacity(0.15))
                     .foregroundStyle(.red)
                     .clipShape(Capsule())
-                Button(L10n.t("action.retry", language)) {
-                    onRetry()
-                }
-                .font(.caption2)
-                .buttonStyle(.borderless)
             }
         }
     }
@@ -1030,12 +1100,14 @@ struct ThumbnailView: View {
         if let width {
             thumbnailContent
                 .frame(width: width, height: height)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(.black)
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
         } else {
             GeometryReader { proxy in
                 thumbnailContent
                     .frame(width: proxy.size.width, height: height)
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .background(.black)
+                    .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
             }
             .frame(height: height)
         }
@@ -1046,12 +1118,12 @@ struct ThumbnailView: View {
         if let image = PlatformImage(named: imageName) {
             Image(platformImage: image)
                 .resizable()
-                .scaledToFill()
+                .scaledToFit()
                 .clipped()
         } else if let remoteURL {
             AsyncImage(url: remoteURL) { phase in
                 if let image = phase.image {
-                    image.resizable().scaledToFill().clipped()
+                    image.resizable().scaledToFit().clipped()
                 } else {
                     placeholder
                 }
@@ -1128,6 +1200,15 @@ struct ContentView_Previews: PreviewProvider {
 }
 
 extension View {
+    @ViewBuilder
+    func platformCatalogBackground() -> some View {
+        #if os(iOS)
+        self.background(Color(.systemGroupedBackground))
+        #else
+        self.background(Color(nsColor: .windowBackgroundColor))
+        #endif
+    }
+
     @ViewBuilder
     func platformNavigationBarTitleDisplayModeInline() -> some View {
         #if os(iOS)

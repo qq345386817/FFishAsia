@@ -1888,12 +1888,42 @@
     },
     "badge.included": {
       "localizations": {
-        "en": { "stringUnit": { "state": "translated", "value": "Included" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "収録済み" } },
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "已内置" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "已內建" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "기본 제공" } },
-        "de": { "stringUnit": { "state": "translated", "value": "Enthalten" } }
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Included"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "収録済み"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已内置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已內建"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "기본 제공"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Enthalten"
+          }
+        }
       }
     },
     "badge.failed": {
@@ -2499,12 +2529,42 @@
     },
     "detail.modelInformation": {
       "localizations": {
-        "en": { "stringUnit": { "state": "translated", "value": "3D Model Information" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "3Dモデル情報" } },
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "3D 模型信息" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "3D 模型資訊" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "3D 모델 정보" } },
-        "de": { "stringUnit": { "state": "translated", "value": "3D-Modellinformationen" } }
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D Model Information"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3Dモデル情報"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D 模型信息"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D 模型資訊"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D 모델 정보"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "3D-Modellinformationen"
+          }
+        }
       }
     },
     "detail.sketchfab": {
@@ -3632,37 +3692,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Category: %@ · %d models"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在のカテゴリー：%@ · %d 件のモデル"
+            "value": "%@ · %d models"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "当前分类：%@ · 共 %d 个模型"
+            "value": "%@ · %d 个模型"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "当前分類：%@ · 共 %d 個模型"
+            "value": "%@ · %d 個模型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ · %d 件"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "카테고리: %@ · 모델 %d개"
+            "value": "%@ · 모델 %d개"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Kategorie: %@ · %d Modelle"
+            "value": "%@ · %d Modelle"
           }
         }
       }
@@ -4072,37 +4132,37 @@
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Search Japanese, English, Chinese, or scientific name"
-          }
-        },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "和名・英名・中国語名・学名で検索"
+            "value": "Search models or scientific names"
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "搜索日文名、英文名、中文名或学名"
+            "value": "搜索模型或学名"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "搜索日文名、英文名、中文名或学名"
+            "value": "搜尋模型或學名"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデル名・学名で検索"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "일본어, 영어, 중국어 또는 학명 검색"
+            "value": "모델 이름 또는 학명 검색"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Japanischen, englischen, chinesischen oder wissenschaftlichen Namen suchen"
+            "value": "Modelle oder Artnamen suchen"
           }
         }
       }
@@ -4189,12 +4249,42 @@
     },
     "status.included": {
       "localizations": {
-        "en": { "stringUnit": { "state": "translated", "value": "Included with the app" } },
-        "ja": { "stringUnit": { "state": "translated", "value": "Appに収録済み" } },
-        "zh-Hans": { "stringUnit": { "state": "translated", "value": "App 已内置" } },
-        "zh-Hant": { "stringUnit": { "state": "translated", "value": "App 已內建" } },
-        "ko": { "stringUnit": { "state": "translated", "value": "App에 기본 제공" } },
-        "de": { "stringUnit": { "state": "translated", "value": "In der App enthalten" } }
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Included with the app"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appに収録済み"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 已内置"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App 已內建"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "App에 기본 제공"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In der App enthalten"
+          }
+        }
       }
     },
     "status.downloading": {
@@ -4633,6 +4723,246 @@
           "stringUnit": {
             "state": "translated",
             "value": "Download von %@ gestartet"
+          }
+        }
+      }
+    },
+    "action.close": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Close"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "닫기"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schließen"
+          }
+        }
+      }
+    },
+    "catalog.filter.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Filter models"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "筛选模型"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "篩選模型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モデルを絞り込み"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모델 필터"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modelle filtern"
+          }
+        }
+      }
+    },
+    "catalog.filter.all": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "All models"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部模型"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全部模型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべてのモデル"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "모든 모델"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alle Modelle"
+          }
+        }
+      }
+    },
+    "catalog.filter.animated": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animated"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "动画模型"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "動畫模型"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アニメ付き"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "애니메이션"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Animiert"
+          }
+        }
+      }
+    },
+    "catalog.filter.offline": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "离线可用"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "離線可用"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オフライン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "오프라인"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Offline"
+          }
+        }
+      }
+    },
+    "empty.catalogFilter.description": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No models match these filters. Choose All models or another category."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "没有符合筛选条件的模型，请选择全部模型或其他分类。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "沒有符合篩選條件的模型，請選擇全部模型或其他分類。"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "条件に合うモデルがありません。すべてのモデルや別のカテゴリーを選択してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "필터에 맞는 모델이 없습니다. 모든 모델이나 다른 카테고리를 선택해 주세요."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keine passenden Modelle. Wähle alle Modelle oder eine andere Kategorie."
           }
         }
       }

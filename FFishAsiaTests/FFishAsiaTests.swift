@@ -12,6 +12,21 @@ import RealityKit
 #endif
 
 final class FFishAsiaTests: XCTestCase {
+    func testAnimatedFilterDoesNotIncludeNonAnimatedSpecialModels() throws {
+        let models = ModelCatalog.fallbackModels
+        let animated = try XCTUnwrap(models.first { $0.hasAnimation })
+        let staticSpecial = try XCTUnwrap(models.first { $0.category == .special && !$0.hasAnimation })
+        XCTAssertTrue(CatalogFilter.animated.includes(animated, isAvailableOffline: false))
+        XCTAssertFalse(CatalogFilter.animated.includes(staticSpecial, isAvailableOffline: true))
+        XCTAssertTrue(CatalogFilter.all.includes(staticSpecial, isAvailableOffline: false))
+    }
+
+    func testOfflineFilterIncludesBundledAndDownloadedModelsOnly() throws {
+        let model = try XCTUnwrap(ModelCatalog.fallbackModels.first)
+        XCTAssertTrue(CatalogFilter.offline.includes(model, isAvailableOffline: true))
+        XCTAssertFalse(CatalogFilter.offline.includes(model, isAvailableOffline: false))
+    }
+
     func testManifestDecodingBuildsFallbackDownloadURL() throws {
         let model = try XCTUnwrap(ModelCatalog.decodeManifest(from: manifestData()).first)
 

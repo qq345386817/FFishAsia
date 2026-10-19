@@ -1,5 +1,28 @@
 import Foundation
 
+enum CatalogFilter: String, CaseIterable, Identifiable {
+    case all, animated, offline
+
+    var id: String { rawValue }
+    var localizationKey: String { "catalog.filter.\(rawValue)" }
+
+    var symbolName: String {
+        switch self {
+        case .all: return "square.grid.2x2"
+        case .animated: return "play.circle"
+        case .offline: return "checkmark.circle"
+        }
+    }
+
+    func includes(_ model: ModelItem, isAvailableOffline: Bool) -> Bool {
+        switch self {
+        case .all: return true
+        case .animated: return model.hasAnimation
+        case .offline: return isAvailableOffline
+        }
+    }
+}
+
 enum ModelCategory: String, CaseIterable, Codable {
     case plant
     case animal

@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DownloadManagerView: View {
+    @Environment(\.dismiss) private var dismiss
     @ObservedObject var downloadManager: DownloadManager
     let language: AppLanguage
     let onOpenModel: (ModelItem) -> Void
@@ -65,38 +66,50 @@ struct DownloadManagerView: View {
                 }
 
                 ForEach(downloadedModels) { model in
-                    Button {
-                        onOpenModel(model)
-                    } label: {
-                        HStack(spacing: 12) {
-                            ThumbnailView(imageName: model.thumbName, width: 60, height: 60, remoteURL: model.thumbnailURL)
+                    HStack(spacing: 12) {
+                        Button {
+                            onOpenModel(model)
+                        } label: {
+                            HStack(spacing: 12) {
+                                ThumbnailView(imageName: model.thumbName, width: 60, height: 60, remoteURL: model.thumbnailURL)
 
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(model.localizedDisplayName(for: language))
-                                    .font(.headline)
-                                    .foregroundStyle(.primary)
-                                Text(downloadManager.formattedFileSize(for: model))
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(model.localizedDisplayName(for: language))
+                                        .font(.headline)
+                                        .foregroundStyle(.primary)
+                                    Text(downloadManager.formattedFileSize(for: model))
+                                        .font(.caption)
+                                        .foregroundStyle(.secondary)
+                                }
+
+                                Spacer()
+
                             }
-
-                            Spacer()
-
-                            Button(role: .destructive) {
-                                downloadManager.delete(model)
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                            .buttonStyle(.borderless)
+                            .padding(.vertical, 4)
                         }
-                        .padding(.vertical, 4)
+                        .buttonStyle(.plain)
+                        Button(role: .destructive) {
+                            downloadManager.delete(model)
+                        } label: {
+                            Image(systemName: "trash")
+                                .frame(minWidth: 44, minHeight: 44)
+                        }
+                        .buttonStyle(.borderless)
+                        .accessibilityLabel(L10n.t("action.deleteDownloaded", language))
+                        .help(L10n.t("action.deleteDownloaded", language))
                     }
-                    .buttonStyle(.plain)
                 }
             }
         }
         .navigationTitle(L10n.t("downloads.title", language))
         .platformNavigationBarTitleDisplayModeInline()
+        .toolbar {
+            ToolbarItem(placement: .confirmationAction) {
+                Button { dismiss() } label: { Image(systemName: "xmark") }
+                    .accessibilityLabel(L10n.t("action.close", language))
+                    .help(L10n.t("action.close", language))
+            }
+        }
         .downloadManagerWindowFrame()
         .onAppear {
             downloadManager.refreshCacheStats()
