@@ -1,1 +1,1 @@
-生物図鑑,動物,植物,自然観察,自然教育,昆虫,花,海洋生物,3Dモデル,offline,Asian nature,wildlife,animals,plants,biology
+生物,自然学習,魚,両生類,海洋生物,学名,分類,オフライン,アニメ,標本

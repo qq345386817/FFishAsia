@@ -1,1 +1,1 @@
-AR Tiere,3D Modelle,Natur,Biologie,Wildtiere,Pflanzen,Insekten,Blumen,Naturführer,learn
+Biologie,Arten,Insekten,Blumen,Fische,Amphibien,Meeresleben,offline,Animation,Naturführer,AR

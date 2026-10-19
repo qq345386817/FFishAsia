@@ -1,16 +1,12 @@
-Little Nature is an interactive 3D field guide to Asian wildlife and plants. Rotate, zoom, and study animals, flowers, insects, amphibians, and marine life, then place models in your surroundings with AR.
+Explore animals and plants in interactive 3D. Rotate and zoom to study the shapes and details of insects, flowers, fish, amphibians, and marine life. The collection focuses on Asian species, with selected specimens from other regions.
 
-Start immediately with an included animated model. Download more models only when you need them and keep favorites available offline.
+Start with an included animated model, then download other models when you need them. Downloaded models remain available for offline viewing.
 
-Key features:
-- Interactive 3D: rotate and zoom models, including animated species
-- AR field guide: place animal and plant models in your real environment
-- Scientific classification: review localized names, scientific names, and taxonomy
-- Category browsing: filter by All / Animals / Plants / Special
-- Quick search: find models by Japanese, English, Chinese, or scientific name
-- On-demand downloads: download models only when needed to reduce initial app size
-- Offline viewing: open downloaded models even without a network connection
-- Download management: review and clear saved model content
-- Model details: review scientific and technical information in one place
+- 3D viewing: rotate, zoom, and watch models that include animation
+- Browse by category, animation, or offline availability
+- Search localized model names and scientific names
+- Read scientific names and biological classification
+- Download models on demand and manage saved files
+- AR on supported iPhone and iPad: place models in your surroundings
 
-Model resources are curated from public sources and used under CC0 license terms for browsing, downloading, and AR viewing. Little Nature requests camera permission only when you use AR. No account is required. First-party anonymous product analytics are used to improve the catalog and preview experience; they are not used for advertising or tracking.
+Model resources are curated from public sources under CC0 license terms. No account is required. First-party anonymous product analytics help improve the catalog and preview experience; they are not used for advertising or tracking. Camera permission is requested only when you use AR.

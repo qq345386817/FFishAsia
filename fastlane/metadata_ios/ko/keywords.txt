@@ -1,1 +1,1 @@
-생물도감,동물,식물,자연관찰,자연교육,곤충,꽃,해양생물,3D모델,AR,Asian nature,wildlife,animals,plants,biology
+생물,자연,학명,분류,물고기,양서류,해양,오프라인,애니메이션,표본,AR

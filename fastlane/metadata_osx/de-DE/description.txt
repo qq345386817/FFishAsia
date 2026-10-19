@@ -1,14 +1,11 @@
-Little Nature für Mac ist ein Desktop-Feldführer zum Durchsuchen einer wachsenden Sammlung CC0-basierter biologischer 3D-Modellrecords asiatischer Tiere und Pflanzen. Der größere Arbeitsbereich hilft beim Erkunden des Katalogs, Prüfen von Modelldetails und Verwalten gespeicherter Modellinhalte.
+Entdecke Tiere und Pflanzen in interaktivem 3D. Drehe und vergrößere Insekten, Blumen, Fische, Amphibien und Meereslebewesen, um ihre Formen und Details zu betrachten. Die Sammlung konzentriert sich auf asiatische Arten und enthält ausgewählte Exemplare aus anderen Regionen.
 
-Nutze die App für Naturreferenzen, Bildung, Modellauswahl oder einfach zum Durchstöbern von Formen und Taxonomie von Blumen, Insekten, Amphibien, Meereslebewesen und anderen Organismen.
+Beginne mit einem enthaltenen animierten Modell und lade weitere Modelle bei Bedarf herunter. Heruntergeladene Modelle kannst du auch offline ansehen.
 
-Hauptfunktionen:
-- Desktop-Katalog: kuratierte 3D-Tier- und Pflanzenmodelle auf dem Mac durchsuchen
-- Kategorien: nach Alle / Tiere / Pflanzen / Spezial filtern
-- Schnelle Suche: Modelle nach japanischem, englischem, chinesischem oder wissenschaftlichem Namen finden
-- Downloads bei Bedarf: Modelle nur laden, wenn sie gebraucht werden, um Speicher zu sparen
-- Offline-Zugriff: gespeicherte Modellinhalte nach dem Download ansehen
-- Downloadverwaltung: gespeicherte Modelle prüfen und lokale Inhalte löschen
-- Modelldetails: Flächen, Eckpunkte, Dateigröße, Kategorie und Quellenlinks ansehen
+- 3D-Ansicht: Modelle drehen, vergrößern und vorhandene Animationen ansehen
+- Nach Kategorie, Animation oder Offline-Verfügbarkeit filtern
+- Lokalisierte Modellnamen und wissenschaftliche Namen suchen
+- Wissenschaftliche Namen und biologische Systematik nachlesen
+- Modelle bei Bedarf laden und gespeicherte Dateien verwalten
 
-Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen zum Durchsuchen und als lokale Referenz verwendet. Ein Konto ist nicht erforderlich. Anonyme, eigene Produktanalysen helfen, Katalog und Vorschau zu verbessern; sie dienen weder Werbung noch Tracking.
+Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen verwendet. Ein Konto ist nicht erforderlich. Anonyme eigene Produktanalysen verbessern Katalog und Vorschau; sie dienen weder Werbung noch Tracking.

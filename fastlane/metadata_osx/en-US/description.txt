@@ -1,16 +1,11 @@
-Little Nature for Mac is an interactive 3D field guide to Asian wildlife and plants. Rotate, zoom, and study animated animals, flowers, insects, amphibians, marine life, and other organisms in a spacious desktop viewer.
+Explore animals and plants in interactive 3D. Rotate and zoom to study the shapes and details of insects, flowers, fish, amphibians, and marine life. The collection focuses on Asian species, with selected specimens from other regions.
 
-Start immediately with an included animated model. Download more models only when you need them and keep favorites available offline.
+Start with an included animated model, then download other models when you need them. Downloaded models remain available for offline viewing.
 
-Key features:
-- Interactive 3D: rotate and zoom models, including animated species
-- Desktop catalog: browse curated animal and plant models on Mac
-- Scientific classification: review localized names, scientific names, and taxonomy
-- Category browsing: filter by All / Animals / Plants / Special
-- Quick search: find models by Japanese, English, Chinese, or scientific name
-- On-demand downloads: download models only when needed to reduce storage use
-- Offline access: review saved model content after it has been downloaded
-- Download management: check saved models and clear local content
-- Model details: review scientific and technical information in one place
+- 3D viewing: rotate, zoom, and watch models that include animation
+- Browse by category, animation, or offline availability
+- Search localized model names and scientific names
+- Read scientific names and biological classification
+- Download models on demand and manage saved files
 
-Model resources are curated from public sources and used under CC0 license terms for browsing and local reference. No account is required. First-party anonymous product analytics are used to improve the catalog and preview experience; they are not used for advertising or tracking.
+Model resources are curated from public sources under CC0 license terms. No account is required. First-party anonymous product analytics help improve the catalog and preview experience; they are not used for advertising or tracking.

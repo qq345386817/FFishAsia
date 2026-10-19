@@ -1,14 +1,12 @@
-Little Nature ist ein AR-Feldführer mit einer wachsenden Sammlung biologischer 3D-Modelle asiatischer Tiere und Pflanzen. Platziere Modelle in deinem realen Raum und betrachte Formen und Details von Blumen, Insekten, Amphibien und Meereslebewesen aus der Nähe.
+Entdecke Tiere und Pflanzen in interaktivem 3D. Drehe und vergrößere Insekten, Blumen, Fische, Amphibien und Meereslebewesen, um ihre Formen und Details zu betrachten. Die Sammlung konzentriert sich auf asiatische Arten und enthält ausgewählte Exemplare aus anderen Regionen.
 
-Ob Naturerkundung, Wissenschaft mit Kindern oder ein neuer Blick auf Lebewesen: Little Nature bringt Modelle aus dem Bildschirm auf deinen Tisch, Boden oder in deine Umgebung.
+Beginne mit einem enthaltenen animierten Modell und lade weitere Modelle bei Bedarf herunter. Heruntergeladene Modelle kannst du auch offline ansehen.
 
-Hauptfunktionen:
-- AR-Feldführer: 3D-Tier- und Pflanzenmodelle in deiner realen Umgebung ansehen
-- Kategorien: nach Alle / Tiere / Pflanzen / Spezial filtern
-- Schnelle Suche: Modelle nach japanischem, englischem, chinesischem oder wissenschaftlichem Namen finden
-- Downloads bei Bedarf: Modelle nur laden, wenn sie gebraucht werden, um die App klein zu halten
-- Offline ansehen: geladene Modelle auch ohne Netzwerk öffnen
-- Downloadverwaltung: gespeicherte Modellinhalte prüfen und löschen
-- Modelldetails: Basisdaten wie Flächen, Eckpunkte und Dateigröße ansehen
+- 3D-Ansicht: Modelle drehen, vergrößern und vorhandene Animationen ansehen
+- Nach Kategorie, Animation oder Offline-Verfügbarkeit filtern
+- Lokalisierte Modellnamen und wissenschaftliche Namen suchen
+- Wissenschaftliche Namen und biologische Systematik nachlesen
+- Modelle bei Bedarf laden und gespeicherte Dateien verwalten
+- AR auf unterstützten iPhones und iPads: Modelle in deiner Umgebung platzieren
 
-Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen zum Durchsuchen, Herunterladen und Anzeigen in AR verwendet. Little Nature fragt nur bei Nutzung von AR-Funktionen nach Kamerazugriff. Ein Konto ist nicht erforderlich. Anonyme, eigene Produktanalysen helfen, Katalog und Vorschau zu verbessern; sie dienen weder Werbung noch Tracking.
+Die Modellressourcen stammen aus öffentlichen Quellen und werden unter CC0-Lizenzbedingungen verwendet. Ein Konto ist nicht erforderlich. Anonyme eigene Produktanalysen verbessern Katalog und Vorschau; sie dienen weder Werbung noch Tracking. Kamerazugriff wird nur bei der Nutzung von AR angefordert.
