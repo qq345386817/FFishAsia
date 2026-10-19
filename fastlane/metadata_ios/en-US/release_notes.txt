@@ -1,2 +1,2 @@
-- Added animal models and animated previews.
-- Improved catalog updates and image loading.
+- Browse models more easily with animated and offline filters.
+- Improved model details and accessibility.

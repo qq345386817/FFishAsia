@@ -1,2 +1,2 @@
-- Neue Tiermodelle und animierte Vorschauen.
-- Modellaktualisierungen und Bildladen verbessert.
+- Modelle mit Filtern für Animationen und Offline-Inhalte leichter finden.
+- Modelldetails und Bedienungshilfen verbessert.

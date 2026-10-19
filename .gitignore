@@ -73,6 +73,7 @@ fastlane/report.xml
 fastlane/Preview.html
 fastlane/**/*.png
 fastlane/**/*.mov
+fastlane/**/*.mp4
 fastlane/test_output
 fastlane/*.p8
 fastlane/.env*
